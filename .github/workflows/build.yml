@@ -1,0 +1,81 @@
+name: 앱 빌드 (APK + AAB)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: Java 21 설치
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Node 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 의존성 설치
+        run: npm install
+
+      - name: 안드로이드 프로젝트 생성
+        run: |
+          npx cap add android
+          npx cap sync android
+
+      - name: 앱 아이콘 적용
+        run: |
+          sudo apt-get install -y imagemagick >/dev/null 2>&1 || true
+          rm -rf android/app/src/main/res/mipmap-anydpi-v26
+          for d in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
+            dpi="${d%%:*}"; size="${d##*:}"
+            dir="android/app/src/main/res/mipmap-$dpi"
+            mkdir -p "$dir"
+            convert www/icon-512.png -resize ${size}x${size} "$dir/ic_launcher.png"
+            convert www/icon-maskable-512.png -resize ${size}x${size} "$dir/ic_launcher_round.png"
+            convert www/icon-maskable-512.png -resize ${size}x${size} "$dir/ic_launcher_foreground.png"
+          done
+
+      - name: 테스트용 APK 빌드 (지인 배포용)
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: APK 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: siwoo-app-테스트용-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: 스토어용 AAB 빌드 (서명키 등록된 경우만)
+        if: ${{ secrets.KEYSTORE_B64 != '' }}
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_B64" | base64 -d > android/app/upload.jks
+          cd android
+          ./gradlew bundleRelease --no-daemon \
+            -Pandroid.injected.signing.store.file=$PWD/app/upload.jks \
+            -Pandroid.injected.signing.store.password="$KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias=siwoo \
+            -Pandroid.injected.signing.key.password="$KEYSTORE_PASSWORD"
+
+      - name: AAB 업로드
+        if: ${{ secrets.KEYSTORE_B64 != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: siwoo-app-스토어용-AAB
+          path: android/app/build/outputs/bundle/release/app-release.aab
