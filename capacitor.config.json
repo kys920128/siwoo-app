@@ -1,0 +1,6 @@
+{
+  "appId": "com.evelog.siwoo",
+  "appName": "시우",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}

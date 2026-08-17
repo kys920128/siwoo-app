@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>시우 — 아이를 보는 법</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#FBF3E7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{
+  --bg:#FBF3E7; --card:#FFFFFF; --ink:#4A392E; --sub:#86705F; --line:#F2E3CF;
+  --peach:#FFC79E; --peach2:#FFB38A; --coral:#D95632; --mint:#C4E7D2; --mint2:#9BD8B6;
+  --sky:#C4DEF2; --butter:#FFE9B3; --pink:#FBD3D0; --lav:#E3D9F2;
+  --clay:0 5px 0 rgba(190,148,104,.28), 0 10px 24px rgba(190,148,104,.16);
+  --clay-s:0 3px 0 rgba(190,148,104,.22), 0 6px 14px rgba(190,148,104,.12);
+  --r:22px; --ok:#3E8E5F;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#231C14; --card:#2F261C; --ink:#F6EADB; --sub:#BCA793; --line:#413524;
+    --coral:#FF9A76; --ok:#7CCB9C;
+    --clay:0 5px 0 rgba(0,0,0,.4), 0 10px 24px rgba(0,0,0,.3);
+    --clay-s:0 3px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25);
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:'Nunito',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
+  font-size:16px;line-height:1.62}
+.hd,h1,h2{font-family:'Jua','Nunito',-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-weight:400;letter-spacing:.2px}
+#app{max-width:480px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
+main{flex:1;padding:14px 16px 96px}
+header.top{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 16px 8px;
+  display:flex;align-items:center;justify-content:space-between}
+header.top .t{font-size:20px}
+header.top .sub{font-size:12px;color:var(--sub);font-weight:700}
+.gear{background:var(--card);border:2px solid var(--line);border-radius:14px;width:40px;height:40px;
+  cursor:pointer;color:var(--sub);display:flex;align-items:center;justify-content:center;box-shadow:var(--clay-s)}
+nav.bottom{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);z-index:20;background:var(--card);
+  border:2px solid var(--line);display:flex;width:min(452px,calc(100% - 24px));
+  border-radius:24px;box-shadow:var(--clay);padding:4px}
+nav.bottom button{flex:1;background:none;border:none;padding:8px 0 6px;cursor:pointer;
+  color:var(--sub);font-size:10.5px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-family:inherit;border-radius:18px;transition:background .18s}
+nav.bottom button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+nav.bottom button.on{color:var(--coral);background:var(--bg)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:var(--r);
+  padding:16px;margin-bottom:14px;box-shadow:var(--clay-s)}
+.card.pop{box-shadow:var(--clay)}
+.chip{display:inline-block;background:var(--bg);border-radius:999px;padding:3px 11px;
+  font-size:12px;color:var(--sub);margin:0 6px 6px 0;font-weight:800}
+.chip.c1{background:var(--peach);color:#5A3A22}
+.chip.c2{background:var(--mint);color:#2A5940}
+.chip.c3{background:var(--sky);color:#2C4A66}
+.chip.c4{background:var(--butter);color:#6B5518}
+.chip.c5{background:var(--pink);color:#7A3A36}
+.chip.c6{background:var(--lav);color:#4C3B6E}
+h2{font-size:17px;margin:0 0 8px}
+h3{font-size:13.5px;margin:16px 0 6px;color:var(--sub);font-weight:800;font-family:'Nunito',sans-serif}
+.big{font-size:19px;margin:2px 0 6px}
+.sub{color:var(--sub);font-size:13.5px}
+.small{font-size:12.5px;color:var(--sub)}
+button.pri,button.sec{width:100%;border:none;border-radius:18px;padding:14px;font-size:16px;
+  font-weight:800;cursor:pointer;font-family:inherit;color:#5A3A22;transition:transform .12s, box-shadow .12s}
+button.pri{background:var(--peach);box-shadow:0 4px 0 rgba(190,120,70,.45)}
+button.sec{background:var(--butter);box-shadow:0 4px 0 rgba(190,150,60,.35)}
+button.pri:active,button.sec:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(190,120,70,.45)}
+button.ghost{background:none;border:none;color:var(--coral);font-size:14px;cursor:pointer;
+  padding:8px 0;font-family:inherit;font-weight:800}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:2.5px solid var(--line);
+  border-radius:18px;padding:13px 14px;margin-bottom:10px;font-size:15px;cursor:pointer;
+  font-family:inherit;color:var(--ink);font-weight:700;transition:border-color .15s}
+.opt .d{display:block;font-size:12.5px;color:var(--sub);margin-top:2px;font-weight:600}
+.opt.on{border-color:var(--coral);background:var(--bg)}
+input,textarea,select{width:100%;background:var(--card);color:var(--ink);
+  border:2px solid var(--line);border-radius:14px;padding:11px 12px;font-size:15px;font-family:inherit}
+textarea{min-height:72px;resize:vertical}
+label.f{display:block;font-size:13px;color:var(--sub);margin:13px 0 5px;font-weight:800}
+.notice{background:var(--sky);color:#2C4A66;border-radius:16px;padding:12px 14px;font-size:13.5px;margin:12px 0;font-weight:600}
+.notice.warm{background:var(--pink);color:#7A3A36}
+.notice.mint{background:var(--mint);color:#2A5940}
+@media (prefers-color-scheme: dark){
+  .notice{background:#2C3E52;color:#CBE0F2}.notice.warm{background:#4A2E2C;color:#F2CBc7}.notice.mint{background:#2A4436;color:#C6E8D4}
+  .chip.c1{background:#5A3A22;color:#FFC79E}.chip.c2{background:#2A5940;color:#C4E7D2}.chip.c3{background:#2C4A66;color:#C4DEF2}
+  .chip.c4{background:#6B5518;color:#FFE9B3}.chip.c5{background:#7A3A36;color:#FBD3D0}.chip.c6{background:#4C3B6E;color:#E3D9F2}
+  button.pri{color:#5A3A22}button.sec{color:#6B5518}
+}
+.divider{height:2px;background:var(--line);margin:14px 0;border-radius:2px}
+.playline{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pnum{color:var(--sub);font-size:13px;font-weight:800}
+.bar-row{display:flex;align-items:center;gap:10px;margin:7px 0}
+.bar-row .lab{width:100px;font-size:13.5px;font-weight:700}
+.bar-row .track{flex:1;height:16px;background:var(--bg);border-radius:8px;overflow:hidden;border:1.5px solid var(--line)}
+.bar-row .fill{height:100%;background:var(--peach2);border-radius:8px;min-width:3px}
+.bar-row .val{width:44px;text-align:right;font-size:12.5px;color:var(--sub);font-weight:700}
+.emobtn{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--card);
+  border:2.5px solid var(--line);border-radius:18px;padding:12px 4px;cursor:pointer;flex:1;
+  font-family:inherit;color:var(--ink);font-size:11.5px;font-weight:800}
+.emobtn .e{font-size:26px}
+.emobtn.on{border-color:var(--coral);background:var(--bg)}
+.condbtn{background:var(--card);border:2px solid var(--line);border-radius:999px;
+  padding:7px 13px;font-size:13.5px;cursor:pointer;font-family:inherit;color:var(--ink);margin:0 6px 8px 0;font-weight:700}
+.condbtn.on{border-color:var(--coral);background:var(--pink);color:#7A3A36}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:13px}
+.cal .h{color:var(--sub);font-size:11px;padding:4px 0;font-weight:800}
+.cal .d{padding:8px 0;border-radius:12px;cursor:pointer;position:relative;font-weight:700}
+.cal .d.dot::after{content:"";position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+  width:5px;height:5px;border-radius:50%;background:var(--coral)}
+.cal .d.sel{background:var(--peach);color:#5A3A22}
+.cal .d.today{outline:2.5px solid var(--peach2)}
+.logitem{border-left:4px solid var(--peach2);padding:6px 0 6px 12px;margin:10px 0;border-radius:2px}
+.logitem .dt{font-size:12px;color:var(--sub);font-weight:800}
+.mile{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:2px solid var(--line);cursor:pointer}
+.mile:last-child{border-bottom:none}
+.mile .nm{font-size:14.5px;font-weight:700}
+.mile .st{font-size:12.5px;color:var(--sub);font-weight:700}
+.mathbox{background:linear-gradient(135deg,var(--lav),transparent);border:2px dashed #B49CD9;
+  border-radius:18px;padding:13px 14px;margin:12px 0;font-size:14px}
+.mathbox .tt{font-weight:800;color:#7A5FA8;font-size:13px;margin-bottom:6px}
+@media (prefers-color-scheme: dark){ .mathbox{background:linear-gradient(135deg,#3A2F52,transparent)} .mathbox .tt{color:#C9B4EC} }
+.srcbox{background:var(--bg);border-radius:16px;padding:10px 12px;font-size:12.5px;color:var(--sub);margin-top:12px;font-weight:600}
+.bubble{position:relative;background:var(--card);border:2px solid var(--line);border-radius:18px;
+  padding:12px 14px;font-size:14.5px;box-shadow:var(--clay-s);font-weight:700}
+.bubble::before{content:"";position:absolute;left:-9px;top:18px;width:14px;height:14px;background:var(--card);
+  border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg)}
+.hero{display:flex;gap:12px;align-items:flex-start;margin:6px 0 16px}
+.hero .mascot{flex:0 0 74px}
+.fade{animation:fd .3s ease}
+@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.mascot.b{animation:bounce 2.6s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){ .mascot.b{animation:none} .fade{animation:none} }
+.hidden{display:none!important}
+#printArea{display:none}
+@media print{ #app{display:none} #printArea{display:block;font-size:12px;color:#000}
+  #printArea h1{font-size:18px}#printArea h2{font-size:14px;margin:14px 0 4px}
+  #printArea table{width:100%;border-collapse:collapse}
+  #printArea td,#printArea th{border:1px solid #999;padding:4px 6px;text-align:left;font-size:11px}}
+.stChip{font-size:11px;border-radius:999px;padding:3px 10px;font-weight:800}
+.stChip.ok{background:var(--mint);color:#2A5940}
+.stChip.tmp{background:var(--pink);color:#7A3A36}
+.footer-note{font-size:11.5px;color:var(--sub);text-align:center;margin:18px 4px 6px;line-height:1.7;font-weight:600}
+.foodItem{display:flex;align-items:center;gap:9px;padding:10px 4px;border-bottom:2px solid var(--line);cursor:pointer}
+.foodItem:last-child{border-bottom:none}
+.foodItem .nm{font-weight:800;font-size:15px}
+.foodItem .tag{margin-left:auto;display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.badge{font-size:11px;border-radius:999px;padding:2px 9px;font-weight:800}
+.badge.ok{background:var(--mint);color:#2A5940}
+.badge.al{background:var(--butter);color:#6B5518}
+.badge.watch{background:var(--sky);color:#2C4A66}
+.badge.warn{background:var(--pink);color:#7A3A36}
+.mealcell{border:2px solid var(--line);border-radius:14px;padding:8px 10px;margin:6px 0;font-size:13.5px;cursor:pointer;font-weight:700}
+.mealcell .mt{font-size:11px;color:var(--sub);font-weight:800}
+.shopbtn{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:2px solid var(--line);
+  border-radius:999px;padding:7px 13px;font-size:13px;cursor:pointer;font-family:inherit;color:var(--ink);font-weight:800;box-shadow:var(--clay-s)}
+.dday{display:flex;align-items:center;gap:10px}
+.dday .n{font-family:'Jua';font-size:26px;color:var(--coral)}
+a{color:var(--coral)}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:8px}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <div><div class="t hd" id="hTitle">시우</div><div class="sub" id="hSub"></div></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span id="stChip" class="stChip tmp">확인 중</span>
+      <button class="gear" onclick="go('settings')" aria-label="설정">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </header>
+  <main id="main"></main>
+  <nav class="bottom" id="nav" aria-label="주 메뉴">
+    <button data-v="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></svg>오늘</button>
+    <button data-v="plays" onclick="go('plays')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a5 5 0 0 1 0 9 5 5 0 0 0 0 9"/><circle cx="12" cy="7.5" r="1" fill="currentColor"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>놀이</button>
+    <button data-v="food" onclick="go('food')"><svg viewBox="0 0 24 24"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M9 11V7a3 3 0 0 1 6 0"/><path d="M8 21h8"/><path d="M12 19v2"/></svg>이유식</button>
+    <button data-v="log" onclick="go('log')"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>기록</button>
+    <button data-v="map" onclick="go('map')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>지도</button>
+  </nav>
+</div>
+<div id="printArea"></div>
+<script>
+/* ============ 데이터 ============ */
+const PLAYS = [{"n": 1, "name": "흑백 초점책, 한 면씩", "m": 0, "dom": "인지", "dom2": null, "math": 0, "label": "[CDC 2개월] 「수 초 동안 장난감을 본다」 · 10명 중 7~8명 이상 · 신생아도 시도 가능", "mat": "흑백 초점책", "how": "아기 눈 위에 한 면만 편다. **아기가 눈을 돌리면 그때가 끝**이다.", "down": "도형이 하나만 있는 면으로. 더 가까이.", "up": "두 면을 나란히 놓고 어느 쪽을 먼저 보는지 본다.", "warn": "안 볼 때 얼굴 앞에 들이대지 마십시오. 그건 자극이 아니라 방해입니다.", "src": [8, 13, 17], "srcRaw": "D8, D13, D17 — D8에서 마름모를 보다 자세를 바꿔 패턴을 보고 잠들었고, D17에는 하품과 칭얼거림이 나와 중단했습니다."}, {"n": 2, "name": "어느 쪽을 먼저 보나", "m": 0, "dom": "인지", "dom2": null, "math": 1, "label": "[CDC 2개월] 「수 초 동안 장난감을 본다」 · 10명 중 7~8명 이상", "mat": "초점책 (도형이 다른 두 면)", "how": "왼쪽에 물결무늬, 오른쪽에 마름모를 놓는다. 아기 얼굴 정중앙에서 시작한다. **어느 쪽을 먼저, 얼마나 오래 보는지**만 본다.", "down": "두 개가 아니라 하나만. 대비가 강한 것으로.", "up": "**좌우를 바꿔 다시 한다.** 같은 도형을 고르면 도형 선호, 같은 방향을 고르면 방향 선호다.", "warn": "**이게 이 앱의 핵심 동작입니다.** 좌우를 바꾸는 순간 놀이가 관찰이 됩니다.", "src": [11, 13], "srcRaw": "D11, D13 — D13에서 아기가 처음 놓인 물결무늬를 **외면하고 스스로 고개를 돌려** 마름모를 찾아 3분간 봤습니다.", "mathEye": {"seed": "도형 비교 · 통제변인", "now": "물결무늬와 마름모 중 어느 쪽을 먼저 보는지 봅니다.", "later": "좌우를 바꿔 다시 해보는 것 — 이게 통제변인입니다. 위치를 바꿔도 같은 도형을 고르면 도형을 본 것입니다.", "watch": "좌우를 꼭 바꿔보세요. 안 바꾸면 아무것도 알 수 없습니다."}}, {"n": 3, "name": "읽어주다 자리 옮기기", "m": 0, "dom": "언어", "dom2": "인지", "math": 1, "label": "[CDC 4개월] 「사람의 목소리가 나는 쪽을 향해 고개를 돌린다」 · 10명 중 7~8명 이상", "mat": "아무 책", "how": "책을 읽어주다 **읽는 자리를 옮긴다.** 아기가 소리 쪽으로 고개를 돌리는지 본다.", "down": "가까이서. 목소리를 조금 크게.", "up": "방 반대편으로. 또는 엄마가 반대편에서 등장해 주의가 옮겨가는지 본다.", "warn": "고개를 돌렸다고 **말을 알아들은 게 아닙니다.** 소리 나는 쪽을 본 것입니다. 이름 반응은 놀이 43에서 따로 확인합니다.", "src": [14, 26], "srcRaw": "D14, D26 — D14에서 딸꾹질 중에도 아빠 쪽으로 고개를 돌렸고, 엄마가 등장하자 주의가 엄마로 옮겨갔습니다.", "mathEye": {"seed": "방향", "now": "소리가 오는 방향으로 고개를 돌립니다.", "later": "수학에서 좌표를 배우기 훨씬 전에, 아기는 자기 몸을 원점으로 쓰는 법부터 익힙니다. (신생아기의 방향 반응은 반사일 수 있습니다.)", "watch": "방향을 바꿀 때 얼마나 정확히 도는지 보세요."}}, {"n": 4, "name": "책 읽어주기 (기저귀 갈고 나서)", "m": 0, "dom": "언어", "dom2": "사회정서", "math": 0, "label": "CDC 이정표 없음 · 언제 시작해도 좋음", "mat": "아무 책", "how": "**기저귀를 갈고 배부른 뒤에** 읽는다. **처음 3분은 반응이 없는 게 정상**이다.", "down": "그림만 보여준다. 목소리 톤만 유지한다.", "up": "대화하듯 읽는다. 칭얼거릴 때 톤을 바꾸면 다시 집중하기도 한다.", "warn": "우는 건 책이 싫어서가 아니라 **배가 고파서**인 경우가 많습니다.", "src": [9, 12, 20, 25], "srcRaw": "D9, D12, D20, D25 — D9에서 「초기 3분 무반응(Warm-up)」이 기록됐고, D25에서 칭얼거릴 때 대화체로 바꾸자 집중이 돌아왔습니다."}, {"n": 5, "name": "배 위 터미타임", "m": 0, "dom": "신체", "dom2": "사회정서", "math": 0, "label": "[CDC 2개월] 「배를 대고 엎드렸을 때 머리를 치켜든다」 · 10명 중 7~8명 이상", "mat": "없음 (부모 가슴)", "how": "부모가 눕고 아기를 가슴 위에 엎드려 올린다. **깨어 있을 때만.** 아기가 힘들어하면 끝낸다.", "down": "부모 상체를 더 비스듬히 세운다.", "up": "바닥 매트에서. 눈앞에 볼 것을 놓아준다.", "warn": "**절대 눈을 떼지 마십시오. 잠들면 즉시 바로 눕히십시오.** (일반 안전 지침)", "src": [21, 24], "srcRaw": "D21, D24 — D24에서 고개를 뒤로 젖혀 아빠와 눈을 맞추려 했습니다."}, {"n": 6, "name": "경사면 터미타임", "m": 0, "dom": "신체", "dom2": null, "math": 0, "label": "[CDC 2개월] 「배를 대고 엎드렸을 때 머리를 치켜든다」 · 10명 중 7~8명 이상", "mat": "쿠션 또는 수유쿠션", "how": "완만한 경사에 아기 상체를 올려 엎드리게 한다. 앞에 볼 것을 둔다.", "down": "경사를 더 세운다. 목욕 직후에 한다.", "up": "평지 매트로 옮긴다.", "warn": "경사가 급하면 얼굴이 파묻힙니다. **어깨가 엉덩이보다 확실히 높기만 하면 됩니다.** (일반 안전 지침)", "src": [27, 32], "srcRaw": "D27, D32 — D27에서 경사면 덕에 수월하게 고개를 들고 인형을 봤고, D32에서 45도를 들어 사슴을 안정적으로 봤습니다."}, {"n": 7, "name": "손에 쥐어보기", "m": 0, "dom": "신체", "dom2": "인지", "math": 0, "label": "[CDC 4개월] 「손에 장난감을 놓으면 그것을 쥔다」 · 10명 중 7~8명 이상", "mat": "작은 공, 또는 부모 손가락", "how": "아기 손바닥에 공을 대준다. **손가락이 곡면을 따라 어떻게 펴지는지** 본다.", "down": "더 가느다란 것(손가락)으로.", "up": "크기가 다른 것 두 개를 번갈아. 쥐는 모양이 달라지는지 본다.", "warn": "일반적으로 이 시기 쥐기는 파악반사로 설명됩니다. **다만 시우 기록은 다르게 적혀 있습니다.** D21에 \"공의 곡면을 따라 손가락을 펴서 감싸 쥐는 정교한 파지\", D30에 \"쥐는 힘을 조절\"이 남아 있습니다. 반사인지 조절인지는 **크기가 다른 것을 줘봐야** 갈립니다. 그게 ↑입니다.", "src": [21, 30], "srcRaw": "D21, D30"}, {"n": 8, "name": "불 끄기", "m": 0, "dom": "사회정서", "dom2": null, "math": 0, "label": "CDC 이정표 없음 · 환경 조절", "mat": "조명", "how": "칭얼거림이 이유 없이 계속될 때 **불을 끈다.** 다른 건 아무것도 하지 않는다.", "down": "완전 소등이 부담되면 간접등만.", "up": "낮에도 암막을 쳐본다.", "warn": "자극을 더 주는 게 답이 아닐 때가 많습니다. **빼는 게 답입니다.**", "src": [20], "srcRaw": "D20 — 칭얼거림이 심했으나 불을 끄자 즉시 잠들었습니다."}, {"n": 9, "name": "모빌 (흑백 → 컬러)", "m": 1, "dom": "인지", "dom2": null, "math": 0, "label": "[CDC 2개월] 「움직임에 따라 상대를 주시한다」 · 10명 중 7~8명 이상", "mat": "모빌", "how": "처음엔 흑백. 반응이 뚜렷해지면 컬러를 섞는다. 회전은 **가장 느리게**.", "down": "회전을 멈추고 정지 상태로.", "up": "인형 하나만 남기고 나머지를 뗀다. 그 하나를 좋아하는지 본다.", "warn": "**15분을 넘기지 마십시오.** D19에 15분 추적 후 하품하고 잠든 기록이 있고, 선생님이 이걸 「15분의 법칙」이라 부르셨습니다.", "src": [19, 22, 29, 31], "srcRaw": "D19, D22, D29, D31 — D31에서 주황색 사슴에 유독 긴 응시를 보였습니다."}, {"n": 10, "name": "색 맞추기 (책 속 색 ↔ 실물)", "m": 1, "dom": "인지", "dom2": null, "math": 1, "label": "[CDC 2개월] 「움직임에 따라 상대를 주시한다」 · 10명 중 7~8명 이상", "mat": "색이 선명한 그림책 + 같은 색 모빌·인형", "how": "책의 무지개색을 보여준 뒤, **같은 색 실물**을 보여준다. 시선이 오가는지 본다.", "down": "색을 하나만. 대비가 큰 색으로.", "up": "색을 두세 개로 늘린다. 좋아하는 색을 찾는다.", "warn": "색을 「안다」는 뜻이 아닙니다. **같은 색에 시선이 머무는지**만 보는 것입니다.", "src": [39], "srcRaw": "D39 — 「엉망진창 무지개」를 읽어준 뒤 책 속 색과 사슴 모빌 색을 매칭하며 응시했습니다.", "mathEye": {"seed": "같음 판단 · 분류", "now": "책 속 색과 실물 색 사이를 시선이 오가는지 봅니다.", "later": "「이것과 저것이 같다」는 판단이 분류의 시작입니다. 수를 세려면 먼저 무엇을 셀지 정해져야 하고, 그걸 정하는 게 분류입니다.", "watch": "색을 안다고 기대하지 말고, 시선이 두 곳을 오가는지만 보세요."}}, {"n": 11, "name": "사라졌다 나타나기", "m": 1, "dom": "인지", "dom2": "사회정서", "math": 0, "label": "[CDC 12개월] 「담요 밑의 장난감을 찾듯이 숨기는 것을 찾는다」 · **1개월엔 「불안 → 안도」 수준**", "mat": "아기가 좋아하는 인형", "how": "좋아하는 인형을 **손으로 가린다.** 잠깐. 다시 보여준다. 표정 변화를 본다.", "down": "반쯤만 가린다.", "up": "가리는 시간을 늘린다. 가린 뒤 다른 자리에서 나타나게 한다.", "warn": "**가린 걸 손으로 찾아내는 건 12개월 무렵입니다.** 지금은 「없어지면 불안, 나타나면 안도」면 충분합니다.", "src": [34], "srcRaw": "D34 — 사슴이 가려지면 불안해하다 다시 나타나면 즉시 안도했습니다."}, {"n": 12, "name": "상·하·좌·우", "m": 1, "dom": "언어", "dom2": "인지", "math": 1, "label": "[CDC 4개월] 「사람의 목소리가 나는 쪽을 향해 고개를 돌린다」 · 10명 중 7~8명 이상", "mat": "없음", "how": "아기 위·아래·왼쪽·오른쪽으로 자리를 옮기며 **\"위!\" \"아래!\"**를 말한다.", "down": "좌우 두 방향만. 각도를 줄인다.", "up": "영어를 섞는다(\"Up!\"). 소리 없이 얼굴만 움직여본다.", "warn": "못 따라오면 각도를 줄이십시오.", "src": [47, 115], "srcRaw": "D47, D115 — D47에서 \"상/하/좌/우\"에 맞춰 고개를 정확히 돌리며 즐거워했고, D115에서 특정 음성(\"Up\")에 강한 반응을 보였습니다.", "mathEye": {"seed": "좌표축", "now": "위·아래·좌·우, 방향에 이름이 붙는 순간입니다.", "later": "네 방향이 곧 두 개의 축이고, 두 축이 평면입니다.", "watch": "네 방향의 반응 속도가 다른지 보세요."}}, {"n": 13, "name": "아기 체육관 발로 차기", "m": 1, "dom": "신체", "dom2": "인지", "math": 0, "label": "[CDC 2개월] 「양쪽 팔과 양쪽 다리를 움직인다」 · 10명 중 7~8명 이상", "mat": "아기 체육관", "how": "발이 닿는 위치에 소리 나는 부분을 둔다. **우연히 눌러 소리가 나는 순간**을 아기가 알아채는지 본다.", "down": "발에 거의 닿게 가까이.", "up": "거리를 조금 늘려 **발을 뻗어야** 닿게 한다.", "warn": "처음엔 우연입니다. **「소리가 끝나면 다시 누르는」 순간이 오면 그때가 의도입니다.**", "src": [48, 49, 50], "srcRaw": "D48, D49, D50 — D48에서 우연히 눌러 흥미를 보였고(주로 오른발), D50에서 음악이 끝나면 이어서 눌렀으며 **까치발을 해서라도** 눌렀습니다."}, {"n": 14, "name": "모빌에 고리 달아주기", "m": 1, "dom": "신체", "dom2": "인지", "math": 0, "label": "[CDC 4개월] 「팔을 사용하여 장난감을 흔든다」 · 10명 중 7~8명 이상", "mat": "모빌 + 고리", "how": "손이 닿을 만한 고리를 매단다. 처음엔 **손에 쥐어준다.** 다음엔 놔둔다.", "down": "고리를 더 낮게.", "up": "조금 높여 손을 뻗게 한다.", "warn": "**목에 감기지 않는 길이인지 매번 확인하십시오.** (일반 안전 지침)", "src": [52, 54], "srcRaw": "D52, D54 — D54에서 잡아주지 않아도 **스스로 고리를 낚아채** 조작했습니다."}, {"n": 15, "name": "얼굴 만지기", "m": 1, "dom": "사회정서", "dom2": "언어", "math": 0, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」 · 10명 중 7~8명 이상", "mat": "부모 얼굴", "how": "아기를 안고 얼굴을 **손 닿는 거리(30cm)**로 가져간다. 만지면 \"코!\" \"입!\"이라고 말해준다.", "down": "부모가 아기 손을 잡아 얼굴에 대준다.", "up": "「눈 코 입」 그림책과 함께. 책의 부위와 실제 얼굴을 번갈아 짚는다.", "warn": "**수염·안경처럼 질감이 다른 것**이 있으면 그게 먼저입니다.", "src": [45, 68, 180], "srcRaw": "D45, D68, D180 — D68에서 아빠 수염 질감을 느끼며 쿠잉했고, D180에서 양손을 뻗어 양볼에 얹었습니다. 30cm는 D180 기록에서 온 수치입니다."}, {"n": 16, "name": "소리를 되돌려주기 (쿠잉 주고받기)", "m": 1, "dom": "언어", "dom2": "사회정서", "math": 0, "label": "[CDC 6개월] 「상대와 번갈아 가며 소리를 낸다」 · 10명 중 7~8명 이상", "mat": "없음", "how": "아기가 \"우우\" 하면 **똑같이 따라 한다.** 그리고 **기다린다.** 아기가 다시 낼 때까지.", "down": "아기 소리를 그대로. 변형하지 않는다.", "up": "소리를 살짝 바꿔서 돌려준다. 아기가 또 바꾸는지 본다.", "warn": "**기다리는 게 전부입니다.** 부모가 계속 말하면 아기 차례가 없습니다.", "src": [33, 67, 80], "srcRaw": "D33, D67, D80 — D33에서 아빠의 모방에 미소로 화답했고, D67에서 **순서를 기다려 대답하듯** 옹알거렸습니다."}, {"n": 17, "name": "촉감 그림책", "m": 1, "dom": "인지", "dom2": "신체", "math": 0, "label": "[CDC 6개월] 「물건을 탐색하기 위해 입 안에 넣는다」 · 손 탐색은 더 이름", "mat": "촉감책 (털·주름 등)", "how": "손을 잡아 질감 위에 얹어준다. **손을 빼면 거기서 끝**이다.", "down": "부모 손으로 먼저 만져 보여준다.", "up": "질감이 다른 두 면을 번갈아. 어느 쪽에 손이 더 오래 머무는지 본다.", "warn": "이 시기 아기는 **책보다 읽어주는 사람 얼굴을 먼저 봅니다.** 정상입니다.", "src": [57], "srcRaw": "D57 — 동물 털 질감을 탐색했고, 동시에 \"책 자체보다 읽어주는 부모의 얼굴에 우선적으로 반응\"했다고 기록돼 있습니다."}, {"n": 18, "name": "자기 손 보기", "m": 2, "dom": "인지", "dom2": "신체", "math": 0, "label": "[CDC 4개월] 「자신의 손을 관심 있게 바라본다」 · 10명 중 7~8명 이상", "mat": "없음", "how": "아기가 손을 응시하기 시작하면 **아무것도 하지 마십시오.** 방해하지 않는 것이 놀이입니다.", "down": "손을 시야 안으로 살짝 옮겨준다.", "up": "두 손을 모아준다. 양손을 번갈아 보는지 본다.", "warn": "이건 **자기 몸이 자기 것임을 알아가는 과정**입니다. 사진 찍겠다고 끊지 마십시오.", "src": [63, 72, 95], "srcRaw": "D63, D72, D95 — D63에서 오른손을 뚫어지게 봤고(hand-regarding), D95에서 모빌을 조작하며 자기 손을 번갈아 봤습니다."}, {"n": 19, "name": "거울 놀이", "m": 2, "dom": "사회정서", "dom2": "인지", "math": 0, "label": "[CDC 6개월] 「거울에 비친 자신의 모습을 보는 것을 좋아한다」 · 10명 중 7~8명 이상", "mat": "안전 거울", "how": "아기를 안고 거울 앞에 선다. 부모가 거울 속에서 웃는다. 그리고 **실제 얼굴로도 웃는다.**", "down": "거울만. 얼굴 하나만 비친다.", "up": "거울 속과 실제를 번갈아 나타난다. 아기가 둘을 번갈아 보는지 본다.", "warn": "6개월까지는 **거울 속이 자기라는 걸 모릅니다.** 그래도 좋아합니다.", "src": [74], "srcRaw": "D74 — 거울 속 아빠와 실제 아빠를 번갈아 봤습니다."}, {"n": 20, "name": "멀리서 보기", "m": 2, "dom": "인지", "dom2": "사회정서", "math": 1, "label": "[CDC 2개월] 「움직임에 따라 상대를 주시한다」 · 10명 중 7~8명 이상", "mat": "모빌 또는 부모", "how": "평소보다 **훨씬 멀리(1m 이상)** 떨어져 부른다. 또는 모빌을 멀리 건다. 아기가 멀리 있는 것을 보는지 확인한다.", "down": "거리를 절반으로.", "up": "방 경계 밖에서 얼굴만 내민다.", "warn": "아기 시야는 계속 넓어집니다. **가까이만 보여주면 넓어진 걸 모르고 지나갑니다.**", "src": [51, 92, 190], "srcRaw": "D51, D92, D190 — D51에서 **1m 밖 모빌**을 보며 웃고 쿠잉했고(1m는 이 기록에서 온 수치), D92에서 천장 구석 홈캠 렌즈를 정확히 응시했으며, D190에서 방 경계 밖 화자를 향해 미소를 보냈습니다.", "mathEye": {"seed": "거리 · 원근", "now": "멀리 있는 것을 보는지 확인합니다.", "later": "「저건 저기 있다」는 감각, 거리의 시작입니다. 가까운 것만 보여주면 시야가 넓어진 걸 모르고 지나갑니다.", "watch": "가까이와 멀리의 반응 거리를 비교해보세요. 그 차이가 매주 벌어집니다."}}, {"n": 21, "name": "표정 따라 하기", "m": 2, "dom": "사회정서", "dom2": "언어", "math": 0, "label": "[CDC 6개월] 「웃는다」 · 10명 중 7~8명 이상", "mat": "없음", "how": "아기 얼굴 앞에서 **크게 웃는다.** 그리고 **기다린다.** 혀를 내밀거나 입을 벌리는 것도 좋다.", "down": "표정을 더 천천히, 더 크게.", "up": "가짜 웃음소리(\"하! 하!\")를 섞는다.", "warn": "모방이 안 나와도 됩니다. **부모를 보는 것 자체**가 목적입니다.", "src": [56, 74], "srcRaw": "D56, D74 — D56에서 부모의 웃는 표정을 따라 웃었고, D74에서 아빠의 가짜 웃음과 발성을 모방했습니다."}, {"n": 22, "name": "모빌 쳐서 움직이기", "m": 2, "dom": "인지", "dom2": "신체", "math": 0, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」 · 10명 중 7~8명 이상", "mat": "모빌", "how": "손이 닿는 높이로 낮춘다. **치는 법을 보여주지 않는다.** 아이가 우연히 쳐서 움직임이 생기는 순간을 기다린다.", "down": "손에 닿아 있게 더 낮게.", "up": "조금 높여 팔을 뻗게 한다.", "warn": "「쳤다 → 움직였다」를 연결하는 데 며칠 걸립니다. 그 며칠이 중요합니다.", "src": [57, 65, 70, 111], "srcRaw": "D65, D70, D111 — D57에 이미 \"모빌을 툭툭 쳐서 움직임을 만든 후 쿠잉으로 화답\"이 있고, D70에서 잡아당겨 입으로 가져가려 했습니다."}, {"n": 23, "name": "이중언어 리듬 놀이", "m": 2, "dom": "언어", "dom2": null, "math": 0, "label": "[CDC 6개월] 「상대와 번갈아 가며 소리를 낸다」 · 10명 중 7~8명 이상", "mat": "아무 물건", "how": "물건을 보여주며 **\"가지! eggplant!\"** 처럼 두 언어를 붙여 말한다. **끝마디를 과장**한다.", "down": "한 언어만. 리듬만 강조.", "up": "세 단어를 이어서. 리듬을 바꿔가며.", "warn": "아기가 반응하는 건 단어가 아니라 **리듬**입니다. 뜻을 가르치는 게 아닙니다.", "src": [88], "srcRaw": "D88 — \"가지! eggplant!\" 등 **단어 끝마디의 리듬**에 큰 즐거움을 보였습니다. 같은 날 기록에 \"주간의 과도한 흥분이 야간 수면의 질을 저하\"도 남아 있으니 자기 전엔 하지 마십시오."}, {"n": 24, "name": "목욕을 놀이로", "m": 2, "dom": "사회정서", "dom2": null, "math": 0, "label": "CDC 이정표 없음 · 루틴 형성", "mat": "욕조", "how": "**목욕 전에 먼저 논다.** 맨살로 안고 논다. 기분이 좋아진 상태로 물에 들어간다.", "down": "물 온도를 조금 높게. 시간을 짧게.", "up": "물에서 다리로 바닥을 딛게 해본다.", "warn": "피곤한 상태에서 억지로 씻기면 **울음과 거부가 학습됩니다.**", "src": [76, 81, 91], "srcRaw": "D91, D81, D76 — D91에서 목욕 전 스킨십으로 목욕을 「놀이」로 인식시키자 식사·수면의 질이 올랐고, 반대로 D81에서 피로가 쌓인 저녁 강제 목욕 후 **아빠 얼굴을 쳐다보고 명확히 거부하며** 심하게 울었습니다."}, {"n": 25, "name": "자는 곳과 노는 곳 나누기", "m": 2, "dom": "인지", "dom2": "사회정서", "math": 1, "label": "CDC 이정표 없음 · 환경 설계", "mat": "없음", "how": "노는 공간과 자는 공간을 **물리적으로 분리**한다. 자는 방에서는 놀지 않는다.", "down": "같은 방이면 조명과 매트만이라도 바꾼다.", "up": "자는 방 진입 = 수면 신호가 되게 순서를 고정한다.", "warn": "2개월이면 **장소에 따라 행동이 달라집니다.** 아기는 이미 공간을 압니다.", "src": [87, 127], "srcRaw": "D87, D127 — D87에서 수면 공간과 놀이 공간에 따라 차분함과 활발함이 달랐고, D127에서 분리 수면을 시작하자 즉각 적응했습니다.", "mathEye": {"seed": "공간 분할", "now": "장소에 따라 아기 행동이 달라지는지 봅니다.", "later": "「여기는 이런 곳, 저기는 저런 곳」 — 공간을 덩어리가 아니라 구획으로 보기 시작합니다.", "watch": "두 방에 들어갈 때 표정과 팔다리가 달라지는지 보세요."}}, {"n": 26, "name": "3D 팝업북", "m": 3, "dom": "인지", "dom2": null, "math": 1, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」 · 10명 중 7~8명 이상", "mat": "팝업북", "how": "접힌 상태로 보여준다. 그리고 **펼친다.** 눈이 커지는 순간을 본다. 반복한다.", "down": "팝업이 하나만 있는 단순한 면으로.", "up": "아기 손으로 펼치게 도와준다.", "warn": "**반복해도 놀람이 그대로일 수 있습니다.** D97에서 아빠가 반복 검증하자 **동일한** 놀람 반응이 나왔습니다. 익숙해지는 데는 시간이 더 걸립니다.", "src": [97, 186], "srcRaw": "D97, D186", "mathEye": {"seed": "차원 (2D→3D)", "now": "평면이 입체가 되는 순간을 눈앞에서 봅니다.", "later": "놀라는 건 예상과 다른 일이 벌어졌기 때문이고, 그 예상이 곧 아기의 공간 모형입니다.", "watch": "반복해도 놀람이 안 줄 수 있습니다. 정상입니다."}}, {"n": 27, "name": "뒤집기 도와주기", "m": 3, "dom": "신체", "dom2": null, "math": 0, "label": "[CDC 6개월] 「배를 대고 엎드린 자세에서 뒤집는다」 · 10명 중 7~8명 이상", "mat": "매트", "how": "아기를 눕히고 **다리 축만 살짝 돌려준다.** 상체는 아기가 스스로 따라오게 둔다.", "down": "몸통까지 함께 돌려 성공 경험을 만든다.", "up": "시야 안에 장난감을 놓고 도움을 뺀다.", "warn": "실패하면 아기가 **화를 냅니다.** D41 \"낑낑대며 짜증과 분노\", D101 \"실패 시 짜증\", D137 \"행동 제약 시 강한 짜증\". **짜증은 포기가 아니라 동기입니다.** 그때 도와주십시오.", "src": [101, 112, 137, 142], "srcRaw": "D101, D112, D137, D142 — D112에서 \"다리의 축을 살짝 돌려주면 상체를 이용하여 뒤집기에 성공\"이 기록됐습니다. 이 놀이의 방법은 그 문장에서 그대로 왔습니다."}, {"n": 28, "name": "비눗방울", "m": 3, "dom": "인지", "dom2": null, "math": 0, "label": "[CDC 2개월] 「움직임에 따라 상대를 주시한다」 · 10명 중 7~8명 이상", "mat": "비눗방울", "how": "아기 시야에서 **천천히** 분다. 방울이 뜨고 떨어지는 것을 눈으로 좇는지 본다.", "down": "큰 방울 하나만. 더 가까이.", "up": "아기가 손을 뻗어 터뜨리게 한다.", "warn": "**얼굴에 직접 불지 마십시오. 옆이나 위로.** (일반 안전 지침)", "src": [106], "srcRaw": "D106 — 허공을 떠다니는 비눗방울을 시선으로 쫓으며 집중했습니다."}, {"n": 29, "name": "물건 입에 넣기 (막지 마십시오)", "m": 3, "dom": "인지", "dom2": "신체", "math": 0, "label": "[CDC 6개월] 「물건을 탐색하기 위해 입 안에 넣는다」 · 10명 중 7~8명 이상", "mat": "안전한 물건들", "how": "삼킬 수 없는 크기의 안전한 물건을 준다. **입에 넣는 것을 막지 않는다.**", "down": "치발기처럼 명확히 그 용도인 것으로.", "up": "재질이 다른 여러 개를 번갈아.", "warn": "**삼킬 수 없는 크기여야 합니다.** (일반 안전 지침) 그리고 **막으면 짜증을 냅니다.** D132에 \"손을 강제로 빼거나 눕혀줄 때 즉각적으로 짜증과 투정\". **입은 이 시기의 손입니다.**", "src": [100, 102, 103, 111, 132], "srcRaw": "D100, D102, D103, D111, D132"}, {"n": 30, "name": "손수건 떨어뜨리기", "m": 3, "dom": "인지", "dom2": null, "math": 1, "label": "CDC 이정표 없음 · 물리 인과 경험", "mat": "얇은 손수건", "how": "아기 위에서 손수건을 **놓는다.** 천천히 떨어져 몸에 닿는다.", "down": "더 낮은 데서. 얼굴이 아닌 배 위로.", "up": "두 개를 다른 높이에서 동시에.", "warn": "**얼굴에 오래 두지 마십시오. 닿는 즉시 걷어주십시오.** (일반 안전 지침)", "src": [116], "srcRaw": "D116 — 얼굴에 떨어진 손수건에 깜짝 놀랐고, 선생님은 이걸 「중력의 물리적 타격감 경험」이라 적으셨습니다.", "mathEye": {"seed": "중력 · 낙하", "now": "떨어지는 것을 몸으로 맞아봅니다.", "later": "손수건은 천천히 떨어져서 떨어지는 과정 전체를 볼 수 있습니다. 공이면 너무 빠릅니다.", "watch": "떨어지는 도중에 눈이 따라가는지, 닿고 나서 반응하는지 — 다른 단계입니다."}}, {"n": 31, "name": "몸으로 읽는 그림책", "m": 3, "dom": "언어", "dom2": "사회정서", "math": 0, "label": "[CDC 6개월] 「웃는다」 · 10명 중 7~8명 이상", "mat": "의성어·의태어가 많은 그림책", "how": "\"쿵!\" \"데굴데굴\"을 **몸으로 시연**한다. 부모가 직접 구른다.", "down": "손동작만.", "up": "아기 몸에 동작을 적용한다(살짝 굴려주기).", "warn": "부모가 부끄러움을 버려야 됩니다. **그 값어치를 합니다.** D116에서 자지러지게 웃었습니다.", "src": [116, 206], "srcRaw": "D116, D206 — D206에서 과장된 표정과 효과음으로 독서를 제안하자 웃음으로 화답하며 들어왔습니다."}, {"n": 32, "name": "애착 인형 들이기", "m": 3, "dom": "사회정서", "dom2": null, "math": 0, "label": "CDC 이정표 없음 · 정서", "mat": "인형 하나", "how": "하나를 고른다. **잘 때 옆에 둔다.** 며칠 반복한다.", "down": "부모 냄새가 밴 천을 함께 둔다.", "up": "외출할 때 가져간다.", "warn": "시우는 **처음 보는 인형인데도 거부 없이** 안고 얼굴을 부볐습니다(D118). 다만 이건 한 번의 사례입니다. 안 받아들이는 아기도 많고, 그래도 괜찮습니다.", "src": [118], "srcRaw": "D118"}, {"n": 33, "name": "젖병 양손으로 쥐기", "m": 3, "dom": "신체", "dom2": null, "math": 0, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」 · 10명 중 7~8명 이상", "mat": "젖병", "how": "수유할 때 아기 두 손을 젖병에 모아준다.", "down": "한 손만 얹어준다.", "up": "잡는 힘을 확인하고 부모가 손을 조금씩 뗀다.", "warn": "**손가락이 아니라 손바닥 전체로 감싸는 게 이 시기입니다.** D113 원문 \"젖병을 손가락이 아닌 손바닥 전체로 감싸 쥠\". 정상입니다.", "src": [103, 113], "srcRaw": "D103, D113"}, {"n": 34, "name": "발로 누르는 것을 눈으로 확인하기", "m": 4, "dom": "인지", "dom2": "신체", "math": 0, "label": "[CDC 4개월] 「자신의 손을 관심 있게 바라본다」의 발 버전 · 10명 중 7~8명 이상", "mat": "아기 체육관 / 바운서", "how": "발이 닿는 곳에 건반을 둔다. 아기가 **고개를 들어 무엇을 누르는지 보는지** 관찰한다.", "down": "소리가 더 크게. 발 바로 아래에.", "up": "건반 두 개를 다른 위치에. 어느 쪽을 고르는지 본다.", "warn": "**「특정 건반 = 특정 소리」를 짝짓는 건 아직 안 됩니다.** D123 원문 \"특정 건반과 특정 소리를 1:1로 매핑하지는 못함\". 그건 나중입니다.", "src": [123, 125, 127], "srcRaw": "D123, D125, D127"}, {"n": 35, "name": "스피너 돌리기 (시범 먼저)", "m": 4, "dom": "인지", "dom2": "신체", "math": 0, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」 · 10명 중 7~8명 이상", "mat": "스피너", "how": "**먼저 아무 말 없이 스피너만 손 닿는 곳에 두고 1~2분 기다린다.** 아이가 혼자 무엇을 하는지 본 뒤에, 그다음 여러 번 돌려 보인다. 그리고 다시 넘긴다.", "down": "부모가 아기 손을 잡고 함께 친다.", "up": "거울 앞에 붙여 회전을 두 방향에서 보게 한다.", "warn": "**시범 직후에 바로 나오기도 합니다.** D147에서 아기는 \"부모의 행동을 관찰한 후\" 곧바로 손을 뻗어 정확히 타격했습니다. 안 나와도 며칠 기다려 보십시오.", "src": [147, 205], "srcRaw": "D147, D205"}, {"n": 36, "name": "손가락 수 세기", "m": 4, "dom": "인지", "dom2": "언어", "math": 2, "label": "CDC 이정표 없음 · 수 개념의 시작", "mat": "부모 손", "how": "손가락을 **하나씩 펴며** \"하나, 둘, 셋\"이라고 말한다. **속도를 일정하게.**", "down": "셋까지만. 더 천천히.", "up": "다섯까지. **목욕할 때도 같은 리듬으로.**", "warn": "수를 가르치는 게 아닙니다. **수량이 늘어나는 시각적 변화**를 보여주는 것입니다.", "src": [151, 152, 195, 218, 222], "srcRaw": "D151, D152, D195, D218, D222 — D218에 \"수 세기(1~20, 목욕 시 1~5)\"와 \"정속 리듬\"이 있습니다. ↑의 「목욕 시」와 「일정한 속도」는 여기서 왔습니다. D222에서는 수 세기에 손을 뻗어 표면을 두드렸습니다.", "mathEye": {"seed": "수량 · 자연수", "now": "일정한 리듬으로 하나씩 늘어나는 패턴을 봅니다.", "later": "수 세기는 사물 하나에 수 하나를 짝짓는 것인데, 아기가 지금 잡을 수 있는 건 「하나씩 더해지는 패턴」뿐입니다. 여기서 시작합니다.", "watch": "속도를 일정하게. 빨라졌다 느려지면 패턴이 깨집니다."}}, {"n": 37, "name": "어둠 속 혼자 놀기", "m": 4, "dom": "사회정서", "dom2": null, "math": 0, "label": "CDC 이정표 없음 · 자기 조절", "mat": "없음", "how": "조도를 낮추고 **부모가 잠시 물러난다.** 혼자 손을 모으고 노는지 본다. **울면 즉시 간다.**", "down": "조도를 조금만 낮춘다. 옆에 있되 말은 걸지 않는다.", "up": "시간을 늘린다.", "warn": "**평온하던 아기가 부모가 나타나는 순간 웁니다.** D130 원문 \"평온하게 있다가 엄마가 방에 진입하자 그제서야 울며 보챔\". 우는 건 혼자 있어서가 아니라 부모를 봤기 때문입니다.", "src": [130, 160], "srcRaw": "D130, D160 — D160에서는 깨어난 뒤 울지 않고 몇 분간 혼자 몸을 움직이며 기다렸습니다."}, {"n": 38, "name": "되집기 도와주기 (반드시 함께 하십시오)", "m": 4, "dom": "신체", "dom2": null, "math": 0, "label": "[CDC 6개월] 「배를 대고 엎드린 자세에서 뒤집는다」(tummy to back) · 10명 중 7~8명 이상", "mat": "매트", "how": "엎드린 상태에서 어깨를 살짝 밀어 **누운 자세로 돌아오게** 도와준다.", "down": "몸통 전체를 돌려준다.", "up": "도움 없이. 시야 밖으로 장난감을 옮겨 스스로 돌게 유도.", "warn": "**뒤집기만 되고 되집기가 안 되면 밤에 웁니다.** D181 \"수면 중 자발적 뒤집기 후 슈퍼맨 자세 연쇄 구동 및 오열\", D195 \"자발적 뒤집기 기동 후 앙와위 복귀 실패로 보챔\". 이건 시우가 실제로 겪은 일입니다.", "src": [132, 157], "srcRaw": "D132, D157 — D157에서 엎드린 상태에서 누운 상태로 180도 되집기에 성공했습니다."}, {"n": 39, "name": "목표물 놓고 배밀이", "m": 4, "dom": "신체", "dom2": "인지", "math": 0, "label": "CDC 항목 없음(기기는 2022년 삭제) · WHO 6개 항목에도 배밀이는 없음", "mat": "좋아하는 장난감", "how": "엎드린 아기 앞, **손이 안 닿는 거리**에 장난감을 둔다. 기다린다.", "down": "손 뻗으면 닿는 거리로.", "up": "더 멀리. 중간에 낮은 장애물을 둔다.", "warn": "**앞으로 못 가고 뒤로 밀리는 게 정상 순서입니다.** D163 원문 \"고개를 들고 전방을 보나 후방으로 몸이 밀림\". 이때 웃어주십시오.", "src": [139, 142, 146, 148, 163], "srcRaw": "D139, D142, D146, D148, D163 — D146에서 \"체력이 고갈되면 바닥에 머리를 대고 쉬었다가 다시 전진하는 에너지 안배\"가 관찰됐습니다."}, {"n": 40, "name": "까꿍 인형", "m": 4, "dom": "사회정서", "dom2": "인지", "math": 0, "label": "[CDC 9개월] 「까꿍놀이를 할 때 미소를 짓거나 웃는다」 · 10명 중 7~8명 이상", "mat": "작동 완구 또는 손", "how": "숨었다 나타난다. **일정한 리듬**으로. 아이가 나타날 자리를 미리 보는지 확인한다.", "down": "손으로 얼굴만 가렸다 보인다.", "up": "나타나는 위치를 바꾼다. 타이밍을 늦춰 기대를 만든다.", "warn": "9개월 항목이지만 4개월에도 즐깁니다. **웃지 않아도 「기다리는 표정」이 나오면 성공**입니다.", "src": [150], "srcRaw": "D150 — 코끼리 인형의 움직임과 소리에 집중하며 **시각적 기대**를 보였습니다."}, {"n": 41, "name": "소리로 예측하기", "m": 4, "dom": "인지", "dom2": "언어", "math": 0, "label": "CDC 이정표 없음 · 예측 · 놀이 40과 짝", "mat": "젖병 쉐이커 등 준비 소리가 나는 것", "how": "아기가 안 보는 데서 **준비하는 소리**를 낸다. 소리만으로 다음에 올 일을 아는지 본다.", "down": "소리를 낸 직후 실물을 바로 보여준다.", "up": "소리와 실물 사이 시간을 늘린다.", "warn": "이건 **소리 → 사건**을 연결한다는 뜻입니다. 시각 단서(D155, 젖병을 보고 울음 증폭)보다 한 단계 위입니다.", "src": [155, 190], "srcRaw": "D155, D190 — D190에서 **젖병 쉐이커 소리를 듣고** 버둥거리며 고주파 발성을 냈습니다. 아직 젖병은 보이지 않은 상태였습니다."}, {"n": 42, "name": "하이체어에 앉혀 놀기", "m": 5, "dom": "신체", "dom2": null, "math": 0, "label": "[WHO] 도움 없이 앉기 — **중앙값 5.9개월 · 정상 범위 3.8~9.2개월**", "mat": "하이체어", "how": "앉힌다. 상체가 앞으로 쏠려도 **넘어지지 않으면 그대로 둔다.** 앞에 조작할 것을 둔다.", "down": "등받이를 세우고 쿠션으로 받친다.", "up": "지지를 줄인다. 양손으로 조작하게 한다.", "warn": "정상 범위가 **3.8~9.2개월로 5.4개월 폭**입니다. 아직 못 앉아도 범위 안입니다. 무리하지 마십시오.", "src": [153, 159], "srcRaw": "D153, D159 — D153에서 \"코어 근육의 미숙함으로 상체가 앞으로 쏠리나, 넘어지지 않고 중심을 유지하며 두 손으로 스피너를 능숙하게 조작\"했습니다."}, {"n": 43, "name": "엎드려서 책 잡기", "m": 5, "dom": "신체", "dom2": "언어", "math": 0, "label": "[CDC 6개월] 「배를 대고 엎드렸을 때 팔을 곧게 펴고 몸을 위로 밀어 올린다」 · 10명 중 7~8명 이상", "mat": "보드북", "how": "엎드린 아기 앞에 책을 세워둔다. **양손으로 모서리를 잡는지** 본다.", "down": "눕힌 상태에서 책을 위에 들어준다.", "up": "페이지를 넘기게 도와준다.", "warn": "**책이 망가집니다. 보드북으로 하십시오.** (일반 지침)", "src": [155, 188], "srcRaw": "D155, D188 — D188에서 \"보드북 지면을 소근육으로 파지 후 회전(넘기기)\"이 관찰됐습니다."}, {"n": 44, "name": "슈퍼맨 자세", "m": 5, "dom": "신체", "dom2": null, "math": 0, "label": "[CDC 6개월] 「배를 대고 엎드렸을 때 팔을 곧게 펴고 몸을 위로 밀어 올린다」 · 10명 중 7~8명 이상", "mat": "움직이는 장난감", "how": "엎드린 상태에서 **앞쪽에 움직이는 것**을 둔다. 배만 바닥에 대고 팔다리를 드는 자세가 나온다.", "down": "팔 아래 쿠션을 받쳐 상체를 높인다.", "up": "장난감을 좌우로 움직여 몸을 비틀게 한다.", "warn": "이 자세는 오래 못 합니다. 몇 초면 충분합니다.", "src": [154], "srcRaw": "D154 — \"배를 축으로 삼고 양팔과 두 다리를 바닥에서 완전히 들어 올리는 슈퍼맨 자세\""}, {"n": 45, "name": "이름 부르고, 방향 바꿔 다시 부르기", "m": 5, "dom": "언어", "dom2": "인지", "math": 0, "label": "[CDC 9개월] 「아기의 이름을 부르면 쳐다본다」 · 10명 중 7~8명 이상", "mat": "없음", "how": "이름을 부른다. **그리고 방향을 바꿔 다시 부른다.** 이름에 반응한 건지 소리에 반응한 건지 갈린다.", "down": "가까이서. 억양을 과장해서.", "up": "이름 대신 아무 말이나 해본다. 반응이 다른지 본다.", "warn": "**이게 D122의 실험입니다.** D122 원문 \"방향을 바꿔 이름을 불렀을 때 우연적 반응임을 확인함(의미 미부여)\". 착각이 깨져도 괜찮습니다. 같은 날 \"압~~빠!\"처럼 **억양을 과장했을 때** 훨씬 크게 웃었습니다.", "src": [122, 162, 177], "srcRaw": "D122, D162, D177"}, {"n": 46, "name": "손 뻗어 잡기 (반경 30cm)", "m": 5, "dom": "신체", "dom2": "인지", "math": 1, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」 · 10명 중 7~8명 이상", "mat": "다양한 물건", "how": "아기 주변 **30cm 반경**에 크기가 다른 물건 여러 개를 둔다.", "down": "손에 닿는 거리로.", "up": "40cm로. 몸을 움직여야 닿게.", "warn": "**이 시기 손 뻗기는 대개 선호가 아닙니다.** D177 \"무작위적 탐색 반사의 빈도 증가\", D179 \"선호가 아닌 상체 기립근 발달로 사지 자유도가 확보되면서 발생하는 생리적 확장 반사일 가능성이 높음\". **여러 날 반복해서 같은 것을 고르는지 확인하기 전에는 선호로 읽지 마십시오.**", "src": [177, 179, 182], "srcRaw": "D177, D179, D182 — 30cm는 D179, 40cm는 D182(\"전방 40cm 거리에 꼬꼬맘 가동\")에서 온 수치입니다.", "mathEye": {"seed": "반경 · 거리 판단", "now": "닿을까 안 닿을까를 뻗기 전에 판단하는지 봅니다.", "later": "팔이 닿는 범위가 곧 아기가 가진 반경이고, 매일 그 반경을 다시 재고 있습니다.", "watch": "뻗기 전에 멈칫하는지 보세요. 무작정 뻗기와 재보고 뻗기는 다릅니다."}}, {"n": 47, "name": "치발기 손 바꿔 쥐기", "m": 5, "dom": "신체", "dom2": null, "math": 0, "label": "[CDC 9개월] 「한 손에서 다른 손으로 물건을 옮긴다」 · 10명 중 7~8명 이상", "mat": "치발기", "how": "한 손에 쥐어준다. **반대쪽에서 관심을 끌어** 손을 바꾸게 한다.", "down": "부모가 옮겨준다.", "up": "양손에 하나씩 쥐어주고 세 번째를 내민다.", "warn": "이앓이 중이면 놀이가 아니라 **진통**입니다(D145, D213). 그것도 괜찮습니다.", "src": [182], "srcRaw": "D182 — \"치발기 좌우 교대 파지 후 구강 이동\""}, {"n": 48, "name": "또래 마주 보기", "m": 5, "dom": "사회정서", "dom2": "언어", "math": 0, "label": "[CDC 6개월] 「친숙한 사람을 안다」 · 10명 중 7~8명 이상", "mat": "매트, 또래 아기", "how": "아기 둘을 **마주 보게** 눕히거나 엎드리게 한다. 부모는 물러난다.", "down": "거리를 두고. 시간을 짧게.", "up": "손이 닿는 거리로. 같은 장난감을 하나만 놓는다.", "warn": "**또래를 마주 보면 옹알이가 폭발합니다**(D114, D167). 어른 상대로도 폭발하니(D83, D90) 어느 쪽이 더 많다고는 말할 수 없습니다.", "src": [114, 162, 166, 167, 219], "srcRaw": "D114, D162, D166, D167, D219 — D219에서 친구와 전화기 장난감을 **서로 끌어당겼습니다.**"}, {"n": 49, "name": "숟가락 놀이 (이유식 시작 무렵)", "m": 5, "dom": "사회정서", "dom2": "신체", "math": 0, "label": "CDC 이정표 없음 · 섭식 반사 관찰", "mat": "숟가락", "how": "숟가락을 입에 대며 **\"아, 냠냠\"** 하고 부모가 먼저 입을 벌린다. 아기가 따라 벌리는지 본다.", "down": "숟가락 없이 입 모양만.", "up": "숟가락 끝을 아기가 잡게 한다.", "warn": "**모방처럼 보이지만 모방이 아닐 수 있습니다.** D178에 선생님이 직접 「모방의 환상 차단」이라 적으시고, \"고차원적 개념 학습이 아닌 다가오는 질량체(스푼)와 후각 지표에 반응하여 자동으로 출력된 생리적 섭식 반사\"라고 결론 내리셨습니다. **모방인지 반사인지는 숟가락 없이 입 모양만 보여줘야 갈립니다.** 그게 ↓입니다.", "src": [178, 188, 198], "srcRaw": "D178, D188, D198"}, {"n": 50, "name": "촉감 놀이 (음식 재료)", "m": 6, "dom": "인지", "dom2": "신체", "math": 0, "label": "[CDC 6개월] 「물건을 탐색하기 위해 입 안에 넣는다」 · 10명 중 7~8명 이상", "mat": "미역, 수박, 강냉이, 완두콩, 딸기 등", "how": "매트에 펼쳐준다. **손으로 만지고 뭉개게 둔다.**", "down": "하나만. 촉감이 부드러운 것부터.", "up": "질감이 다른 두세 가지를 함께.", "warn": "**먹을 수 있는 것만 쓰십시오.** (일반 안전 지침) 이 시기 아기는 전부 입에 넣습니다.", "src": [106, 110, 113, 145, 184, 187, 191], "srcRaw": "D106, D110, D113, D145, D184, D187, D191"}, {"n": 51, "name": "움직이는 촉감 (반려동물)", "m": 6, "dom": "사회정서", "dom2": "신체", "math": 0, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」 · 10명 중 7~8명 이상", "mat": "반려동물 (있는 경우)", "how": "어른이 동물을 잡아준 상태에서 **아이가 손을 뻗으면** 닿게 해준다. 세게 쥐면 손을 살살 감싸 힘을 빼준다.", "down": "부모 손 위에 아기 손을 얹어 함께 만진다.", "up": "아기 혼자 만지게 하되 어른이 계속 옆에 있는다.", "warn": "**어른이 반드시 동물과 아기 사이에 있어야 합니다.** (일반 안전 지침) 놀이 50과 17은 **가만히 있는 것**만 다룹니다. 움직이고 반응하는 촉감은 완전히 다른 경험입니다.", "src": [196], "srcRaw": "D196 — \"상지를 전방으로 확장하여 반려견의 하지 및 미부 피모를 소근육 파지(쥐기 및 문지르기)\""}, {"n": 52, "name": "손가락 벌림 맞추기", "m": 6, "dom": "신체", "dom2": "인지", "math": 1, "label": "[CDC 12개월] 「엄지와 검지를 써서 집는다」의 전 단계 · 10명 중 7~8명 이상", "mat": "크기가 다른 공 여러 개", "how": "크기가 다른 것을 차례로 준다. **손가락 벌리는 폭이 크기에 따라 달라지는지** 본다.", "down": "크기 차이를 크게.", "up": "차이를 미세하게.", "warn": "눈으로 크기를 재서 **손을 미리 맞추는 것**입니다. 꽤 고급 능력입니다.", "src": [187], "srcRaw": "D187 — \"사물의 체적에 맞춰 손가락 벌림 반경 비례 조절 후 파지\"", "mathEye": {"seed": "크기 비교 · 비례", "now": "손가락 벌리는 폭이 물건 크기에 따라 달라지는지 봅니다.", "later": "눈으로 재서 손을 미리 맞추는 것 — 비례의 몸으로 된 형태입니다.", "watch": "잡기 직전의 손 모양을 보세요. 잡고 난 뒤가 아니라."}}, {"n": 53, "name": "블록 던지기", "m": 6, "dom": "인지", "dom2": "신체", "math": 1, "label": "CDC 이정표 없음 · 인과 탐색", "mat": "원목 블록", "how": "블록을 준다. **던지는 것을 막지 않는다.** 떨어지는 소리와 궤적을 보게 한다.", "down": "가벼운 천 블록으로.", "up": "통을 놓고 그 안에 넣게 유도한다.", "warn": "던지는 건 나쁜 버릇이 아니라 **중력 실험**입니다.", "src": [193], "srcRaw": "D193 — \"블록 객체를 움켜쥐고 전방 수평 벡터로 투척(던지기 행동) 연쇄 수행\"", "mathEye": {"seed": "궤적 · 인과", "now": "던지면 매번 아래로 떨어지는 걸 반복해서 봅니다.", "later": "「내가 이렇게 하면 저렇게 된다」가 인과이고, 「어떤 길로 가는가」가 궤적입니다.", "watch": "던진 뒤 떨어진 자리를 눈으로 좇는지 확인하세요."}}, {"n": 54, "name": "안과 밖", "m": 6, "dom": "인지", "dom2": "신체", "math": 2, "label": "[CDC 12개월] 「컵 안에 블록을 넣듯이 용기에 무엇인가를 넣는다」 · 10명 중 7~8명 이상", "mat": "통, 작은 공 여러 개", "how": "**먼저 통과 공만 주고 기다린다.** 아이가 스스로 무엇을 하는지 본 뒤에, 넣었다 뺐다 보여준다. 아이가 할 때 \"안\" \"밖\"이라고 말해준다.", "down": "큰 통, 큰 공. **빼기만.**", "up": "작은 통. 넣기까지. 넣으면서 수를 센다.", "warn": "**빼는 게 먼저, 넣는 게 나중입니다.** D227에서 \"큰 통 입구로 정확히 조준하여 떨어뜨리는 위치 정밀 조작에는 다소 미숙\"했습니다. 12개월 항목이니 당연합니다.", "src": [207, 218, 227], "srcRaw": "D207, D218, D227", "mathEye": {"seed": "집합의 소속 · 조준", "now": "안에 있다 / 밖에 있다를 통과 공으로 만집니다.", "later": "원소가 집합에 속하느냐 — 수학에서 가장 먼저 배우는 관계입니다. 빼기가 넣기보다 쉬운 건 넣기에 조준이 필요해서입니다.", "watch": "못 넣고 흘리는 과정이 조준 연습입니다. 도와주지 마세요."}}, {"n": 55, "name": "멈출 때까지 기다리기", "m": 6, "dom": "인지", "dom2": null, "math": 0, "label": "CDC 이정표 없음 · 예측", "mat": "스피너, 오뚝이", "how": "돌린다. 아기가 **완전히 멈출 때까지 기다렸다가** 다시 돌리는지 본다.", "down": "회전이 빨리 멈추는 것으로.", "up": "회전 중에 손바닥으로 눌러 멈추게 해본다.", "warn": "「멈춤을 확인하고 다시 조작」은 **결과를 예측한다는 뜻**입니다. 큰 진전입니다.", "src": [205, 212, 223], "srcRaw": "D205, D212, D223 — D223에서 \"회전 중인 날개를 손바닥으로 눌러 정지\"시켰습니다. ↑는 그 기록에서 왔습니다."}, {"n": 56, "name": "원목 교구 기둥", "m": 6, "dom": "신체", "dom2": "인지", "math": 1, "label": "[CDC 12개월] 「용기에 무엇인가를 넣는다」 · 10명 중 7~8명 이상", "mat": "수직 기둥형 원목 교구", "how": "기둥에 블록을 끼워 손 닿는 곳에 둔다. **어떻게 빼는지는 말하지 않는다.** 아이가 무엇을 하는지 본다.", "down": "블록을 반쯤 빼놓아 잡기 쉽게.", "up": "블록 수를 늘린다.", "warn": "아기가 **틀 자체를 넘어뜨려 블록을 빼기도 합니다**(D217). **그것도 해법입니다. 틀리지 않았습니다.** D199에서는 \"교구 프레임의 전도 없이\" 스스로 빼냈으니, 두 방법을 다 씁니다.", "src": [199, 217], "srcRaw": "D199, D217", "mathEye": {"seed": "수직축 · 순서", "now": "기둥에 순서대로 꽂힌 블록, 위에 것을 빼야 아래가 나옵니다.", "later": "이 강제된 순서가 나중에 「차례」와 「순서열」이 됩니다.", "watch": "맨 위부터 빼는지, 아무거나 당기는지 보세요. 틀을 넘어뜨리는 것도 해법입니다."}}, {"n": 57, "name": "마스킹 테이프 떼기", "m": 6, "dom": "신체", "dom2": null, "math": 0, "label": "[CDC 12개월] 「엄지와 검지를 써서 집는다」 · 10명 중 7~8명 이상", "mat": "마스킹 테이프", "how": "매끈한 면에 테이프를 붙인다. 아기가 **손톱 끝으로 뜯는지** 본다.", "down": "끝을 살짝 들어 올려 붙인다.", "up": "완전히 평평하게 붙인다. 여러 개를 붙인다.", "warn": "**손 전체가 아니라 손가락 끝을 쓰기 시작했다는 신호**입니다. D222 \"손가락 말단 손톱/지문 면으로 잡고\".", "src": [208, 222], "srcRaw": "D208, D222"}, {"n": 58, "name": "투명한 벽 (보이는데 못 잡는 것)", "m": 6, "dom": "인지", "dom2": null, "math": 1, "label": "CDC 이정표 없음 · 놀이 62와 짝", "mat": "투명 워터매트, 또는 투명 용기에 넣은 장난감", "how": "좋아하는 것을 **투명한 것 너머**에 둔다. 보이는데 못 잡는 상황을 만든다. 반응을 본다.", "down": "투명한 것을 치워 바로 잡게 한다.", "up": "그대로 둔다. 우회로를 찾는지 본다.", "warn": "**좌절을 오래 두지 마십시오.** 몇 번 시도한 뒤엔 열어주십시오. 이 놀이의 짝은 **뚫린 벽(놀이 62)**입니다. 두 개를 함께 하면 「막힌 경계 vs 통과되는 경계」가 갈립니다.", "src": [211], "srcRaw": "D211 — \"물고기를 잡기 위해 돌진하여 워터매트 투명 표면에 얼굴과 입을 밀착함\"", "mathEye": {"seed": "경계 · 위상", "now": "보이는데 못 잡는 상황 — 시각 거리는 0인데 물리적으로 막혀 있습니다.", "later": "보이는 것과 닿는 것이 다르다는 걸 처음 배웁니다. 「연결돼 있는가」를 묻는 위상의 시작입니다.", "watch": "막힌 걸 안 뒤 더 미는지, 돌아가는지, 포기하는지 — 셋은 다른 전략입니다."}}, {"n": 59, "name": "미디어월 · 큰 화면 보기", "m": 6, "dom": "인지", "dom2": null, "math": 0, "label": "[CDC 2개월] 「움직임에 따라 상대를 주시한다」의 원거리 심화 · 10명 중 7~8명 이상", "mat": "없음 (외출 시)", "how": "외출 중 큰 화면이나 수조를 만나면 **아이 시선이 그쪽으로 가는지** 본다. 억지로 돌려 세우지 않는다.", "down": "움직임이 느린 것으로.", "up": "더 오래.", "warn": "**가정 내 화면 노출과는 다릅니다.** 이건 외출 중 우연히 만나는 자극입니다. 일부러 화면을 틀어주는 용도가 아닙니다.", "src": [132, 197], "srcRaw": "D197, D132 — D197에서 미디어 월의 \"움직임 벡터를 향해 안구를 상측으로 고정하고 장시간 주시\", D132에서 수조의 생물과 빛을 장시간 응시했습니다."}, {"n": 60, "name": "공 굴리기", "m": 7, "dom": "인지", "dom2": "신체", "math": 1, "label": "CDC 이정표 없음 · 궤적 추적", "mat": "공", "how": "아기 앞에서 공을 굴린다. \"굴러간다\" \"멈췄다\"를 말해준다.", "down": "천천히, 가까이. 큰 공으로.", "up": "아기가 밀어 굴리게 유도한다.", "warn": "**눈으로 좇는 게 먼저, 미는 건 나중입니다.** D225 \"스스로 공을 밀어 굴리는 자발적 투척은 아직 관찰되지 않음\", D226 \"공을 밀어 굴리기보다 둥근 표면을 조심스럽게 감싸 잡아 몸쪽으로 끌어당김\". 참고로 **블록 던지기는 이미 합니다**(D193). 물건에 따라 다릅니다.", "src": [225, 226], "srcRaw": "D225, D226", "mathEye": {"seed": "궤적 · 감속", "now": "굴러가는 공은 옆으로 가며 점점 느려집니다.", "later": "던진 것은 아래로, 굴린 것은 옆으로 — 두 종류의 움직임을 구분하는 중입니다. 멈추는 건 마찰 때문입니다.", "watch": "눈으로 좇는 게 먼저, 미는 건 나중입니다."}}, {"n": 61, "name": "젖병 각도 조절", "m": 7, "dom": "인지", "dom2": "신체", "math": 1, "label": "[CDC 12개월] 「컵을 잡아 주면 컵의 물을 마신다」의 전 단계 · 10명 중 7~8명 이상", "mat": "젖병", "how": "아기가 직접 들고 마시게 한다. **잘 안 나올 때 스스로 각도를 세우는지** 본다.", "down": "부모가 손을 받쳐 각도를 유지해준다.", "up": "손을 완전히 뗀다.", "warn": "안 나온다고 우는 게 아니라 **바닥을 들어 올린 것**은 문제 해결입니다. D215 \"젖병 밑부분을 직접 위로 들어 올려 각도를 세움\". **그 순간을 기록하십시오.**", "src": [215, 232], "srcRaw": "D215, D232", "mathEye": {"seed": "각도 · 유체의 수평", "now": "병은 돌아가는데 안의 우유 수면은 늘 수평입니다.", "later": "각도 하나로 나오고 안 나오고가 바뀌는 경험 — 변수와 결과의 관계를 처음 만집니다.", "watch": "안 나올 때 우는지, 바닥을 들어 올리는지 보세요. 후자면 문제 해결입니다."}}, {"n": 62, "name": "울타리 너머 손 뻗기 (뚫린 벽)", "m": 7, "dom": "인지", "dom2": "신체", "math": 1, "label": "[CDC 6개월] 「원하는 장난감을 잡으려고 손을 뻗는다」의 심화 · 10명 중 7~8명 이상", "mat": "베이비룸 울타리", "how": "울타리 **바깥**, 창살 사이로 손이 겨우 닿는 자리에 장난감을 둔다.", "down": "창살 바로 앞에.", "up": "손이 아슬아슬하게 닿는 거리로.", "warn": "「막힌 것을 우회해서 목표에 닿기」입니다. **수단-목적 사고의 시작**입니다. 놀이 58(투명한 벽)과 짝으로 하십시오.", "src": [207, 220], "srcRaw": "D207, D220 — D207에서 \"울타리 창살 사이로 손을 뻗어 외부 영역의 노란 고리 조준 파지 성공\"", "mathEye": {"seed": "우회 · 뚫린 경계", "now": "창살 사이로 손을 넣어 바깥 물건을 잡습니다.", "later": "막힌 벽과 뚫린 벽 — 겉보기엔 둘 다 벽인데 하나는 통과됩니다. 직선으로 못 가면 돌아간다는 발상이 우회입니다.", "watch": "창살 사이를 찾아서 넣는지, 아무 데나 미는지 보세요."}}, {"n": 63, "name": "잼잼, 손 흔들기", "m": 7, "dom": "사회정서", "dom2": "신체", "math": 0, "label": "[CDC 12개월] 「짝짜꿍과 같은 게임을 함께 한다」 · 10명 중 7~8명 이상", "mat": "없음", "how": "부모가 잼잼을 시연한다. 노래를 붙인다. **매일 같은 시간에** 한다.", "down": "아기 손을 잡고 함께 움직인다.", "up": "부모가 하고 기다린다. 모방을 기다린다.", "warn": "12개월 항목입니다. **7개월에 시도만 나와도 이릅니다.**", "src": [221], "srcRaw": "D221 — \"잼잼과 손 흔들기 모방 시도\""}, {"n": 64, "name": "네발기기 유도", "m": 7, "dom": "신체", "dom2": null, "math": 0, "label": "[WHO] 네발기기 — **중앙값 8.3개월 · 정상 범위 5.2~13.5개월 · 4.3%는 하지 않음**", "mat": "탁 트인 매트", "how": "장난감을 조금 멀리 둔다. 무릎과 발바닥이 바닥에 닿는 자세가 나오는지 본다. **강요하지 않는다.**", "down": "거리를 줄인다. 배밀이로 닿게 한다.", "up": "낮은 쿠션 언덕을 넘게 한다.", "warn": "**네발기기를 건너뛰는 아기가 4.3%입니다.** 배밀이로만 다녀도 정상입니다. WHO 연구에서 이 아이들은 분석에서 제외됐고, 미국 CDC는 2022년에 기기를 체크리스트에서 **삭제**했습니다. D228에서 시우는 또래의 네발기기를 **관찰한 뒤** 모방을 시도했습니다.", "src": [209, 210, 214, 228, 231], "srcRaw": "D209, D210, D214, D228, D231"}, {"n": 65, "name": "계단·경사면 (안고서)", "m": 7, "dom": "신체", "dom2": "인지", "math": 1, "label": "CDC 이정표 없음 · 전정감각", "mat": "계단, 경사면", "how": "아기를 안고 **천천히** 계단이나 경사를 오르내린다. 기울기가 바뀔 때 아기 반응을 본다.", "down": "완만한 경사만. 더 천천히.", "up": "아기가 배밀이로 경사를 직접 오르게 한다.", "warn": "이 커리큘럼에서 **전정감각(균형·기울기)을 다루는 유일한 놀이**입니다. 나머지는 전부 시각·청각·촉각·운동입니다.", "src": [224, 232], "srcRaw": "D224, D232 — D224에서 계단을 오르내릴 때 \"안구 초점을 고정하며 신체 기울기 변화에 반응\"했고, D232에서 경사면을 배밀이로 이동한 뒤 집에서 하체를 높이 올리는 동작이 늘었습니다.", "mathEye": {"seed": "기울기 · 경사", "now": "안겨서 계단을 오르내리며 기울기를 몸으로 겪습니다.", "later": "얼마나 가면 얼마나 높아지는가 — 그 비율이 기울기입니다. 눈보다 귀 속 평형기관으로 먼저 배웁니다.", "watch": "기울어질 때 시선을 한 점에 고정하는지 보세요."}}, {"n": 66, "name": "플래시카드 (짧게)", "m": 7, "dom": "인지", "dom2": "언어", "math": 0, "label": "CDC 이정표 없음 · 주의 집중", "mat": "그림 카드", "how": "한 장씩 넘긴다. **아기 시선이 흩어지면 즉시 끝낸다.**", "down": "더 천천히. 카드 수를 줄인다.", "up": "카드에 이름을 붙여 말해준다.", "warn": "**효과가 검증된 학습법이 아닙니다.** 아기가 즐기면 하고, 아니면 멈추십시오. 오래 하면 과자극입니다.", "src": [229], "srcRaw": "D229 — \"플래시카드가 전환되는 동안 시선을 카드 중앙에 고정하고 정면 주시 상태 지속\""}];
+const DAILY = {"8": {"i": "흑백 초점책 (마름모 속 사각형 vs 반복 패턴)", "o": "마름모(단일 도형) 응시 → 자세 변경 → 패턴 응시 → 수면"}, "9": {"i": "기저귀 교체(쾌적함) 후 독서 시도", "o": "초기 3분 무반응(Warm-up) → 중반 관심 보임 → 후반 공복감으로 중단"}, "10": {"i": "수유 시 클래식 음악 노출, 그 외 휴식 제공", "o": "먹고 자는 패턴의 무한 반복(Eat-Sleep Cycle). 깨어있는 시간 거의 없음."}, "11": {"i": "곡선(원) vs 직선(다각형) 선호도 및 추적 실험", "o": "동그라미 위주의 시선 추적(Tracking) 확인. 눈동자에 원이 비치는 현상 관찰. 이후 수면 진입."}, "12": {"i": "인위적 자극 배제 및 생리적 욕구 충족 주력", "o": "먹고 자는 패턴의 무한 반복. 깨어있는 시간 거의 없음."}, "13": {"i": "초점책 넓게 펼쳐 제시 (초기값: 물결/별 vs 실제값: 마름모 패턴)", "o": "초기 배치(물결)를 외면하고 스스로 고개를 돌려 '마름모 패턴'을 찾아 3분간 응시."}, "14": {"i": "백설공주' 낭독 중 낭독자(아빠) 위치 이동 및 엄마 등장", "o": "· 딸꾹질 중에도 소리 나는 쪽(아빠)으로 고개를 돌려 시선 추적(Sound Localization).  · 엄마 등장 시 아빠에게서 엄마로 주의 전환(Attention Switching)."}, "15": {"i": "연구자(아빠)의 건강 악화로 인한 접촉 최소화", "o": "깊은 수면 상태 유지 (수면 방해하지 않음)"}, "16": {"i": "왕비와 거울' 낭독 중 시각적 방해물(책) 제거 실험", "o": "소리에 반응했으나 시선은 책/카메라에 고정. 책을 숨기자 아빠와 아이컨택 성공."}, "17": {"i": "만만디의 우연한 모험' 낭독", "o": "눈을 감고 외면하다(회피) 급격한 안면 홍조와 함께 울음 폭발."}, "18": {"i": "조리원 퇴소 전일, 별도 자극 없이 수면 위주 생활", "o": "깨어있는 시간 최소화."}, "19": {"i": "집 도착 후 '타이니 모빌(흑백)' 첫 가동", "o": "15분간 회전하는 인형을 추적(Tracking)하다 하품 후 수면."}, "20": {"i": "새벽 독서 및 기저귀 교체, 이후 '소등' 실험", "o": "칭얼거림이 심했으나 '불을 끄자(Darkness)' 즉시 수면 진입."}, "21": {"i": "작은 공 쥐어보기 (Grip Test)", "o": "공의 곡면을 따라 손가락을 펴서 감싸 쥐는 정교한 파지 성공."}, "22": {"i": "우드(유색/질감) 모빌 노출", "o": "흑백이 아닌 나무 모빌에도 관심을 보임."}, "23": {"i": "수면 중 '시골 극장 레벤다' 낭독", "o": "미동 없이 수면 유지."}, "24": {"i": "콩/깨 소리 vs 공 움직임", "o": "소리엔 무반응, 시각(공) 자극엔 고개 돌려 추적."}, "25": {"i": "회색 곰의 딸' 낭독 중 대화체 전환", "o": "칭얼거림 발생 시 대화하듯 읽어주자 집중력 회복 및 완독."}, "26": {"i": "미카의 하루' 낭독 및 카메라 제거", "o": "엄마를 보던 중 아빠 목소리에 고개를 돌림. 카메라 제거 시 집중 향상."}, "27": {"i": "목욕 후 경사면 위 터미타임", "o": "경사면을 활용해 수월하게 고개를 들고 인형 응시."}, "28": {"i": "간절히 원하는 아이' 낭독 및 위치 이동", "o": "카메라/아빠에게 시선 고정 시, 다른 자극에 반응하지 못함."}, "29": {"i": "타이니모빌 컬러 인형 노출 시작", "o": "컬러 모빌의 움직임에 시선을 고정하고 집중하기 시작함."}, "30": {"i": "공 잡기 시도 및 초점책 놀이", "o": "손에 닿는 공의 질감을 느끼며 쥐는 힘을 조절하고 초점책에 몰입함."}, "31": {"i": "주황색 사슴 모빌 집중 노출", "o": "주황색 사슴에 유독 강한 애착과 긴 응시 시간을 보임."}, "32": {"i": "역방향 쿠션 위 터미타임", "o": "고개를 45도 들어 정면의 사슴을 안정적으로 응시함."}, "33": {"i": "아빠 가슴 위 밀착 교감 및 발성", "o": "아빠를 보며 **쿠잉(Cooing)**을 하고 아빠의 모방에 미소로 화답함."}, "34": {"i": "선호 모빌 가리기/보여주기 실험", "o": "사슴이 가려지면 불안해하다가 다시 나타나면 즉시 안도함."}, "35": {"i": "복합 자극(까꿍책 + 부모 육성)", "o": "모빌에 집중하다가도 부모의 목소리에 즉각 고개를 돌림."}, "37": {"i": "초점책 노출 중 공복 자극 발생", "o": "배고픔으로 울음 발생 시 즉시 활동을 중단하고 수유로 전환."}, "38": {"i": "시/청각 복합 자극(모빌)", "o": "모빌을 보며 명확한 사회적 미소를 짓고 침 분비량이 증가함."}, "39": {"i": "[엉망진창 무지개] 독서 & 실물 연계", "o": "책 속 무지개색을 보고 사슴 모빌의 색상과 매칭하며 응시함."}, "41": {"i": "뒤집기 시범 및 신체 보조(Scaffolding)", "o": "몸이 완전히 뒤집히지 않자 낑낑대며 짜증과 분노를 표출함."}, "42": {"i": "평지 매트 위 자율 터미타임", "o": "도움 없이 고개를 90도 가까이 세우고 주변(강아지 등)을 탐색함."}, "45": {"i": "[눈코입] 독서 및 신체 부위 접촉 놀이", "o": "아빠의 얼굴을 손으로 만지며 책 속의 부위와 일치시킴."}, "46": {"i": "의도적 잡기 및 쥐기 훈련", "o": "물체나 아빠의 손가락을 의지적으로 쥐고 힘을 유지함."}, "47": {"i": "4방향 시각 추적 및 방향 어휘 자극", "o": "\"상/하/좌/우\" 말에 맞춰 고개를 정확히 회전하며 즐거워함."}, "48": {"i": "아기 체육관 피아노 건반 노출", "o": "발버둥 중 우연히 건반을 눌러 소리가 나자 흥미를 보임. 주로 오른발 사용."}, "49": {"i": "사슴 모빌 손 타격 및 아기체육관", "o": "손을 뻗어 모빌을 치고 웃음. 건반을 전날보다 더 잘 다루기 시작함."}, "50": {"i": "아기 체육관 거리 조절 및 관찰", "o": "음악이 끝나면 이어서 누름(의지적 시도). 까치발을 해서라도 건반을 누름."}, "51": {"i": "1m 원거리 모빌 노출", "o": "1m 밖 모빌을 응시하며 웃고 쿠잉함. 전체적인 쿠잉 횟수가 급증함."}, "52": {"i": "모빌에 고리를 달아 조작 유도", "o": "고리를 손으로 잡고 모빌을 조작하며 소근육 발달을 꾀함."}, "53": {"i": "[해님 안녕 달님 안녕] 및 천문학 지식", "o": "아빠 얼굴보다 책의 그림을 응시하며 고도의 집중력을 보임."}, "54": {"i": "자율적 모빌 고리 잡기", "o": "잡아주지 않아도 스스로 고리를 낚아채 조작함. 손가락 활용 정교화."}, "55": {"i": "설날 외가 방문 및 집안 구경", "o": "낯선 공간을 두리번거리며 구경함. 아빠의 공간 설명을 경청함."}, "56": {"i": "주변 사물 인지 및 표정 모방", "o": "달력, 사진을 뚫어지게 봄. 부모의 웃는 표정을 따라 웃음."}, "57": {"i": "촉감 그림책(동물 털) 노출 및 모빌 조작", "o": "· 동물 털을 만지며 생소한 질감을 탐색함.  · 책 자체보다 읽어주는 부모의 얼굴에 우선적으로 반응함.  · 모빌을 툭툭 쳐서 움직임을 만든 후 쿠잉으로 화답함."}, "58": {"i": "50일 촬영 및 첫 외부 카페(스타벅스) 방문", "o": "· 차량 이동 및 낯선 다중 이용 시설에서 주로 수면을 취함. · 집안에서 엄마아빠의 움직임을 눈으로 쫓으며 위치를 추적함. · 벽면 달력 등 특정 지점을 정밀하게 관찰함."}, "59": {"i": "잠투정 상황에서의 3권 연속 독서 시도", "o": "· 울다가도 책을 펼치자 즉시 울음을 멈추고 그림에 집중함.   · 책이 끝나면 다시 보채며 다음 책을 요구하는 듯한 반응을 보임.   · 독서 중 풍성한 쿠잉(옹알이)으로 아빠와 상호작용함."}, "62": {"i": "원더윅스 의심 및 엄마의 독서 자극", "o": "낮잠을 거의 자지 못하고 보챘으나, 엄마가 책을 읽어주면 기분 좋은 듯 팔다리를 휘저음."}, "63": {"i": "자기 신체(오른손) 탐색 및 구강기 반응", "o": "자신의 오른손을 뚫어지게 응시하며(Hand-regarding), 손을 입에 넣고 빠는 빈도가 급격히 늘어남."}, "64": {"i": "외할머니와의 대면 및 발성 유도", "o": "단순 옹알이를 넘어 \"응응 아으앙냥\" 등 복합 음절 발성."}, "65": {"i": "모빌 관찰 및 직접 타격 조작", "o": "모빌을 보며 옹알이를 하고, 동시에 손으로 툭툭 치며 조작함."}, "66": {"i": "수면 패턴 안정 및 아빠 얼굴 촉각 탐색", "o": "밤중 1회 수유 후 통잠. 아빠 품에서 아빠의 얼굴을 손으로 만짐."}, "67": {"i": "부모의 언어적 반응 및 대화 시도", "o": "옹알이 급증. 부모의 말에 순서를 기다려 대답하듯 옹알거림."}, "68": {"i": "트립트랩 거치 및 아빠 수염 촉각 탐색", "o": "아빠 수염의 질감을 느끼며 쿠잉하고, 아빠의 말에 상호작용함."}, "69": {"i": "베이비카페 첫 방문 및 또래 노출", "o": "낯가림 없이 숙면하며, 깬 후 옹알이 양이 평소보다 급증함."}, "70": {"i": "모빌 조작 및 소리 추적 활동", "o": "· 모빌을 스스로 잡아당겨 입으로 가져가려 함(구강기 탐색).  · 장인어른의 소리 자극에 즉각적으로 시선을 이동하며 추적함."}, "71": {"i": "팔 휘두르기, 딸랑이 놀이, 순한 아기 테스트", "o": "팔을 격렬히 휘둘러 잠을 설치나 깨어있을 땐 잘 웃음. 얼굴 위 모빌 자극을 오래 인내함."}, "72": {"i": "아기체육관 모빌 조작 및 손 탐색", "o": "모빌을 의도적으로 당기려 하고, 자신의 손을 한참 응시함."}, "73": {"i": "뒤늦은 50일 기념 사진 촬영", "o": "촬영 중 고개를 가누고 버티는 힘이 또래보다 월등히 강하다는 전문가 평가를 받음."}, "74": {"i": "거울 놀이, 부모 표정/음성 모방", "o": "큰 눈 인형 선호. 아빠의 가짜 웃음과 발성을 모방함. 거울 속 아빠와 실제 아빠를 번갈아 봄."}, "75": {"i": "첫 문화센터 방문 및 베이비 마사지", "o": "다수의 낯선 사람 속에서 시각적 탐색을 즐기며, 마사지 자극을 안정적으로 수용함."}, "76": {"i": "대형 욕조 교체 및 목욕 중 하체 저항", "o": "· 신체 성장에 맞춰 더 큰 욕조로 환경을 확장함.  · 씻길 때 바닥을 발로 강하게 딛고 일어서려는 듯 버티는 모습을 보임."}, "77": {"i": "아빠의 개학(부재 증가) 및 잦은 수유 요구", "o": "· 7분 수유 후 45분 만에 다시 찾는 등 불규칙하고 잦은 보챔(Cluster feeding).  · 아빠 품보다 엄마 품에서 눈에 띄게 안정을 찾음."}, "78": {"i": "야근으로 인한 아빠와의 물리적 시간 감소", "o": "아빠가 안으면 울음을 터뜨리고, 주 양육자인 엄마가 안으면 즉시 울음을 그침."}, "79": {"i": "엄마와의 베이비카페 재방문", "o": "집 밖의 다양한 시청각 자극 및 타인과의 환경에 노출됨."}, "80": {"i": "주말 전담 육아 및 대화형 옹알이 출현", "o": "· 아빠 품에 금세 다시 적응하여 안정감을 찾음.  · 뚜렷한 발음은 아니나 상호작용을 의도하는 '대화형 옹알이' 시도."}, "81": {"i": "낱말 파티션 교육, 돌페어 방문, 피로 상태에서의 강제 목욕", "o": "· 낱말 그림과 아빠의 입 모양에 반응하여 폭발적인 옹알이(상호작용)를 보임.  · 낯선 돌페어 행사장에서 보챔 없이 평온함을 유지함.  · 피로가 누적된 저녁, 강제 목욕 후 아빠 얼굴을 쳐다보고 명확히 거부하며 심하게 욺."}, "82": {"i": "수유량 감소 및 소변량(배출) 체크", "o": "먹는 양은 줄었으나, 소변량은 정상 수준을 유지하며 건강상 이상 징후를 보이지 않음."}, "83": {"i": "카페 방문 및 낯선 타인 조우", "o": "엄마뿐만 아니라 카페의 낯선 사람에게도 낯가림 없이 적극적으로 옹알이를 쏟아냄."}, "84": {"i": "보챔 상황에서의 그림책 독서 자극", "o": "· 울며 칭얼대다가도 책을 보여주면 즉시 울음을 그치고 집중함.  · 고개를 이리저리 움직이며 책의 여러 부분을 능동적으로 탐색함.  · 청각(목소리)보다 시각(그림)에 선행하여 반응하며 옹알이가 급증함."}, "85": {"i": "아내의 수면 교육 및 아빠와의 저녁 유모차 산책", "o": "유모차에서 바깥 풍경을 관찰함. 산책이 수면 교육(생체 리듬)과 시각 발달에 긍정적 변수로 작용하길 기대함."}, "86": {"i": "또래 모임(터미타임) 및 일찍 앞당긴 수면 루틴", "o": "· 친구들과 함께 엎드려 서로를 관찰함.  · 아빠의 회식으로 목욕/수면을 앞당기자, 잠투정이 심해지고 새벽에 일찍 깸."}, "87": {"i": "자는 곳과 노는 곳의 공간 분리 노출", "o": "장소를 명확히 인식하여, 수면 공간과 놀이 공간에 따라 행동 양식(차분함 vs 활발함)을 다르게 보임."}, "88": {"i": "아빠 전담 육아 및 이중언어(Bilingual) 자극 놀이", "o": "\"가지! eggplant!\" 등 단어 끝마디의 리듬에 큰 즐거움을 표함. 주간의 과도한 흥분(과각성)이 야간 수면의 질을 저하시킴."}, "89": {"i": "은행 방문 (새로운 외부 환경 노출)", "o": "외출 시 조용했던 과거와 달리, 집에서 하듯 큰 소리로 옹알이하거나 울며 보챔."}, "90": {"i": "베이비카페 다인원(10명 이상) 또래 모임", "o": "집단 환경보다 주 양육자(엄마)와의 물리적 분리에 민감하게 반응하여 크게 욺. 다른 아기와 눈을 맞추며 폭발적인 옹알이를 발산함."}, "91": {"i": "퇴근 후 스킨십 및 긍정적 목욕 루틴 형성", "o": "목욕 전 아빠와의 맨살 스킨십 및 놀이로 긍정적 기분을 유도함. 목욕을 '놀이'로 인식하여 식사와 수면의 질이 상승함."}, "92": {"i": "천장 구석에 설치된 홈캠 (전자기기)", "o": "낮이나 밤, 주변에 사람이 없을 때도 먼 거리에 있는 홈캠의 렌즈를 정확히 응시하며 옹알이를 함."}, "93": {"i": "부부 동반 또래 모임 참석 (타 아동 관찰)", "o": "1개월 차이 나는 또래 아기의 월등한 대근육/소근육 발달(서기, 젖병 잡기 등)을 목격함."}, "94": {"i": "호수공원 산책 (유모차 → 아기띠 전환)", "o": "유모차에서 답답함을 느껴 아기띠로 안아주자, 탁 트인 시야로 세상을 관찰하며 폭발적으로 옹알이를 함."}, "95": {"i": "모빌 조작 및 자기 손 탐색", "o": "모빌을 예전보다 훨씬 자유자재로 조작하며 놀고, 그 과정에서 자신의 손을 번갈아 쳐다보며 인식함."}, "96": {"i": "문화센터 방문 및 배고픔 발생", "o": "낯선 환경에 금세 적응하여 잘 놀지만, 공복 상태가 되자 어김없이 크게 울며 보챔."}, "97": {"i": "낯선 타인 조우 및 3D 팝업북 노출", "o": "· 처음 보는 사람이나 낯선 자극에 고개를 갸우뚱하며 탐색함.  · 팝업북이 2D에서 3D로 입체화될 때 눈이 커짐.  · 아빠가 이를 반복 검증하자 동일한 놀람(시각 확장) 반응을 보임."}, "98": {"i": "연속적인 그림책 읽기 및 수면 패턴 분석", "o": "· 책에 고도의 집중력을 보이며, 중단 시 다른 책을 요구하며 보챔.  · 과도한 독서(시각 자극)가 야간 과각성으로 이어짐.  · 타 영아 대비 절대적인 수면 요구량이 적음을 확인(부모의 기질과 동일)."}, "99": {"i": "문화센터 단추 촉감 놀이 및 모빌 당기기", "o": "· 바닥에 깔린 다양한 모양의 단추를 손으로 쥐고 탐색함.  · 트립트랩에서 모빌을 어깨까지 강하게 당김.  · 뒤집기를 위한 신체 비틀기 시도가 빈번해짐."}, "100": {"i": "부모의 상호작용 및 주변 사물 노출", "o": "· 옹알이의 발음(음소)이 다양해지며 특정 단어를 모방하려는 뉘앙스를 보임.  · 사회적 웃음의 빈도가 크게 증가함.  · 장난감, 아빠 손 등 손에 잡히는 모든 것을 입으로 가져감(구강기 절정)."}, "101": {"i": "뒤집기 및 되집기 보조 연습", "o": "스스로 뒤집으려 용을 쓰며, 실패 시 짜증을 표출함. 아빠의 도움으로 뒤집기 성공 경험을 쌓음."}, "102": {"i": "전방위적 구강 탐색 (손, 장난감, 책 등)", "o": "손에 잡히는 모든 물체를 예외 없이 입으로 가져가 강렬하게 탐색함."}, "103": {"i": "고리 구강 탐색, 문화센터 터미타임 및 젖병 양손 파지", "o": "· 고리를 입에 넣음.  · 엎드려 강사에게 시선을 고정함.  · 젖병을 양손으로 모아 쥠."}, "104": {"i": "수면 지시에 대한 항의, 액체 매트 노출, 찬바람 산책", "o": "· 불만족 시 옹알이로 항의함.  · 매트를 만지지 않고 주시함.  · 서늘한 환경 산책 후 수면 질 향상."}, "105": {"i": "아빠 출근 시간(06시) 기상 및 각성 유지", "o": "새벽 6시 기상 후 재수면에 들지 않고 완전한 각성 상태를 유지함."}, "106": {"i": "문화센터 교구 촉감 놀이, 첫 비눗방울 관찰, 타액(침) 분비 증가", "o": "· 버섯 교구를 손으로 쥐고 적극적으로 탐색함.  · 허공을 떠다니는 비눗방울을 시선으로 쫓으며 멍하니 집중함.  · 최근 들어 입 주변으로 침을 흘리는 양이 눈에 띄게 급증함."}, "107": {"i": "매일 그림책 읽어주기 루틴 및 옹알이 발화", "o": "· 일상생활 중 옹알이의 빈도와 양이 폭발적으로 증가함.  · 투정을 부리다가도 책을 읽어주면 즉시 몰입하여 집중함."}, "108": {"i": "생애 첫 야시장 방문 및 벚꽃 구경", "o": "인파와 소음이 극심한 복잡계 환경 속에서도 평온하게 숙면을 취함."}, "109": {"i": "베이비카페 첫 수영 (허리 보행기 튜브), 야간 수면 장애", "o": "· 입수 직후 울며 거부하다가 점차 물의 부력에 적응함.  · 수영 후 밤에 과각성 상태로 극심하게 보챔.  · 태열 증상이 심해짐."}, "110": {"i": "이른 기상(07시), 문화센터 딸기 촉감놀이, 야간 놀람", "o": "· 기상 시간이 앞당겨짐(루틴 변화).  · 자다가 깜짝 놀라 깨며 자지러지게 우는 현상(야경증 전조) 발생.  · 태열 지속."}, "111": {"i": "모빌 조작(시야 확장) 및 아빠 손 구강 탐색", "o": "· 넓어진 시야각으로 모빌 전체를 조망하며 손으로 타격/조작함.  · 아빠의 손을 자신의 입으로 강하게 끌어당겨 구강 탐색을 진행함."}, "112": {"i": "온도 하강, 뒤집기 보조(하체 회전), 공간/형태 매핑 계획", "o": "· 실내 온도 하강 변수 투입 후 태열 감소.  · 아빠가 다리의 축을 살짝 돌려주면 상체를 이용하여 뒤집기에 성공함."}, "113": {"i": "뒤집기 보조, 젖병 파지, 바운서 반동, 완두콩 촉감놀이", "o": "· 젖병을 손가락이 아닌 손바닥 전체로 감싸 쥠.  · 바운서에서 강한 하체 근력으로 반동을 만들어냄.  · 외출 후 낮잠을 자지 못하고 극심한 과자극 보챔을 보임."}, "114": {"i": "친구 집 방문 및 합동 터미타임", "o": "· 또래 친구와 마주 본 상태에서 옹알이가 폭발함.  · 집에 귀가한 직후 다시 극심한 울음과 보챔이 시작됨."}, "115": {"i": "6방향 공간 벡터 자극 (이중언어), 패턴 관찰", "o": "· 아빠의 위치 변화에 따른 시선 추적 및 특정 음성(Up)에 강한 긍정 반응.  · 알록달록한 복합 패턴을 뚫어지게 응시(데이터 처리).  · 주 양육자 부재 인지 후 스스로 정서 조절 시도."}, "116": {"i": "중력 실험(손수건), 공감각적 독서 시연, 목 가누기 테스트", "o": "· 얼굴에 떨어진 손수건에 깜짝 놀람(중력의 물리적 타격감 경험).  · 책의 의성어/의태어를 아빠가 직접 몸으로 시연하자 자지러지게 웃음.  · 팔을 당겨 앉히는 테스트(Pull-to-sit) 시, 고개가 뒤로 젖혀지며 아직 완전한"}, "117": {"i": "45도 보조 목 가누기 연습, 그림책 읽기", "o": "· 수면 부족 상태에서 꾸벅꾸벅 졸며 칭얼거림.  · 평소 좋아하는 책에도 '웃음 섞인 울음'으로 반응함."}, "118": {"i": "주 양육자(엄마)가 준비한 애착인형(젤리캣) 제공", "o": "낯선 대상임에도 거부감 없이 품에 안고 얼굴을 부비며 구강/촉각 탐색을 진행함."}, "119": {"i": "일상적인 저녁 루틴 (독서, 뒤집기 보조, 목욕, 수면)", "o": "칭얼거리며 정서적 불안정(엔트로피 증가)을 보이다가도, 책을 읽어주면 즉시 울음을 그치고 집중함."}, "120": {"i": "병원 3곳 방문, 1시간 낮잠, 옹알이 폭발", "o": "· 과도한 외부 일정 후 1시간의 낮잠으로도 피로가 회복되지 않아 하품을 함.  · 옹알이의 빈도가 크게 늘고, 부모의 귀에 특정 단어처럼 들리는 발음이 섞여 나옴."}, "121": {"i": "어린이 서점 방문, 기하학(점/선/면) 책 구입", "o": "서점의 다양한 책을 탐색함. 부모 주도로 적분 개념의 기초가 되는 책을 선정 및 도입함."}, "122": {"i": "호명 반응 교차 검증 및 억양/음량에 따른 반응 테스트", "o": "· 방향을 바꿔 이름을 불렀을 때 우연적 반응임을 확인함 (의미 미부여).  · \"압~~빠!\"와 같이 억양과 크기가 과장된 청각 데이터에 더 큰 웃음을 보임."}, "123": {"i": "신형 아기체육관(피아노형) 도입", "o": "하체로 건반을 차며 소리와 빛의 반응을 즐기나, 특정 건반과 특정 소리를 1:1로 매핑하지는 못함."}, "124": {"i": "문화센터 방문, 또래 신체 비교, 독서 경험에 대한 부모의 가설 논쟁", "o": "· 또래 대비 키가 크고 팔다리가 길쭉한 신체적 특징(유전)을 확인.  · 책 읽어주기에 대한 지속적인 흥미 유지."}, "125": {"i": "기하학(점/선/면) 도서 노출, 바운서-아기체육관 조작", "o": "· 점→선→면으로 이어지는 적분 개념 도서에 흥미를 보임.  · 바운서에서 발로 체육관을 누르며, 고개를 들어 자신이 무엇을 누르는지 '시각적으로 확인'하려 함."}, "126": {"i": "퇴근 후 독서 루틴 유지", "o": "책에 대한 일관된 긍정적 반응 및 집중도 유지."}, "127": {"i": "분리 수면(공간 분리) 시작, 아기체육관 정밀 조작", "o": "· 낯선 수면 환경에 즉각 적응함.  · 고개를 들고 발로 찰 목표물(건반)을 눈으로 확인하며 조작함."}, "128": {"i": "친할머니 첫 대면, 특정 대상 응시 시 미간 찌푸림", "o": "· 낯선 대상에게 우호적 반응(기질).  · 사물을 뚫어지게 응시할 때 아빠와 똑같이 미간에 주름을 잡으며 생각에 잠김."}, "129": {"i": "100일 스튜디오 촬영, 행동 제약에 대한 항의", "o": "낯가림으로 오인했으나, 구강기 탐색(손 빨기)이나 원하는 자세가 제약될 때 짜증과 큰 소리로 항의하는 것임을 파악함."}, "130": {"i": "어둠 속(시각 차단)에서의 단독 놀이, 양육자(엄마)의 등장", "o": "· 시각 데이터가 차단된 상태에서 두 손을 모으고 인지적 탐색을 진행함.  · 평온하게 있다가 엄마가 방에 진입하자 그제서야 울며 보챔."}, "131": {"i": "아빠와의 첫 문화센터 동반, 강사의 음성 자극", "o": "· 익숙한 장소(문센)이나 동반자(아빠)가 바뀌자 불안감(울음)을 표출함.  · 낯선 환경에서도 강사가 말을 할 때 그 화자를 뚫어지게 응시함."}, "132": {"i": "· 아쿠아플라넷 수조 관람  · 구강 탐색(손 빨기) 물리적 차단  · 엎드린 자세에서 되집기 보조", "o": "· 수조의 움직이는 생물과 빛을 향해 시선을 장시간 고정함.  · 손을 강제로 빼거나 눕혀줄 때 즉각적으로 짜증과 투정을 부림."}, "133": {"i": "4개월 차 수면 퇴행기 진입, 일상적 수면 루틴 제공", "o": "기존 입면 시간에 잠들지 못하고 각성함. 수면 궤도 이탈 및 칭얼거림의 반복."}, "134": {"i": "· 문화센터 동화 구연 및 시각 자극(쫄대 비)  · 아빠의 조기 퇴근으로 인한 상호작용 절대 시간 증가  · 혐오 자극(머리 감기) 투입", "o": "· 강사(화자)의 얼굴과 행동을 뚫어지게 응시함.  · 평소 거부 반응(울음)을 보이던 머리 감기 과정에서 웃으며 평온을 유지함."}, "135": {"i": "영유아검진(허벅지 주름 비대칭 발견), 뒤집기 시도 증가", "o": "· 허벅지 주름 비대칭으로 인한 고관절 탈구 가능성(정밀 검사 요망) 확인.  · 신체 회전(뒤집기) 모멘텀 지속적 증가."}, "136": {"i": "옆잠베개' 부재(환경 변수 누락), 미세한 소음 및 물리적 파동", "o": "· 익숙한 수면 보조 도구(옆잠베개) 부재 시 입면에 실패하고 심하게 보챔.  · 작은 소음이나 움직임에 깜짝 놀라는(모로 반사/예민함) 기질이 뚜렷함."}, "137": {"i": "스스로 뒤집기 시도, 부모의 개입(방해) 투입", "o": "· 신체 축을 비틀며 뒤집기 성공에 근접함.  · 실패해도 포기하지 않고 반복하며, 행동 제약 시 강한 짜증(분노)을 표출함."}, "138": {"i": "· 문화센터(원숭이 복장, 촉감놀이)  · 친구 집 방문 (연속된 외부 낯선 환경 노출)", "o": "수면 궤도 진입 실패, 잦은 야간 각성 및 심한 보챔(과자극에 의한 코르티솔 수치 상승)."}, "139": {"i": "· 엎드린 자세(터미타임) 제공  · 아빠와의 밀착 상호작용", "o": "· 뒤집기가 완성되지 않은 상태에서 엎드려 전진(배밀이)하려는 강한 추동을 보임.  · 아빠와 시선을 맞추며 소통함."}, "140": {"i": "· 주간 외출에 따른 과자극(Overstimulation) 발생  · 심야 시간 아빠의 물리적 스킨십(체온, 체취) 일시 투입", "o": "낮 동안의 시각/청각적 데이터 초과로 입면에 어려움을 겪었으나, 아빠의 품에 안긴 직후 급격히 안정을 찾고 즉각적인 수면 궤도에 진입함."}, "141": {"i": "친구들 집 초대 (다인원 상호작용)", "o": "낯선 사람 및 또래 아기들의 소리와 움직임에 노출됨."}, "142": {"i": "· 장난감(목표물) 제시 후 뒤집기 유도  · 수면 시 옆잠베개(물리적 제약) 투입", "o": "· 자력으로 뒤집기 최초 성공. 특히 시야에 목표물이 있을 때 회전 추동력이 강해짐.  · 옆잠베개를 불편해하며 심한 거부 반응을 보임."}, "143": {"i": "· 리조트 수영장 최초 입수(부력 및 수압 제공)  · 낯선 환경에서의 주간 활동 누적", "o": "· 수영 중 입에 거품을 물고 찡그리다 아빠 품에서 수면 궤도 진입.  · 저녁 시간 극심한 보챔과 짜증(과각성) 출력."}, "144": {"i": "1박 2일 여행 후 귀가, 장시간 차량 탑승(저주파 진동 및 백색소음 제공)", "o": "이동하는 차 안에서 한 번의 칭얼거림 없이 장시간 깊은 수면 상태를 유지함."}, "145": {"i": "· 문화센터 승무원 복장 및 촉감놀이  · 수유 및 수면 시도 (이앓이 통증 발현)", "o": "· 아랫잇몸에 하얀 유치가 관찰됨.  · 수유 중 심하게 보채고 울며, 옆잠베개를 강하게 거부함."}, "146": {"i": "· 목표물(장난감) 전방 배치  · 코어 근육 발달로 인한 착석 능력 향상", "o": "· 장난감을 쟁취하기 위해 배밀이로 전진함. 이동 중 체력이 고갈되면 바닥에 머리를 대고 쉬었다가 다시 전진하는 에너지 안배를 보임.  · 의자에 꼿꼿하게 앉아 노는 능력이 확보됨."}, "147": {"i": "부모의 스피너 회전 시범 (시각적/행동적 모델링 반복 노출)", "o": "부모의 행동을 관찰한 후, 거울 앞 스피너를 향해 손을 뻗어 정확한 타격으로 회전을 구현함."}, "148": {"i": "· 180도 신체 회전(뒤집기) 자율 수행  · 도서 및 목표물(풍선) 제공", "o": "· 짜증과 소리 지름 등 감정 표현의 해상도가 급격히 높아짐.  · 보조 없이 혼자서 완벽하게 뒤집기를 수행함.  · 누워서 스스로 책을 잡고, 엎드린 상태에서 풍선을 잡기 위해 배밀이로 낑낑대며 전진함."}, "149": {"i": "아빠의 오랜만의 조기 귀가 및 대면", "o": "아빠의 얼굴을 보자마자 환한 미소로 긍정적 정서를 표출함."}, "150": {"i": "· 기상 직후 폭발적인 옹알이 발화  · 작동 완구(까꿍 코끼리) 노출", "o": "· 다양한 톤과 성량으로 음성 데이터를 출력함.  · 코끼리 인형의 움직임과 소리에 집중하며 시각적 기대를 보임."}, "151": {"i": "· 엎드린 상태에서 전방 사물 탐색/파지 시도  · 부모 주도의 시각적 수 세기(손가락 덧셈) 지도", "o": "· 호기심(동기)을 바탕으로 목표를 향해 손을 뻗어 조작하려 함.  · 아빠가 손가락을 하나씩 펴며 수량이 증가하는 시각적 변화를 응시함."}, "152": {"i": "· 다수의 양육자(조부모, 삼촌)와의 대면 및 긍정적 정서 상태  · 손가락 수 세기 놀이(상수) 지속 투입", "o": "· 특정 대상을 향해 시선을 맞추며(눈맞춤) 다양한 데시벨과 톤으로 옹알이와 웃음을 발사함.  · 시각적 수량 변화에 대한 집중력 유지."}, "153": {"i": "하이체어(트립트랩) 착석 환경 제공 및 전방 스피너 조작 유도", "o": "코어 근육의 미숙함으로 상체가 앞으로 쏠리나, 넘어지지 않고 중심을 유지하며 두 손으로 스피너를 능숙하게 조작함. 웃음과 긍정적 정서 발현 빈도 증가."}, "154": {"i": "바닥 엎드림(터미타임) 상태에서 동적 목표물(꼬꼬맘) 노출", "o": "배를 축으로 삼고 양팔과 두 다리를 바닥에서 완전히 들어 올리는 '슈퍼맨 자세'를 유지하며 목표물을 응시함."}, "155": {"i": "· 공복 상태에서 시야 내 젖병 노출  · 엎드린 상태 전방에 그림책 배치", "o": "· 젖병 인지 즉시 울음의 데시벨 증폭  · 양손으로 책 모서리 파지 및 응시  · 야간 입면 거부 및 분유 섭취량 감소"}, "156": {"i": "야간 수면 루틴 시간에 맞춰 수면 방 진입 및 소등(조도 저하)", "o": "· 방 진입 시 칭얼거림 발생  · 소등 시 즉각 데시벨 최고조의 오열 출력"}, "157": {"i": "· 엎드린 자세(터미타임) 유지  · 점퍼루 탑승  · 영어 원서 동화책 청각 노출", "o": "· 엎드린 상태에서 누운 상태로 신체 축 180도 회전(되집기)  · 기구 내에서 다리로 바닥을 미는 물리적 반동 수행"}, "159": {"i": "문화센터 내 다수의 3차원 객체(볼풀 공, 계란 모형 등) 및 착석 환경 노출", "o": "타인의 주관적 평가(\"손을 잘 쓴다\") 접수 및 앉은 자세에서 양손으로 사물을 파지하고 조작함"}, "160": {"i": "수면 사이클 종료 후 자연 각성 (부모 부재 및 낮은 조도 유지)", "o": "각성 직후 즉각적인 울음(호출)을 출력하지 않고, 침대 위에서 수 분간 신체 조작 운동을 하며 대기함"}, "161": {"i": "투표소 방문 (낯선 다인원 공간 및 인공 조도 환경 노출)", "o": "특이적 저항(울음) 없이 고개를 유지하며 외부 환경을 응시함."}, "162": {"i": "· 이름 호명 음성 출력  · 부모 발음 노출  · 문화센터 내 또래 영아 노출", "o": "· 호명 방향으로 고개 회전  · '엄마/아빠' 유사 이음절 발화  · 또래를 향해 손을 뻗음"}, "163": {"i": "· 엎드린 자세에서 배밀이 유도  · 야간 수면 저항 및 분유량 저하 관찰", "o": "· 고개를 들고 전방을 보나 후방으로 몸이 밀림  · 야간 입면 거부 지속"}, "164": {"i": "실내 정원 카페 등 고조도/다인원 밀집 환경 노출", "o": "안구 수평 이동 및 주위 탐색, 지속적인 옹알이 발화 유지"}, "165": {"i": "양양자(부모)의 심리적 불안 상태 및 평소 대면 루틴 유지", "o": "부모의 밝은 표정 제시 시 미소 출력 및 신체 경직 없음"}, "166": {"i": "문화센터 니모 콘셉트 놀이 및 또래 영아 근접 배치", "o": "니모 의상 착용 상태로 주위 사물 및 타인에게 손 뻗음"}, "167": {"i": "가정 내 또래 친구 초대 및 매트 위 수평 대면 환경 제공", "o": "서로 마주 본 상태에서 시선을 고정(눈빛 교환)하고 옹알이 교환"}, "168": {"i": "· 저상형 침대와 벽면 사이 틈새(물리적 제약) 발생  · 약 30분간 고립 및 강성 울음 발생  · 분유 수유 수행", "o": "· 새벽 2시경 틈새 낙하 후 탈출 불가  · 울음과 지침의 주기적 반복 후 수면  · 구조 후 분유 정상 섭취"}, "169": {"i": "· 젖병 내 빨대 부속 추가 및 분유 급여  · 또래 영아 모임 노출", "o": "· 빨대 흡철을 통해 분유 정상 소화  · 야간 수면 진입 저항 및 보챔 증가"}, "170": {"i": "· 수면 모니터링 카메라 추가 설치  · 침대 프레임 재배치 및 문 가드 결합", "o": "수면실 하드웨어 경계조건(Boundary Condition) 틈새 제로(0)화 완결"}, "171": {"i": "부부동반 모임 내 타인(양육자 집단)의 음성 및 정서 자극 노출", "o": "타인으로부터 \"말이 많고 언어 발달이 빠르다\"는 주관적 평가 데이터 수집"}, "172": {"i": "처갓집 방문을 통한 가족(친숙) 및 타인(비친숙) 대면 시각 자극 제공", "o": "타인 대면 시 미소 생략, 가족 구성원 대면 시 안면 미소 알고리즘 즉각 출력"}, "173": {"i": "· 저온 공기(에어컨 바람) 접촉  · 고형식(이유식, 떡뻥) 급여  · 소아과 처방약 투약", "o": "· 비강 분비물(콧물) 및 기침 발현  · 떡뻥 과자를 손으로 쥐고 구강 흡철 조작  · 투약 후 수면 잠복기 추적"}, "174": {"i": "상기도 감염(감기) 증상 유지 및 지속적인 체온 상태 모니터링", "o": "콧물 분비 및 인두 자극에 의한 기침 지속됨. 고열(38.0°C 이상)은 계측되지 않음."}, "175": {"i": "양육자 간(부부)의 언어적 발화 빈도 감소 및 가정 내 냉전 환경 조성", "o": "양육자들의 안면을 번갈아 응시하며, 특이적인 자발적 울음이나 정서 위축 반응은 없음."}, "176": {"i": "아내 친구들(비친숙 성인 객체 다수)과의 근접 대면 자극 노출", "o": "초면의 인물들이 접근할 때 회피 행동(울음) 없이 상대방 안면 좌표를 지속 응시함."}, "177": {"i": "이름 호명 자극 투입 및 손 도달 범위 내 다양한 사물 배치", "o": "호명 주파수 입력 시 두부 회전축 이동. 사물을 향해 손을 뻗어 파지하는 빈도 증가."}, "178": {"i": "청경채 미음 급여, 양육자의 구강 개폐 시각 자극 및 \"아, 냠냠\" 음조 출력", "o": "스푼 근접 시 하악을 하강하여 구강 개방, 양육자 조음 시 입술 저작 운동 동기화."}, "179": {"i": "반경 30cm 이내에 다양한 무생물 객체(완구류 등) 배치", "o": "사물을 향해 상지를 뻗어 손가락 말단으로 쥐고 만지는 행동 빈도 증가"}, "180": {"i": "양육자 안면 좌표를 영아 상지 반경(30cm) 내 접근", "o": "양손 대칭 확장 후 양볼 안착, 지골 미세 구동 없는 압력 유지"}, "181": {"i": "야간 REM 수면 진입기 앙와위 배치", "o": "수면 중 자발적 뒤집기 후 슈퍼맨 자세 연쇄 구동 및 오열, 사지 진동"}, "182": {"i": "· 하이체어 착석 후 윈켈 치발기 제공  · 전방 40cm 거리에 꼬꼬맘 가동  · 비친숙 성인(처남)의 아는 척", "o": "· 치발기 좌우 교대 파지 후 구강 이동  · 꼬꼬맘 접근 시 상지 확장 포획  · 처남 대면 시 구각 하강 및 신체 회전"}, "183": {"i": "· 주간 비통제 야외 산책 자극 제공  · 야간 수면 유도 루틴 가동", "o": "· 주위 피사체로 안구 회전 및 주시 지속  · 입면 잠복기 연장 및 야간 각성 빈도 증가"}, "184": {"i": "문화센터 미역 촉감 놀이 매체 노출 및 수평 공간 배치", "o": "미역 질량체 표면에 소근육 확장 및 쥐기 운동 반복, 주변 탐색"}, "185": {"i": "· 수면 전 오열 상태서 정면 양육자 안면 노출  · 공복/졸림(생리적 결핍) 상태 진입", "o": "· 양손 대칭 확장 후 양볼 고정성 파지  · 결핍 시 분당 옹알이 발화 횟수 급증"}, "186": {"i": "· 오열 상태서 호흡 주기 변환  · 영어 팝업북 노출 및 음성 낭독 제공", "o": "· 'ㅇ', 'ㅁ' 음소 결합(\"엄마\") 주파수 출력  · 팝업북 입체 도상 안구 고정"}, "187": {"i": "문화센터 내 수박 촉감 놀이 매체(고명도/구형 완구) 노출 및 수평 공간 배치 (1000038431.jpg 외)", "o": "· 사물의 체적에 맞춰 손가락 벌림 반경 비례 조절 후 파지  · 야간 수면 중 1~2시간 주기로 수시 각성 후 보챔 출력"}, "188": {"i": "· 초기 이유식 수유 중 숟가락 끝 신체 접촉 (1000038483.jpg)  · 파지 완구 및 도서 이송 차단 자극  · 3차 정기 예방접종 의학 변수 투입", "o": "· 숟가락 말단을 쥐고 구강 영역으로 이송 조작  · 소유물 격리 시 고주파 발성(짜증) 출력  · 보드북 지면을 소근육으로 파지 후 회전(넘기기) (1000038483.jpg 비디오)"}, "189": {"i": "입면 시간대 침실 소등 및 수면 유도 루틴 가동", "o": "하품 반사(생리적 피로) 출력과 동시에 사지 운동량 증가 및 입면 거부 반응 유지"}, "190": {"i": "· 원거리(방 경계 밖) 대면 자극 제시  · 젖병 쉐이커 구동 소음 및 청각 자극 투입  · 조제 완료된 젖병 시각 노출", "o": "· 원거리 화자의 안면을 향해 시선 고정 및 미소 출력  · 쉐이커 소음 인지 후 신체 버둥거림 및 고주파 발성 유발"}, "191": {"i": "문화센터 강냉이 촉감 놀이 매체 노출 및 수평 공간 배치", "o": "하체 지지 후 둔부 안착 상태 유지, 양손 말단 근육 구동을 통한 고형물 파지 및 마찰 탐색"}, "192": {"i": "고형 유체 매체(첫 요거트) 구강 진입 자극 (1000038710.jpg)", "o": "초기 미세 각성 및 보챔(울음) 출력 후 근육 이완 및 섭식 인입 적응"}, "193": {"i": "기하학적 목재 적목 블록 다수 배치 및 양육자의 분류 시연 (1000038432.mp4 참조)", "o": "블록 객체를 움켜쥐고 전방 수평 벡터로 투척(던지기 행동) 연쇄 수행"}, "194": {"i": "일상 각성 상태에서의 청각 음성 주파수 노출 및 수유 루틴 가동", "o": "양육자 대면 시 단음절 및 복합 조음 발화 빈도 상승, '아', '바' 음소 결합 감지"}, "195": {"i": "· 야간 수면 중 임의 각성 조건 노출  · 목욕 및 일과 중 신체 짚기 기반 수 세기 놀이 자극", "o": "· 자발적 뒤집기 기동 후 앙와위 복귀 실패로 보챔 출력  · 수 세기 놀이 시 아빠의 손가락 말단에 안구 고정"}, "196": {"i": "가정 내 동종 생물학적 객체(반려견 레오) 근접 대면 및 신체 단서 노출 (1000038870.jpg)", "o": "상지를 전방으로 확장하여 반려견의 하지 및 미부 피모를 소근육 파지(쥐기 및 문지르기)함"}, "197": {"i": "인스파이어리조트 대형 미디어 월(LED 디스플레이) 고명도·동적 시각 자극 노출 (1000038911.jpg 비디오)", "o": "유모차에 각성 상태로 탑승하여 디스플레이 움직임 벡터를 향해 안구를 상측으로 고정하고 장시간 주시함"}, "198": {"i": "· 문화센터 집단 환경 내 다감각 매체 노출 및 일본 문화 의상 착용 (1000038911.jpg)  · 주간 정기 초기 이유식 급여", "o": "· 매체 접촉 조작 수행  · 스푼 유입 시 능동적으로 구강을 개방하고 삼킴 유효율 상승"}, "199": {"i": "· 수평 지면에 설치된 다축 수직 원목 교구(교구 기둥) 노출  · 일상 각성기 상태의 조음 자극 입력 유도", "o": "· 교구 프레임의 전도(쓰러짐) 없이 수직 축에서 블록을 상측으로 분리 인입함  · 설단을 전방으로 돌출(메롱 행동)하며 다중 주파수 고주파 발성 수행"}, "200": {"i": "인구 밀도가 높고 복잡한 대형 매장(이케아) 방문 및 쇼룸 내 고대비 점무늬 침구 노출", "o": "주변 피사체를 두리번거리며 집중함. 도트 무늬 침구 위에서 미소를 보였으나, 야간에 입면을 힘들어함."}, "201": {"i": "주간 낮잠 지속 시간의 단축 경향 포착", "o": "낮 각성 시간의 상대적 증가"}, "202": {"i": "야간 입면 시 조도 소등 및 수면 루틴 가동", "o": "진입 전 고볼륨의 울음 및 저항 행동 표출"}, "203": {"i": "가정 내 정면 대면 상황에서의 안구 정렬 관찰", "o": "미세한 안구 내측 편위 가능성 제기 (가성내사시 여부 검증 필요)"}, "204": {"i": "한국어·영어 도서 낭독 및 음성 펜(세이톡) 청각 자극, 공기 주입식 아기의자 배치", "o": "펜 소리에 안구 고정 및 집중, 누운 자세에서 발로 의자를 밀어내며 신체 변위 유발"}, "205": {"i": "· 거울에 부착된 회전 스피너 노출  · 3차원 원목 교구 제시  · 그림책 독서 중 \"무당벌레야\" 언어 자극", "o": "· 스피너가 완전히 멈출 때까지 대기 후 재회전 시킴  · 네모, 세모 등 2차원 단어 청취하며 탐색  · 고개를 숙여 특정 도상을 집중 응시"}, "206": {"i": "· 독서 제안 시 과장된 표정과 효과음 제시  · 놀이 매트 위 독립적인 자유 놀이 환경 제공", "o": "· 제안 자극에 웃음으로 화답하며 독서 진입  · 한 가지 조각에 집착하지 않고 다양한 조각을 교차 탐색"}, "207": {"i": "· 주머니와 통을 활용한 '안과 밖 놀이' 시연  · 오전 영어 평면도형 책 독서 및 오후 원목 교구 연계 복습  · 베이비룸 울타리 틈새 너머 원거리 사물 배치", "o": "· 통 안의 물건을 밖으로 빼내는 과정 주시 및 그림책 타공 응시  · 네모, 동그라미 어휘에 맞춰 사물 탐색  · 울타리 창살 사이로 손을 뻗어 외부 영역의 노란 고리 조준 파지 성공"}, "208": {"i": "놀이판 마스킹 테이프, 엄마 치마 꽃무늬 패턴", "o": "테이프를 한참 응시 후 손가락 끝으로 뜯어내고, 치마 꽃무늬를 잡으려 손을 뻗음"}, "209": {"i": "거실 놀이 매트 위 탁 트인 수평 공간", "o": "팔다리를 교대로 움직여 앞으로 기어가고, 무릎과 발바닥으로 지면을 지지하며 상체를 세우려 함"}, "210": {"i": "놀이 매트 정면에 분산 배치된 장난감 및 수평 공간", "o": "손바닥과 무릎을 바닥에 대고 엉덩이를 띄우는 네발기기 자세를 취하며 전진 시도"}, "211": {"i": "물과 물고기 모형이 들어 있는 투명 워터매트", "o": "물고기를 잡기 위해 돌진하여 워터매트 투명 표면에 얼굴과 입을 밀착함"}, "212": {"i": "회전 스피너, 오뚝이 완구 노출", "o": "완구가 완전히 멈출 때까지 기다린 후, 정지 상태를 확인하고 다시 손을 뻗어 조작함"}, "213": {"i": "유치 돌출(이앓이) 반응 및 치발기/장난감 노출", "o": "장난감을 입에 넣고 계속 씹으며, 야간 수면 중 자주 깨어나 보챔"}, "214": {"i": "거실 놀이 매트 위 탁 트인 수평 공간", "o": "배밀이 상태에서 두 발을 가슴 하단으로 모으며 복부와 엉덩이를 띄우는 네발기기 준비 자세를 취함"}, "215": {"i": "내용물이 들어 있는 무거운 유리 젖병", "o": "젖병을 들고 마시던 중 기울어져 분유가 잘 나오지 않자, 젖병 밑부분을 직접 위로 들어 올려 각도를 세움"}, "216": {"i": "아기띠를 통한 수직 이동, 네발기기 중 신체 중심 변화", "o": "바닥에 눕히면 울다가 아기띠 수직 이동에 진정됨. 음 빠 소리를 냄. 네발기기 중 다리가 당겨져 우연히 혼자 앉기 1회 발현"}, "217": {"i": "평면 그림책, 원목 교구 틀 및 블록 조각들", "o": "책 앞으로 기어가 그림과 글자를 정면 응시함. 원하는 블록을 빼기 위해 교구 틀 자체를 수평으로 넘어뜨린 뒤 내부 블록을 분리함"}, "218": {"i": "통 속에 장난감을 넣고 빼는 놀이, 수 세기(1~20, 목욕 시 1~5) 청각 자극", "o": "아빠가 통에 물건을 넣고 빼며 정속 리듬으로 들려주는 수 세기 음성에 시선을 맞추고 응시함"}, "219": {"i": "집드리 모임(또래 아기들 및 부모 초청), 전화기 장난감 배치", "o": "낯선 인원과 소음 환경에서 평소와 달리 잠투정을 표출함. 친구와 전화기 장난감을 잡고 서로 끌어당김"}, "220": {"i": "베이비룸 안전 울타리 가드 및 문 앞 공간", "o": "울타리 문 앞에 서서 바깥을 응시하거나 소리를 지르며 가드 너머로 나가려는 행동을 보임"}, "221": {"i": "잼잼 시연, 반짝반짝 작은별 노래 및 율동, 러닝테이블 완구 노출", "o": "잼잼과 손 흔들기 모방 시도. 완구 조작 시 손 전체가 아닌 손가락 말단(손가락 끝)을 사용하는 소근육 분화 조작 수행"}, "222": {"i": "벽면 차트에 붙인 마스킹 테이프, 1:1 수 세기 육성 자극", "o": "마스킹 테이프를 시각 스캐닝 후 손가락 말단 손톱/지문 면으로 잡고 간헐적으로 뜯어내려 시도함. 수 세기 자극에는 손을 뻗어 표면을 두드리는 반응 표출"}, "223": {"i": "거실 안전 울타리 안 전면 거울 가드, 회전 스피너 완구 노출", "o": "스스로 하체와 둔부를 바닥에 고정해 앉은 자세를 유지하며 스피너를 손으로 쳐서 돌린 뒤, 회전 중인 날개를 손바닥으로 눌러 정지시킴"}, "224": {"i": "광명동굴 계단 및 외부 기온 변화(동굴 내부 한기 vs 외부 열기)", "o": "계단을 오르내릴 때 안구 초점을 고정하며 신체 기울기 변화에 반응하고, 기온 편차에 어깨를 작게 움츠림"}, "225": {"i": "거실 매트 위 공 굴리기 놀이, 언어 자극(\"굴러간다\", \"멈췄다\")", "o": "공이 굴러가는 궤적과 손에 닿는 순간을 눈으로 추적함. 스스로 공을 밀어 굴리는 자발적 투척은 아직 관찰되지 않음"}, "226": {"i": "매트 위 소형 원색 공 노출, \"공 굴려봐\" 언어 자극", "o": "공을 밀어 굴리기보다 둥근 표면을 조심스럽게 감싸 잡아 몸쪽으로 끌어당김"}, "227": {"i": "작은 용기(초록 통) 및 큰 통(원통), 소형 원색 공(4개), 수 세기(\"하나, 둘, 셋, 넷, 다섯\") 및 위치 어휘(\"안, 밖\")", "o": "공을 손가락 말단으로 쥐는 것은 원활하나, 큰 통 입구로 정확히 조준하여 떨어뜨리는 위치 정밀 조작에는 다소 미숙함. 공의 이송과 아빠의 수 세기 리듬에 반응해 손을 뻗음"}, "228": {"i": "2박 3일 단체 여행, 낯선 타인 및 또래 영아(네발기기 구동) 노출, 마찰력 부족한 매트리스 환경", "o": "또래 아기들의 네발기기 동작을 관찰한 후, 기존 배밀이 자세에서 무릎과 발바닥을 지면에 대고 모방 시도"}, "229": {"i": "시각 그림 플래시카드, 빠른 카드 제시 자극, 주변 성인들의 평가 소음", "o": "플래시카드가 전환되는 동안 시선을 카드 중앙에 고정하고 정면 주시 상태 지속"}, "230": {"i": "여행 복귀 후 감기 기운(면역력 저하), 조도를 낮추고 소음을 차단한 안정적인 침실 및 매트 환경", "o": "외부 놀이 자극을 중단하고 수면 및 정적 휴식 모드를 유지함"}, "231": {"i": "거실 매트 위, 전방 일정 거리에 구슬 아바쿠스/기어 조작 교구 배치", "o": "제자리에서 발로 하체를 들어 올리고 무릎을 지면에 밀착하는 준비 자세를 취하나, 이동 시에는 배밀이 방식을 선택해 접근함"}, "232": {"i": "짐보리 경사면 장애물 노출, 옹알이 응답, 분유가 담긴 유리 젖병", "o": "경사면을 배밀이로 이동 후 가정에서 하체를 수직으로 높이 올리는 동작 증가. 수유 중 젖병을 들어 내부 분유의 수면 위치를 눈높이에 맞추어 응시함"}};
+const DOMS=["인지","신체","사회정서","언어"];
+const DOM_ICON={"인지":"🧩","신체":"🏃","사회정서":"💗","언어":"💬"};
+const DOM_CHIP={"인지":"c3","신체":"c2","사회정서":"c5","언어":"c4"};
+const DOM_LABEL={"인지":"인지","신체":"신체·운동","사회정서":"사회성·정서","언어":"언어·의사소통"};
+const CONDS=[["hunger","🍼 배고픔"],["sleepy","😴 졸림"],["sick","🤒 아픔"],["out","🎪 외출 직후"],["fine","✅ 괜찮았음"]];
+const MILES=[
+ {k:"roll2",nm:"되집기 (엎드림→누움)",line:"CDC 6개월 항목. 6개월이면 10명 중 7~8명 이상이 합니다.",cite:"Zubler et al., Pediatrics 2022"},
+ {k:"sit",nm:"도움 없이 앉기",line:"중앙값 5.9개월, 정상 범위 3.8~9.2개월.",cite:"WHO Motor Development Study 2006"},
+ {k:"crawl",nm:"네발기기",line:"중앙값 8.3개월, 정상 범위 5.2~13.5개월. 4.3%는 네발기기를 거치지 않습니다 — 그것도 정상.",cite:"WHO Motor Development Study 2006"},
+ {k:"standA",nm:"붙잡고 서기",line:"중앙값 7.4개월, 정상 범위 4.8~11.4개월.",cite:"WHO Motor Development Study 2006"},
+ {k:"walkA",nm:"붙잡고 걷기",line:"중앙값 9.0개월, 정상 범위 5.9~13.7개월.",cite:"WHO Motor Development Study 2006"},
+ {k:"stand",nm:"혼자 서기",line:"중앙값 10.8개월, 정상 범위 6.9~16.9개월.",cite:"WHO Motor Development Study 2006"},
+ {k:"walk",nm:"혼자 걷기",line:"중앙값 12.0개월, 정상 범위 8.2~17.6개월 — 폭이 9.4개월입니다.",cite:"WHO Motor Development Study 2006"}];
+const SCHED=[
+ [0,0.5,"출생 시","B형간염 1차","v"],
+ [0,1,"생후 4주 이내","BCG(피내용) 1회","v"],
+ [0.45,1.2,"생후 14~35일","영유아 건강검진 1차","c"],
+ [1,2,"1개월","B형간염 2차","v"],
+ [2,3,"2개월","DTaP·IPV·Hib·폐렴구균·로타 각 1차","v"],
+ [4,5,"4개월","DTaP·IPV·Hib·폐렴구균·로타 각 2차","v"],
+ [4,7,"4~6개월","영유아 건강검진 2차","c"],
+ [6,7,"6개월","B형간염 3차 · DTaP·Hib·폐렴구균 3차 · (로타텍만) 3차 · IPV 3차(6~18개월 사이)","v"],
+ [6,9,"6개월부터","인플루엔자 — 매년 접종 시작 (첫해는 4주 간격 2회)","v"],
+ [9,13,"9~12개월","영유아 건강검진 3차","c"],
+ [12,16,"12~15개월","Hib 추가 · 폐렴구균 추가 · MMR 1차 · 수두 1회","v"],
+ [12,24,"12~23개월","A형간염 1차 (2차는 6개월 이상 뒤) · 일본뇌염 시작","v"],
+ [15,19,"15~18개월","DTaP 추가(4차)","v"],
+ [18,25,"18~24개월","영유아 건강검진 4차","c"]];
+const SCHED_SRC="질병관리청 표준예방접종일정표(2025) 기준 · 로타는 로타릭스 2회(2·4개월) 또는 로타텍 3회(2·4·6개월), 교차접종 불가. 정확한 날짜는 소아청소년과 예약 기준으로.";
+const DISCLAIMER="이 앱의 월령 표시는 미국 CDC 발달 이정표와 WHO 운동발달 연구를 옮긴 것입니다. 발달 검사가 아니며 검사를 대체하지 않습니다. 걱정되시면 소아청소년과에서 발달선별검사를 받으세요. 이 앱은 CDC·HHS의 보증을 받지 않았습니다.";
+const FOOD_DISCLAIMER="이유식 정보는 삼성서울병원 임상영양팀·대한소아청소년과학회·WHO·미국소아과학회(AAP) 공개 자료를 정리한 일반 정보입니다. 아이마다 다르니 진행 속도는 소아청소년과와 상의하세요. 알레르기 진단·치료는 이 앱이 할 수 없습니다.";
+
+/* 이유식 단계 (출처: 삼성서울병원 임상영양팀 / WHO 2023 / 보건복지부 식생활지침) */
+const STAGES=[
+ {k:"pre", nm:"수유기", mo:"0~3개월", range:[0,4], meals:0, form:"모유·분유가 전부입니다", note:"이유식은 4~6개월(모유수유아는 6개월, WHO 기준)부터. 아직은 준비 기간이에요."},
+ {k:"early",nm:"초기", mo:"4~6개월", range:[4,6], meals:"하루 1~2회", form:"미음 — 물:쌀 10:1, 곱게 갈아서", milk:"수유가 여전히 주식", note:"쌀미음부터 한 가지씩. 6개월 무렵부터는 소고기를 시작해 철분을 채워주세요."},
+ {k:"mid", nm:"중기", mo:"6~8개월", range:[6,9], meals:"하루 2~3회", form:"알갱이가 살짝 있는 죽", milk:"수유 500~800ml", note:"소고기 등 육류로 철분·아연 공급이 중요한 시기입니다."},
+ {k:"late", nm:"후기", mo:"9~11개월", range:[9,12], meals:"하루 3회 + 간식 1~2회", form:"된 죽 · 진밥", milk:"수유 600ml 안팎", note:"가족 식사 시간에 함께 앉는 연습을 해보세요."},
+ {k:"done", nm:"완료기", mo:"12~24개월", range:[12,25], meals:"하루 3끼 + 간식", form:"진밥에서 서서히 일반 밥으로", milk:"우유·유제품 500~600ml", note:"12개월부터 생우유를 마실 수 있어요. 간은 여전히 약하게."}];
+/* 재료 사전 — 검증된 목록만 (삼성서울병원 단계별 예시 + 학회 근거). 전부는 아니며 예시임 */
+const FOOD_CATS={base:"🍚 베이스",protein:"🥩 단백질",veg:"🥦 채소",fruit:"🍎 과일",dairy:"🧀 유제품"};
+const FOODS=[
+ /* 베이스 — FDA: 곡물 로테이션이 비소 노출을 줄임 (쌀만 고집하지 않아도 됨) */
+ {n:"쌀",s:"early",cat:"base"},{n:"찹쌀",s:"early",cat:"base"},
+ {n:"오트밀",s:"mid",cat:"base",tip:"6개월부터 가능 (Solid Starts). 섬유질이 많아 설사가 잦은 아기는 천천히."},
+ {n:"퀴노아",s:"mid",cat:"base",tip:"6개월부터 가능. 조리 전 물에 잘 헹궈 사포닌을 제거하세요 (Solid Starts)."},
+ {n:"현미",s:"mid",cat:"base",tip:"백미보다 무기비소가 높은 경향 — 매일 쓰지 말고 다른 곡물과 돌려 쓰세요 (FDA)."},
+ {n:"보리",s:"done",cat:"base",tip:"밀 함유 곡물(글루텐)은 소량부터 (ESPGHAN: 4~12개월 사이 도입, 대량 금지)."},
+ /* 단백질 */
+ {n:"소고기",s:"mid",cat:"protein",iron:1,al:"쇠고기"},
+ {n:"닭고기",s:"mid",cat:"protein",al:"닭고기"},
+ {n:"두부",s:"mid",cat:"protein",al:"대두"},
+ {n:"달걀(완숙)",s:"mid",cat:"protein",al:"난류",early:"달걀·땅콩 등은 늦출수록 좋다는 과거 권고가 뒤집혔습니다. 완숙으로, 소량부터."},
+ {n:"흰살생선",s:"mid",cat:"protein",fish:1,tip:"대구·광어·명태 같은 흰살생선은 국내에서 중기(7개월 무렵)부터 통용돼요. 수은 걱정이 적은 흰살부터, 가시는 두 번 확인. 생선은 종류를 합쳐 주 2회 안팎으로만 — 월력표가 자동으로 지켜줘요."},
+ {n:"고등어",s:"done",cat:"protein",al:"고등어",fish:1,tip:"등푸른생선은 알레르기 우려로 돌 무렵부터가 국내 통용이에요. 수은은 낮은 편(식약처 일반어류 분류)."},
+ /* 채소 */
+ {n:"감자",s:"early",cat:"veg"},{n:"단호박",s:"early",cat:"veg"},
+ {n:"당근",s:"mid",cat:"veg"},{n:"양배추",s:"mid",cat:"veg"},{n:"시금치",s:"mid",cat:"veg"},
+ {n:"고구마",s:"late",cat:"veg"},{n:"양파",s:"late",cat:"veg"},{n:"오이",s:"late",cat:"veg"},
+ {n:"콩나물",s:"late",cat:"veg"},{n:"버섯",s:"late",cat:"veg"},{n:"미역",s:"late",cat:"veg"},
+ {n:"가지",s:"done",cat:"veg"},{n:"파프리카",s:"done",cat:"veg"},
+ /* 과일·유제품 */
+ {n:"사과",s:"early",cat:"fruit"},{n:"배",s:"early",cat:"fruit"},
+ {n:"수박",s:"late",cat:"fruit"},{n:"바나나",s:"late",cat:"fruit"},{n:"포도(잘게)",s:"late",cat:"fruit",chok:1},
+ {n:"아기 치즈",s:"late",cat:"dairy",al:"우유"},{n:"플레인 요거트",s:"late",cat:"dairy",al:"우유"},
+ {n:"생우유",s:"done",cat:"dairy",al:"우유",note12:"12개월부터, 하루 500~600ml"}];
+function allFoods(){ return FOODS.concat((feed.custom||[]).map(c=>({n:c.n,s:c.s||"mid",cat:c.cat||"veg",custom:1}))); }
+const CUBE_RULES=[
+ ["🧊 냉동 큐브","국내 통용 1~2주 안에 소진 (공식 상한은 1~2개월, FoodSafety.gov)"],
+ ["🥶 해동","냉장고나 전자레인지 해동으로. 실온 해동 금지, 해동 후 24시간 이내 사용 (NHS)"],
+ ["🔁 재냉동 금지","한 번 해동한 큐브는 다시 얼리지 않아요 (NHS)"],
+ ["🔥 재가열","속까지 완전히 뜨겁게 데운 뒤 식혀서. 재가열은 1회만 (NHS)"],
+ ["🥄 남은 음식","숟가락이 닿은 이유식은 보관하지 말고 버려요 — 침이 섞이면 상해요 (FDA)"]];
+/* 조리·분량 안내 — 수치는 확인된 것만(CDC·WHO·국내 통용), 방법은 일반적인 조리 방식 안내 */
+const STAGE_PREP={
+ early:{grain:"입자 없이 곱게 갈아 체에 거른 미음 (물:쌀 10:1)",amt:"처음엔 1~2큰술(15~30ml)부터, 아기가 받아들이는 만큼 서서히 늘려요 (미국 CDC)"},
+ mid:{grain:"2~5mm 알갱이가 살짝 남은 죽 — 중기 안에서도 처음엔 고운 쪽으로, 익숙해지면 굵은 쪽으로 서서히",amt:"한 끼 70~100g 안팎이 국내에서 통용돼요 — 남기면 억지로 먹이지 않기"},
+ late:{grain:"잇몸으로 으깰 수 있는 무르기의 된 죽·진밥",amt:"정해진 양보다 아기의 배고픔·배부름 신호를 따라가요 (WHO 반응적 수유)"},
+ done:{grain:"진밥에서 서서히 일반 밥·반찬으로 (간은 약하게)",amt:"가족 식사에 가깝게 — 양은 아기가 정하게 두세요 (WHO 반응적 수유)"}};
+const CAT_PREP={
+ base:"잘 씻어 30분 이상 불린 뒤 물을 넉넉히 잡고 푹 끓여요. 단계에 맞는 무르기가 되면 한 김 식혀요.",
+ protein:"속까지 완전히 익히는 게 원칙이에요. 익힌 뒤 단계 입자에 맞게 다지거나 갈아요.",
+ veg:"찌거나 삶아 부드럽게 익힌 뒤 단계 입자로 다져요. 찌는 쪽이 영양 손실이 적어요.",
+ fruit:"잘 익은 과일을 강판에 갈거나 잘게 다져요. 초기·중기엔 익혀 주면 소화가 편해요.",
+ dairy:"따로 조리할 게 없어요. 무가당 제품을 간식처럼 소량씩."};
+/* 죽이유식 공식 — 배죽 비율·재료량은 국내 통용치(자료마다 조금씩 다름을 명시) */
+const BOWL_FORMULA={
+ early:"불린 쌀 1 : 물 10(10배죽)로 곱게 갈아 체에 걸러요. 쌀미음부터, 익숙해지면 재료를 한 가지씩.",
+ mid:"불린 쌀 1 : 물 5~7(5~7배죽) — 처음엔 묽게(7배 쪽), 익숙해지면 되게(5배 쪽). 한 끼 기준 쌀 15~20g·고기 10~15g·채소 10~20g이 국내 통용이에요(자료마다 조금씩 달라요).",
+ late:"무른 밥 느낌의 3~4배죽 — 재료를 조금 굵게 다져 넣어요. 양은 아기의 배고픔 신호를 따라가요(WHO).",
+ done:"진밥(2배 안팎)에 반찬을 곁들이는 형태로 넘어가요. 간은 여전히 약하게."};
+const FOOD_PREP={
+ "쌀":"불린 쌀을 갈아 끓이면 미음, 입자를 살려 끓이면 죽이 돼요. 지은 밥으로 끓이면 시간이 절반.",
+ "찹쌀":"쌀과 같은 방법. 찰기가 있어 되직해지니 물을 조금 더 잡아요.",
+ "오트밀":"불림 없이 물·분유·모유에 몇 분 끓이면 바로 죽이 돼요. 제일 간편한 베이스예요.",
+ "퀴노아":"쓴맛(사포닌)이 빠지게 흐르는 물에 비벼 씻은 뒤 푹 삶고, 톡톡 터지는 알갱이를 단계에 맞게 다져요.",
+ "현미":"백미보다 오래 불리고 더 푹 끓여요. 매일 쓰지 말고 다른 곡물과 돌려 쓰세요 (FDA).",
+ "보리":"푹 불려 무르게 끓여요. 글루텐 함유 곡물이라 소량부터.",
+ "소고기":"기름 적은 부위(우둔·안심)를 찬물에 담가 핏물을 빼고(20~30분 통용), 푹 삶아 단계 입자로 다져요. 삶은 물은 기름을 걷어 육수로 써요.",
+ "닭고기":"안심·가슴살을 푹 삶아 결대로 찢은 뒤 다져요. 퍽퍽하면 육수를 조금 섞어요.",
+ "두부":"끓는 물에 데친 뒤 으깨요. 죽 마지막에 넣으면 고소함이 살아요.",
+ "달걀(완숙)":"흰자·노른자 모두 단단해질 때까지 완전히 삶아요 — 반숙·수란은 안 돼요. 국내 안내서는 노른자 소량부터 시작하는 경우가 많아요.",
+ "흰살생선":"김 오른 찜기에 쪄서 가시를 두 번 확인하며 발라내고 살만 으깨요.",
+ "고등어":"소금 간 없이 찜·조림으로 익혀 가시를 꼼꼼히 제거하고 살만.",
+ "감자":"쪄서 뜨거울 때 으깨요. 식으면 뻑뻑해져요.",
+ "단호박":"씨를 긁어내고 쪄서 속만 숟가락으로 파내 으깨요.",
+ "고구마":"쪄서 껍질을 벗기고 으깨요. 퍽퍽하면 물·분유로 농도를 맞춰요.",
+ "당근":"푹 쪄서 다져요. 초기라면 갈아서 체에 걸러요.",
+ "시금치":"부드러운 잎 부분만 데쳐서 다져요.",
+ "양배추":"두꺼운 심을 빼고 잎만 쪄서 다져요.",
+ "양파":"푹 익히면 단맛이 나요. 잘게 다져 다른 재료와 함께 끓여요.",
+ "미역":"물에 불린 뒤 주물러 씻어 짠기를 빼고, 푹 끓여 아주 잘게 다져요.",
+ "버섯":"기둥을 떼고 갓 부분만 데쳐 잘게 다져요.",
+ "사과":"초기엔 쪄서 갈고, 익숙해지면 강판에 생으로 갈아요.",
+ "배":"사과와 같은 방법. 수분이 많은 과일이에요.",
+ "바나나":"잘 익은 것을 포크로 으깨면 끝. 외출할 때도 편해요.",
+ "포도(잘게)":"껍질·씨를 빼고 반드시 세로 4등분으로 — 통째로는 4세까지 금지예요 (AAP).",
+ "아기 치즈":"그대로 잘게 잘라 주거나 따뜻한 죽에 녹여요.",
+ "플레인 요거트":"무가당 플레인으로 그대로 줘요. 과일을 섞으면 간식이 돼요.",
+ "생우유":"12개월부터 음료로. 컵으로 마시는 연습과 같이 시작해보세요."};
+const NEVER=[
+ ["🍯 꿀","12개월 전 금지 — 영아 보툴리누스 위험 (CDC·식약처)"],
+ ["🥛 생우유(음료)","12개월 전 금지 — 철 결핍 유발 (소아과학회지)"],
+ ["🍇 통포도·견과·팝콘 등","4세까지 질식 주의 — 1.3cm 이하로 잘라주세요 (AAP)"],
+ ["🧂 소금·설탕","간하지 않고 조리 (보건복지부 식생활지침)"],
+ ["🧃 주스","12개월 전 금지 (대한소아청소년과학회)"],
+ ["🐟 다랑어·새치·상어 등 심해성 어류","수은 축적 — 영유아는 가급적 주지 않아요 (식약처 생선 안전섭취 가이드: 1~2세 주 25g 이하). 흰살생선 등 일반어류는 소량씩 나눠서."]];
+const RULE3="새 재료는 한 번에 하나씩, 3~5일 두고 보세요 (AAP). 그 사이 두드러기·구토·설사가 없는지만 보면 됩니다.";
+
+/* 마스코트 — 고슴이 */
+function mascot(mood,size){
+  const s=size||74, eyes = mood==="happy" ? '<path d="M46 56 q4 -5 8 0" stroke="#4A392E" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M66 56 q4 -5 8 0" stroke="#4A392E" stroke-width="2.6" fill="none" stroke-linecap="round"/>'
+    : '<circle cx="50" cy="55" r="3.2" fill="#4A392E"/><circle cx="70" cy="55" r="3.2" fill="#4A392E"/>';
+  const mouth = mood==="oh" ? '<ellipse cx="60" cy="66" rx="4" ry="5" fill="#8A5A44"/>' : '<path d="M54 65 q6 6 12 0" stroke="#8A5A44" stroke-width="2.6" fill="none" stroke-linecap="round"/>';
+  return '<svg class="mascot b" width="'+s+'" height="'+s+'" viewBox="0 0 120 110" role="img" aria-label="고슴이">'
+  +'<g><path d="M60 6 L70 22 L84 12 L88 30 L106 26 L100 44 L118 48 L104 60 L114 74 L96 74 L98 90 L82 82 L60 96 L38 82 L22 90 L24 74 L6 74 L16 60 L2 48 L20 44 L14 26 L32 30 L36 12 L50 22 Z" fill="#8A6248"/>'
+  +'<ellipse cx="60" cy="62" rx="34" ry="30" fill="#FFF1DE"/>'
+  +'<circle cx="42" cy="63" r="6" fill="#FBC7BC" opacity=".85"/><circle cx="78" cy="63" r="6" fill="#FBC7BC" opacity=".85"/>'
+  +eyes+mouth
+  +'<ellipse cx="60" cy="47" rx="5" ry="4" fill="#8A6248"/></g></svg>';
+}
+
+/* ============ 저장소 ============ */
+const store={ok:false,mem:{},
+ init(){try{localStorage.setItem("__t","1");localStorage.removeItem("__t");this.ok=true}catch(e){this.ok=false}},
+ get(k,d){if(this.ok){try{const v=localStorage.getItem("siwoo."+k);if(v!=null)return JSON.parse(v)}catch(e){}}return(k in this.mem)?this.mem[k]:d},
+ set(k,v){this.mem[k]=v;if(this.ok){try{localStorage.setItem("siwoo."+k,JSON.stringify(v))}catch(e){}}}};
+store.init();
+
+/* ============ 상태 ============ */
+let child=store.get("child",null), logs=store.get("logs",[]), playLogs=store.get("playLogs",[]),
+ playState=store.get("playState",{}), miles=store.get("miles",{}), sugCache=store.get("sug",{}),
+ domSad=store.get("domSad",0), feed=store.get("feed",{tried:{},watch:null,plan:{},stageOv:null,started:null}),
+ growth=store.get("growth",[]), appts=store.get("appts",[]), shop=store.get("shop",{partner:{},on:false});
+/* 구버전 plan(배열) → {meals,test} 마이그레이션 */
+Object.keys(feed.plan||{}).forEach(d=>{ if(Array.isArray(feed.plan[d])) feed.plan[d]={meals:feed.plan[d],test:null}; });
+if(feed.testPause===undefined) feed.testPause=false;
+let view="home", curPlay=null, fb={res:null,cond:null}, calSel=null, calMonth=null, foodSel=null, planDay=null, logMode="write";
+function save(){["child","logs","playLogs","playState","miles","sug","domSad","feed","growth","appts","shop"]
+ .forEach((k,i)=>store.set(k,[child,logs,playLogs,playState,miles,sugCache,domSad,feed,growth,appts,shop][i]))}
+
+/* ============ 유틸 ============ */
+const $=s=>document.querySelector(s);
+function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")}
+function todayStr(d){const t=d||new Date();return t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0")}
+function dayNum(ds){if(!child)return 0;const b=new Date(child.birth+"T00:00:00");
+ return Math.floor((new Date((ds||todayStr())+"T00:00:00")-b)/864e5)+1}
+function monthAge(){if(!child)return 0;const base=new Date((child.due||child.birth)+"T00:00:00");
+ const d=Math.floor((new Date(todayStr()+"T00:00:00")-base)/864e5);return Math.max(0,Math.floor(d/30.44))}
+function ageText(){return"생후 "+monthAge()+"개월 · D"+dayNum()+(child&&child.due&&child.due!==child.birth?" (교정)":"")}
+function hash(s){let h=0;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0}return Math.abs(h)}
+function pstate(n){if(!playState[n])playState[n]={level:0,sad:0,skip:0,happy:0};return playState[n]}
+function daysBetween(a,b){return Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/864e5)}
+
+/* ============ 쇼핑 ============ */
+const PARTNER_DEFAULT={}; /* 다음 버전에서 도우미 결과를 여기에 내장 — 지금은 설정에서 등록한 링크 사용 */
+function shopLink(kw){
+  const k=kw.trim();
+  if(shop.partner&&shop.partner[k]) return {url:shop.partner[k],partner:true};
+  if(PARTNER_DEFAULT[k]) return {url:PARTNER_DEFAULT[k],partner:true};
+  return {url:"https://www.coupang.com/np/search?q="+encodeURIComponent(k),partner:false};
+}
+function shopBtn(kw,label){
+  if(!kw)return"";
+  const l=shopLink(kw);
+  let h='<a class="shopbtn" href="'+esc(l.url)+'" target="_blank" rel="noopener">🛒 '+esc(label||kw)+' 찾아보기</a>';
+  if(l.partner) h='<div class="small" style="margin-bottom:6px">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div>'+h;
+  return '<div style="margin-top:10px">'+h+'</div>';
+}
+function matKeyword(mat){
+  const m=(mat||"").split(/[,(·]/)[0].trim();
+  if(!m||m==="없음"||m.startsWith("아무")||m.startsWith("부모")) return null;
+  return m.replace(/^아기\s*/,"아기 ");
+}
+
+/* ============ 놀이 추천 (v1 로직 유지) ============ */
+function suggestToday(){
+  const t=todayStr(); if(sugCache[t])return sugCache[t];
+  const m=Math.min(monthAge(),7);
+  let pool=PLAYS.filter(p=>p.m===m||p.m===Math.max(0,m-1));
+  if(!pool.length)pool=PLAYS.filter(p=>p.m>=6);
+  const recent=new Set();
+  Object.keys(sugCache).forEach(d=>{if(daysBetween(d,t)<=2&&daysBetween(d,t)>=0)sugCache[d].forEach(n=>recent.add(n))});
+  playLogs.forEach(l=>{if(daysBetween(l.date,t)<=2)recent.add(l.n)});
+  let avail=pool.filter(p=>!recent.has(p.n)); if(avail.length<2)avail=pool;
+  const seed=hash(t+(child?child.birth:""));
+  const pick=(arr,off)=>arr.length?arr[(seed+off)%arr.length]:null;
+  const chosen=child&&child.domain&&child.domain!=="none"?child.domain:null;
+  let s1=null;
+  if(chosen){let cs=avail.filter(p=>p.dom===chosen); if(!cs.length)cs=avail.filter(p=>p.dom2===chosen); s1=pick(cs,0)||pick(avail,0)}
+  else s1=pick(avail,0);
+  const others=avail.filter(p=>p.n!==(s1&&s1.n)&&(!s1||p.dom!==s1.dom));
+  const s2=pick(others,3)||pick(avail.filter(p=>p.n!==(s1&&s1.n)),3);
+  const res=[s1,s2].filter(Boolean).map(p=>p.n);
+  sugCache[t]=res;save();return res;
+}
+
+/* ============ 이유식 로직 ============ */
+function curStage(){
+  if(feed.stageOv)return STAGES.find(s=>s.k===feed.stageOv);
+  const m=monthAge();
+  return STAGES.find(s=>m>=s.range[0]&&m<s.range[1])||STAGES[STAGES.length-1];
+}
+function watchDay(){ if(!feed.watch)return 0; return daysBetween(feed.watch.start,todayStr())+1 }
+function triedOK(){ return Object.keys(feed.tried).filter(n=>feed.tried[n].r!=="warn") }
+function stageMeals(stage){ return stage.k==="early"?2:stage.k==="mid"?2:stage.k==="late"?3:stage.k==="done"?3:0 }
+function mealsOf(stage){ return feed.mealsPerDay || stageMeals(stage) }
+const STAGE_ORDER={early:1,mid:2,late:3,done:4};
+function addDays(ds,n){ const d=new Date(ds+"T00:00:00"); d.setDate(d.getDate()+n); return todayStr(d); }
+/* 한 달(28일) 월력표 생성 — 토핑이유식.
+   3일 블록 = 「큐브 재고 세트」(한 번 만들어 소분하는 단위). 재고는 3일간 같지만,
+   **끼니마다 재고에서 다른 조합**을 꺼내 쓴다 (베이스·단백질·채소 로테이션).
+   새 재료는 블록당 1개 — 매일 첫 끼(오전)에 소량 포함해 3일 연속 관찰. 다음 새 재료까지 3일 간격(CDC·AAP 3~5일 하한). */
+function buildMonth(fromDs, delayFirstTest){
+  const stage=curStage(); if(stage.k==="pre") return;
+  const n=mealsOf(stage);
+  const AF=allFoods(), okSet=new Set(triedOK());
+  const pool=c=>AF.filter(f=>f.cat===c&&okSet.has(f.n)).map(f=>f.n);
+  const bases=pool("base"), prots=pool("protein"), vegs=pool("veg"), extras=pool("fruit").concat(pool("dairy"));
+  const cand=AF.filter(f=>(STAGE_ORDER[f.s]||9)<=(STAGE_ORDER[stage.k]||0)
+    && !feed.tried[f.n] && !(feed.watch&&feed.watch.name===f.n)).map(f=>f.n);
+  let ci=0;
+  let blockDelay = delayFirstTest?1:0;
+  if(feed.testPause) ci=cand.length;
+  else if(feed.watch) blockDelay=Math.max(blockDelay,1);
+  const seed=hash(fromDs+(child?child.birth:""));
+  const take=(arr,start,k)=>{ const out=[]; for(let t=0;t<arr.length&&out.length<k;t++){const v=arr[(start+t)%arr.length]; if(!out.includes(v))out.push(v);} return out; };
+  /* 생선은 주 2회 안팎으로 제한 (식약처 생선 안전섭취 가이드·FDA 어린이 권고를 보수적으로 적용) */
+  const fishSet=new Set(AF.filter(f=>f.fish).map(f=>f.n));
+  const fishByDay=new Array(28).fill(0);
+  const fishWeek=(di)=>{ let s=0; for(let k=Math.max(0,di-6);k<=di;k++) s+=fishByDay[k]; return s; };
+  const bowl = feed.style==="bowl";
+  for(let b=0; b*3<28; b++){
+    const test = (b>=blockDelay && ci<cand.length) ? cand[ci++] : null;
+    /* 이 블록의 재고: 베이스 최대 2 · 단백질 최대 2 · 채소 최대 4 (토핑=큐브 / 죽=끓일 죽의 재료) */
+    const stockB=take(bases,seed+b,2), stockP=take(prots,seed+b,2), stockV=take(vegs,(seed+b*3)%97,4);
+    /* 죽이유식: 블록마다 죽 1~2가지를 배치로 끓여 나눠 먹는다 (끼니마다 새 죽 X — 현실 조리 단위) */
+    let recipes=[];
+    if(bowl){
+      /* 이번 주 생선 여유가 없으면 죽 재료 선정 단계에서부터 생선을 빼고 짠다
+         (안 그러면 생선죽이 통째로 막혀 남은 죽 하나만 6끼 반복되는 문제) */
+      const fishBlocked = fishWeek(b*3)>=2;
+      const pickP=(pref)=>{ if(!pref)return null;
+        if(fishSet.has(pref)&&fishBlocked) return stockP.find(x=>!fishSet.has(x))||null;
+        return pref; };
+      const p1=pickP(stockP[0]), p2raw=pickP(stockP[1]||stockP[0]);
+      const p2=(p2raw===p1 && stockP.find(x=>x!==p1&&(!fishSet.has(x)||!fishBlocked)))||p2raw;
+      const b2=stockB[1]||stockB[0];
+      const rA=[].concat(stockB[0]?[stockB[0]]:[], p1?[p1]:[], stockV.slice(0,2));
+      const rB=[].concat(b2?[b2]:[], p2?[p2]:[], stockV.length>2?stockV.slice(2,4):stockV.slice(0,2));
+      recipes=[rA];
+      if(rB.length && JSON.stringify(rB)!==JSON.stringify(rA)) recipes.push(rB);
+      if(!rA.length){ recipes = extras.length? [[extras[b%extras.length]]] : [[]]; }
+    }
+    for(let d=0; d<3 && b*3+d<28; d++){
+      const di=b*3+d, ds=addDays(fromDs,di);
+      const meals=[];
+      for(let m=0;m<n;m++){
+        let items=[];
+        if(bowl){
+          /* 테스트 기간엔 첫 끼=죽1 고정(아침 관찰), 평소엔 날짜별로 죽 순서를 바꿔 단조로움 줄이기 */
+          let r=recipes[(test? m : d+m)%recipes.length]||[];
+          if(r.some(x=>fishSet.has(x)) && fishWeek(di)>=2){
+            const alt=recipes.find(rr=>rr.length&&!rr.some(x=>fishSet.has(x)));
+            r = alt || r.filter(x=>!fishSet.has(x));
+          }
+          items=r.slice();
+          if(test && m===0 && !items.includes(test)) items.push(test); /* 새 재료는 죽에 섞기 전 따로 맛보기 */
+        } else {
+          const idx=d*n+m+d;  /* +d: 날짜별 오프셋 — 다음 날 같은 끼니도 조합이 밀리게 */
+          if(stockB.length) items.push(stockB[idx%stockB.length]);
+          if(stockP.length){
+            let pn=stockP[idx%stockP.length];
+            if(fishSet.has(pn) && fishWeek(di)>=2){ const alt=stockP.find(x=>!fishSet.has(x)); pn=alt||null; }
+            if(pn) items.push(pn);
+          }
+          for(let v=0;v<2&&stockV.length;v++){ const f=stockV[(idx*2+v)%stockV.length]; if(!items.includes(f)) items.push(f); }
+          if(!items.length && !test && extras.length) items.push(extras[idx%extras.length]);
+          if(test && m===0 && !items.includes(test)) items.push(test);  /* 새 재료는 매일 첫 끼에만 */
+        }
+        if(items.some(x=>fishSet.has(x))) fishByDay[di]++;
+        meals.push({items});
+      }
+      feed.plan[ds]={meals,test:(test&&d===0)?test:null,block:b,testItem:test||null,
+        stock:{b:stockB,p:stockP,v:stockV}};
+    }
+  }
+  feed.planMade=todayStr(); save();
+}function hasPlanAhead(){ let c=0; for(let d=0;d<7;d++){ if(feed.plan[addDays(todayStr(),d)]) c++; } return c>=4; }
+function weekShopping(){
+  const set=new Set();
+  for(let d=0;d<7;d++){ const p=feed.plan[addDays(todayStr(),d)]; if(!p)continue;
+    if(p.test)set.add(p.test); (p.meals||[]).forEach(m=>(m.items||[]).forEach(i=>set.add(i))); }
+  return [...set];
+}
+
+/* ============ 네비 ============ */
+function go(v,arg){
+  view=v;
+  if(v==="card"||v==="browse")curPlay=arg;
+  if(v==="feedback"){curPlay=arg;fb={res:null,cond:null}}
+  if(v==="foodDetail")foodSel=arg;
+  if(v==="planDay")planDay=arg;
+  render();window.scrollTo(0,0);
+}
+function navSync(){
+  document.querySelectorAll("nav.bottom button").forEach(b=>{
+    const v=b.dataset.v;
+    const on = v===view || (v==="home"&&["card","feedback"].includes(view)) || (v==="plays"&&view==="browse")
+      || (v==="food"&&["foodDetail","planDay","foodSetup"].includes(view)) || (v==="log"&&view==="cal") || (v==="map"&&view==="summary");
+    b.classList.toggle("on",on);
+  });
+  $("#nav").style.display=(!child||view==="onboard"||view==="worry")?"none":"flex";
+}
+function header(){
+  if(child){$("#hTitle").textContent=child.name||"우리 아이";$("#hSub").textContent=ageText()}
+  else{$("#hTitle").textContent="시우";$("#hSub").textContent="아이를 보는 법"}
+  const c=$("#stChip");
+  if(store.ok){c.className="stChip ok";c.textContent="✓ 저장됨"}
+  else{c.className="stChip tmp";c.textContent="⚠ 임시"}
+}
+
+/* ============ 온보딩 ============ */
+let ob={step:1,birth:"",due:"",preterm:false,domain:null,reason:null};
+function vOnboard(){
+  const s=ob.step;let h='<div class="fade">';
+  if(s===1){
+    h+='<div class="hero"><div>'+mascot("happy",80)+'</div><div class="bubble">안녕하세요! 저는 <b>고슴이</b>예요.<br>아이를 <b>평가하지 않고 바라보는</b> 앱이에요. 아기 생일부터 알려주세요.</div></div>';
+    h+='<div class="card pop"><div class="sub" style="font-weight:800">1/3</div><div class="big hd">아이 생일이 언제인가요?</div>'
+    +'<label class="f">생년월일</label><input type="date" id="obBirth" value="'+(ob.birth||"")+'">'
+    +'<div style="margin-top:10px"><button class="ghost" onclick="ob.preterm=!ob.preterm;render()">'+(ob.preterm?"▾":"▸")+' 예정일보다 이르게 태어났어요</button></div>'
+    +(ob.preterm?'<label class="f">원래 예정일 (교정연령으로 계산)</label><input type="date" id="obDue" value="'+(ob.due||"")+'"><div class="small" style="margin-top:6px">이르게 태어난 아기를 출생일로 재면 전부 「늦게」 보여요. 예정일 기준이 정확합니다.</div>':"")
+    +'<div style="margin-top:16px"><button class="pri" onclick="obNext1()">다음</button></div></div>';
+  }
+  if(s===2){
+    h+='<div class="card pop"><div class="sub" style="font-weight:800">2/3</div><div class="big hd">요즘 어느 쪽에 눈이 가시나요?</div>';
+    DOMS.forEach(d=>{h+='<button class="opt '+(ob.domain===d?"on":"")+'" onclick="ob.domain=\''+d+'\';render()">'+DOM_ICON[d]+' '+DOM_LABEL[d]
+     +'<span class="d">'+({인지:"보고, 비교하고, 예측하고, 원인을 찾는 것",신체:"뒤집고, 쥐고, 밀고, 기는 것",사회정서:"사람을 보고, 웃고, 안정을 찾는 것",언어:"소리를 주고받고, 리듬을 느끼는 것"})[d]+'</span></button>'});
+    h+='<button class="opt '+(ob.domain==="none"?"on":"")+'" onclick="ob.domain=\'none\';render()">아직 모르겠어요<span class="d">네 영역을 골고루 돌아가며 제안해요</span></button>';
+    h+='<div class="notice">아이마다 영역별 속도가 다른 건 정상이에요. 고르신 영역은 「부족한 곳」이 아니라 <b>「요즘 보시는 곳」</b>입니다.</div>';
+    h+='<div class="row"><button class="sec" onclick="ob.step=1;render()">이전</button><button class="pri" onclick="obNext2()">다음</button></div></div>';
+  }
+  if(s===3){
+    const dn=ob.domain==="none"?"":DOM_ICON[ob.domain]+" "+DOM_LABEL[ob.domain]+"을 고르셨네요. ";
+    h+='<div class="card pop"><div class="sub" style="font-weight:800">3/3</div><div class="big hd">'+dn+'어떤 마음이신가요?</div>';
+    [["fun","그냥 이쪽이 재밌어서"],["baby","아이가 이걸 특히 좋아해서"],["miss","요즘 내가 잘 못 봐준 것 같아서"],["worry","좀 느린 것 같아 걱정돼서"]].forEach(([k,t])=>{
+      h+='<button class="opt '+(ob.reason===k?"on":"")+'" onclick="ob.reason=\''+k+'\';render()">'+t+'</button>'});
+    h+='<div class="row"><button class="sec" onclick="ob.step=2;render()">이전</button><button class="pri" onclick="obDone()">시작하기</button></div></div>';
+  }
+  h+='<div class="footer-note">'+esc(DISCLAIMER)+'</div></div>';return h;
+}
+function obNext1(){const b=$("#obBirth").value;if(!b){alert("생년월일을 입력해주세요.");return}
+ ob.birth=b;ob.due=ob.preterm?($("#obDue")?$("#obDue").value:""):"";ob.step=2;render()}
+function obNext2(){if(!ob.domain){alert("하나를 골라주세요. 「아직 모르겠어요」도 됩니다.");return}ob.step=3;render()}
+function obDone(){if(!ob.reason){alert("하나를 골라주세요.");return}
+ child={birth:ob.birth,due:ob.due||null,domain:ob.domain,reason:ob.reason,name:"우리 아이"};
+ save();go(ob.reason==="worry"?"worry":"home")}
+
+function vWorry(){
+  return '<div class="fade"><div class="hero"><div>'+mascot("oh",80)+'</div><div class="bubble">걱정되시는군요. 그럴 땐 <b>놀이보다 먼저 할 게</b> 있어요.</div></div>'
+  +'<div class="card pop"><ul style="font-size:14px;padding-left:18px;line-height:1.9;font-weight:600">'
+  +'<li>걱정되는 게 <b>정확히 무엇인지</b> 기록 탭에 적어두세요</li>'
+  +'<li>다음 영유아 검진 때 <b>이 기록을 그대로</b> 보여주세요</li>'
+  +'<li>검진이 멀었다면 소아청소년과에 미리 가셔도 됩니다</li></ul>'
+  +'<div class="notice warm">이 앱은 발달 검사가 아니에요. 검사를 대신하지도, 앞당기지도 못해요. 이 앱이 하는 일은 <b>의사 선생님께 보여줄 기록을 만드는 것</b>입니다.</div>'
+  +'<button class="pri" onclick="go(\'summary\')">📄 진료실용 요약 만들기</button><div style="height:8px"></div>'
+  +'<button class="sec" onclick="go(\'home\')">알겠어요, 홈으로</button></div></div>';
+}
+
+/* ============ 홈 ============ */
+function playCardMini(n){
+  const p=PLAYS.find(x=>x.n===n);if(!p)return"";
+  const st=pstate(p.n);
+  const lv=st.level<0?'<span class="chip">↓ 쉬운 버전으로</span>':st.level>0?'<span class="chip">↑ 심화 버전으로</span>':"";
+  return '<div class="card" onclick="go(\'card\','+p.n+')" style="cursor:pointer">'
+  +'<div><span class="chip '+DOM_CHIP[p.dom]+'">'+DOM_ICON[p.dom]+' '+DOM_LABEL[p.dom]+'</span>'
+  +(p.math?'<span class="chip c6">📐 수학의 눈</span>':"")+lv+'</div>'
+  +'<div class="playline" style="margin-top:6px"><span class="pnum">'+p.n+'</span><span class="big hd" style="margin:0">'+esc(p.name)+'</span></div>'
+  +'<div class="sub" style="margin-top:4px">'+fmt(p.how.split(".")[0])+'.</div>'
+  +'<div style="text-align:right"><span class="ghost">열기 →</span></div></div>';
+}
+function greet(){
+  const m=monthAge(), hour=new Date().getHours();
+  const t=hour<11?"좋은 아침이에요!":hour<18?"안녕하세요!":"오늘도 수고했어요!";
+  const w=feed.watch?("지금 「"+feed.watch.name+"」 "+watchDay()+"일째 지켜보는 중이에요."):"";
+  return '<div class="hero"><div>'+mascot("happy",74)+'</div><div class="bubble">'+t+' '+esc(child.name)+' 생후 <b>'+m+'개월</b>, <b>D'+dayNum()+'</b>이에요. '+w+'</div></div>';
+}
+function vHome(){
+  let h='<div class="fade">'+greet();
+  if(child.reason==="worry"){
+    h+='<div class="notice warm">걱정으로 시작하셨죠. 놀이보다 <b>기록</b>이 먼저예요 — 걱정되는 장면을 적어두시면 진료실용 요약으로 묶어드려요. <button class="ghost" onclick="go(\'summary\')">요약 만들기 →</button></div>';
+  }
+  // D-day
+  const up=appts.filter(a=>daysBetween(todayStr(),a.date)>=0).sort((a,b)=>a.date<b.date?-1:1);
+  if(up.length){const a=up[0];const dd=daysBetween(todayStr(),a.date);
+    h+='<div class="card"><div class="dday"><div class="n">D-'+dd+'</div><div><b>'+esc(a.label)+'</b><div class="small">'+a.date+'</div></div>'
+    +'<button class="ghost" style="margin-left:auto" onclick="delAppt(\''+a.date+'\')">지움</button></div></div>';
+  }
+  // 오늘의 시우 (정확한 날이 없으면 매일 다른 과거 기록 순환)
+  let sd=dayNum(), d=DAILY[sd], replay=false;
+  if(!d){ const ks=Object.keys(DAILY).map(Number).sort((a,b)=>a-b);
+    if(ks.length){ sd=ks[hash(todayStr()+"replay")%ks.length]; d=DAILY[sd]; replay=true; } }
+  if(d){h+='<div class="card" style="background:linear-gradient(160deg,var(--card),var(--bg))"><h3 style="margin-top:0">🦔 '+(replay?"그날의 시우 — D"+sd+" <span style=\"font-weight:600\">(기록 다시 보기)</span>":"같은 날의 시우 — D"+sd)+'</h3>'
+   +'<div style="font-size:14px"><b>해준 것:</b> '+esc(d.i)+'</div>'
+   +'<div style="font-size:14px;margin-top:4px"><b>시우는:</b> '+esc(d.o)+'</div>'
+   +'<div class="small" style="margin-top:6px">이 앱의 바탕이 된 실제 관찰 기록이에요. 같은 날 다른 아기는 전혀 다른 걸 해요 — 그게 정상입니다.</div></div>';}
+  // 이유식 오늘
+  const st=curStage();
+  if(st.k!=="pre"){
+    const pT=feed.plan[todayStr()];
+    let inner="";
+    if(feed.watch){const wd=watchDay();
+      inner = wd>=3 ? '<span class="badge warn">🧪 '+esc(feed.watch.name)+' 3일 완료 — 어땠는지 알려주세요!</span>'
+                    : '<span class="badge watch">🧪 '+esc(feed.watch.name)+' 관찰 '+wd+'/3일</span>';}
+    else if(pT&&pT.test&&!feed.tried[pT.test]) inner='<span class="badge warn">🧪 오늘 '+esc(pT.test)+' 처음 먹여보는 날!</span>';
+    else if(pT) inner='<span class="small">'+(pT.meals||[]).map(m=>(m.items||[]).join("·")||"—").join(" / ")+'</span>';
+    else inner='<span class="small">한 달 식단이 아직 없어요 — 30초면 만들어져요.</span>';
+    h+='<div class="card" onclick="go(\'food\')" style="cursor:pointer"><h3 style="margin-top:0">🍚 이유식 — '+st.nm+' ('+st.mo+')</h3>'
+    +'<div style="margin:4px 0">'+inner+'</div>'
+    +'<div style="text-align:right"><span class="ghost">이유식 탭 →</span></div></div>';
+  }
+  const mS=monthAge();
+  const nowItems=SCHED.filter(r=>mS>=r[0]&&mS<r[1]);
+  if(nowItems.length){
+    h+='<div class="card" onclick="go(\'map\')" style="cursor:pointer"><h3 style="margin-top:0">💉 지금 시기의 접종·검진</h3>'
+    +nowItems.map(r=>'<div style="font-size:13.5px;font-weight:600">'+(r[4]==="c"?"🩺 ":"💉 ")+'<b>'+r[2]+'</b> — '+r[3]+'</div>').join("")
+    +'<div class="small" style="margin-top:6px">예약일을 등록하면 D-day로 알려드려요 · 지도 탭 →</div></div>';
+  }
+  const m=monthAge();
+  if(m>7)h+='<div class="notice">놀이는 지금 <b>0~7개월</b> 기록에서 뽑은 66개예요. 8개월 이후 놀이는 기록이 쌓이는 대로 추가됩니다.</div>';
+  const sug=suggestToday();
+  h+='<h3>오늘 해볼 놀이</h3>';sug.forEach(n=>{h+=playCardMini(n)});
+  h+='<div class="sub" style="text-align:center;margin:4px 0;font-weight:700">오늘은 이 '+(sug.length>1?"둘":"하나")+'면 충분해요.</div>';
+  if(domSad>=5&&child.domain&&child.domain!=="none"){
+    h+='<div class="notice warm">요즘 '+DOM_LABEL[child.domain]+' 놀이에 반응이 뜸하네요. 다른 영역도 보실래요? <button class="ghost" onclick="go(\'settings\')">영역 바꾸기 →</button><br><span class="small">아이가 아니라 시기의 문제일 수도 있어요.</span></div>';
+  }
+  h+='<div class="footer-note">'+esc(DISCLAIMER)+'</div></div>';return h;
+}
+function delAppt(d){appts=appts.filter(a=>a.date!==d);save();render()}
+
+/* ============ 놀이 탭 ============ */
+function vPlays(){
+  let h='<div class="fade"><h2 class="hd">놀이 66개</h2><div class="small" style="margin-bottom:10px">전부 한 아기의 231행 관찰 기록에서 나왔어요. 지어낸 놀이가 없습니다.</div><div>';
+  DOMS.forEach(d=>{h+='<button class="condbtn" onclick="go(\'browse\',\''+d+'\')">'+DOM_ICON[d]+' '+DOM_LABEL[d]+'</button>'});
+  h+='<button class="condbtn" onclick="go(\'browse\',\'math\')">📐 수학의 눈</button><button class="condbtn" onclick="go(\'browse\',\'all\')">전체</button></div>';
+  const m=Math.min(monthAge(),7);
+  h+='<h3>지금 월령('+monthAge()+'개월) 놀이</h3>';
+  PLAYS.filter(p=>p.m===m).forEach(p=>{h+=playRow(p)});
+  return h+"</div>";
+}
+function playRow(p){
+  return '<div class="card" style="padding:12px 14px;margin-bottom:8px;cursor:pointer" onclick="go(\'card\','+p.n+')">'
+  +'<div class="playline"><span class="pnum">'+p.n+'</span><b>'+esc(p.name)+'</b>'
+  +'<span style="margin-left:auto;display:flex;gap:4px">'
+  +'<span class="chip '+DOM_CHIP[p.dom]+'" style="margin:0">'+DOM_ICON[p.dom]+'</span>'
+  +(p.math?'<span class="chip c6" style="margin:0">📐'+(p.math>1?"📐":"")+'</span>':"")+'</span></div></div>';
+}
+function vBrowse(){
+  const d=curPlay;let list,title;
+  if(d==="math"){list=PLAYS.filter(p=>p.math);title="📐 수학의 눈 — 19개"}
+  else if(d==="all"){list=PLAYS;title="전체 66개"}
+  else{list=PLAYS.filter(p=>p.dom===d||p.dom2===d);title=DOM_ICON[d]+" "+DOM_LABEL[d]}
+  let h='<div class="fade"><button class="ghost" onclick="go(\'plays\')">← 놀이로</button><h2 class="hd" style="margin-top:6px">'+title+'</h2>';
+  if(d==="math")h+='<div class="small" style="margin-bottom:10px">발달 영역이 아니라 <b>보는 렌즈</b>예요. 놀이가 바뀌는 게 아니라 설명이 한 줄 추가됩니다.</div>';
+  for(let m=0;m<=7;m++){const sub=list.filter(p=>p.m===m);if(!sub.length)continue;
+    h+='<h3>생후 '+m+'개월</h3>';sub.forEach(p=>{h+=playRow(p)})}
+  return h+"</div>";
+}
+
+/* ============ 놀이 카드 ============ */
+function vCard(){
+  const p=PLAYS.find(x=>x.n===curPlay);if(!p)return"<div>없는 놀이입니다.</div>";
+  const st=pstate(p.n);
+  let h='<div class="fade"><button class="ghost" onclick="go(\'plays\')">← 돌아가기</button>';
+  h+='<div class="card pop"><div><span class="chip '+DOM_CHIP[p.dom]+'">'+DOM_ICON[p.dom]+' '+DOM_LABEL[p.dom]+'</span>'
+  +(p.dom2?'<span class="chip">'+DOM_ICON[p.dom2]+' '+DOM_LABEL[p.dom2]+' (부)</span>':"")+'</div>'
+  +'<div class="playline" style="margin:8px 0 2px"><span class="pnum">'+p.n+'</span><span class="hd" style="font-size:21px">'+esc(p.name)+'</span></div>';
+  h+='<h3>언제쯤 하는 놀이인가</h3><div style="font-size:14px">'+fmt(p.label)+'</div>'
+  +'<div class="notice" style="font-size:12.5px">CDC 기준은 「평균」이 아니라 「10명 중 7~8명 이상」이에요. 아직 안 해도 2~3명은 안 하는 게 정상입니다.</div>';
+  h+='<h3>준비물</h3><div style="font-size:14.5px;font-weight:600">'+fmt(p.mat)+'</div>';
+  const kw=matKeyword(p.mat); if(kw)h+=shopBtn(kw);
+  h+='<h3>해보기</h3><div style="font-size:15px">'+fmt(p.how)+'</div>';
+  if(st.level<0)h+='<div class="notice" style="font-size:13.5px">지난번에 관심이 없었어요. 오늘은 <b>쉬운 버전</b>부터 ↓</div>';
+  if(st.level>0)h+='<div class="notice mint" style="font-size:13.5px">지난번에 재밌어했어요! 오늘은 <b>심화 버전</b>도 좋아요 ↑</div>';
+  h+='<div class="divider"></div>'
+  +'<div style="font-size:14px"><b>↓ 어려워하면</b><br>'+fmt(p.down)+'</div>'
+  +'<div style="font-size:14px;margin-top:10px"><b>↑ 잘하면</b><br>'+fmt(p.up)+'</div>';
+  h+='<h3>⚠ 주의 · 흔한 착각</h3><div style="font-size:14px">'+fmt(p.warn)+'</div>';
+  if(p.mathEye){h+='<div class="mathbox"><div class="tt">📐 수학의 눈 — '+esc(p.mathEye.seed)+'</div>'
+  +'<div><b>지금:</b> '+esc(p.mathEye.now)+'</div><div style="margin-top:5px"><b>나중에:</b> '+esc(p.mathEye.later)+'</div>'
+  +'<div style="margin-top:5px"><b>봐줄 것:</b> '+esc(p.mathEye.watch)+'</div></div>'}
+  h+='<div class="srcbox">📍 <b>어디서 나온 놀이인가</b><br>'+fmt(p.srcRaw||"")+'</div>';
+  h+='<div style="margin-top:14px"><button class="pri" onclick="go(\'feedback\','+p.n+')">해봤어요 →</button></div></div></div>';
+  return h;
+}
+function vFeedback(){
+  const p=PLAYS.find(x=>x.n===curPlay);
+  let h='<div class="fade"><button class="ghost" onclick="go(\'card\','+p.n+')">← 카드로</button>'
+  +'<div class="card pop"><div class="playline"><span class="pnum">'+p.n+'</span><b style="font-size:17px">'+esc(p.name)+'</b></div>'
+  +'<h3>어땠나요?</h3><div class="row" style="gap:7px">';
+  [["happy","😀","재밌어했어요"],["meh","😐","그냥 그랬어요"],["sad","🙁","관심 없었어요"],["skip","⏭","못 했어요"]].forEach(([k,e,t])=>{
+    h+='<button class="emobtn '+(fb.res===k?"on":"")+'" onclick="fb.res=\''+k+'\';render()"><span class="e">'+e+'</span>'+t+'</button>'});
+  h+='</div><h3>그때 컨디션은? <span style="font-weight:600">(건너뛰어도 돼요)</span></h3><div>';
+  CONDS.forEach(([k,t])=>{h+='<button class="condbtn '+(fb.cond===k?"on":"")+'" onclick="fb.cond=(fb.cond===\''+k+'\'?null:\''+k+'\');render()">'+t+'</button>'});
+  h+='</div><div style="margin-top:14px"><button class="pri" onclick="fbSave()">저장</button></div></div></div>';
+  return h;
+}
+function fbSave(){
+  if(!fb.res){alert("네 가지 중 하나를 골라주세요.");return}
+  const p=PLAYS.find(x=>x.n===curPlay),st=pstate(p.n);
+  playLogs.push({date:todayStr(),n:p.n,res:fb.res,cond:fb.cond});
+  let msg="";const badCond=fb.cond&&fb.cond!=="fine";
+  if(fb.res==="happy"){st.happy++;st.sad=0;st.skip=0;if(st.level<1)st.level++;
+    msg=st.happy>=2?"두 번 연속 재밌어했네요! 다음엔 심화 버전과 함께 다음 월령 놀이도 하나 섞어볼게요.":"좋았네요! 다음엔 조금 어려운 버전을 제안할게요."}
+  else if(fb.res==="meh"){st.happy=0;st.sad=0;st.skip=0;msg="알겠어요. 하루 건너 한 번 더 해보고, 그다음엔 다른 감각 영역으로 바꿔볼게요."}
+  else if(fb.res==="sad"){st.happy=0;
+    if(child.domain===p.dom)domSad++;
+    if(badCond){msg="그때 "+CONDS.find(c=>c[0]===fb.cond)[1].split(" ").slice(1).join(" ")+" 상태였네요. 아이가 못 하는 게 아니라 타이밍 문제일 수 있어요. 난이도는 그대로 두고 컨디션 좋을 때 다시 볼게요."}
+    else{st.sad++;if(st.level>-1)st.level--;
+      msg=st.sad>=3?"세 번 연속 관심이 없었네요. 이 놀이는 2주 쉬고 다른 영역으로 가볼게요. 아이 문제가 아니라 시기 문제일 가능성이 커요.":"알겠어요. 다음엔 쉬운 버전으로 제안할게요."}}
+  else{st.skip++;msg=st.skip>=3?"3일째 못 하셨네요. 부모 시간이 문제일 수 있으니 더 짧은 놀이로 바꿔볼게요. 못 한 날은 잘못이 아니에요.":"괜찮아요. 내일 다시 제안할게요. 아무 판단도 하지 않아요."}
+  save();
+  $("#main").innerHTML='<div class="fade" style="text-align:center;padding-top:30px">'+mascot("happy",96)
+  +'<div class="big hd" style="margin-top:10px">저장했어요!</div>'
+  +'<div style="font-size:14.5px;margin:10px 12px 16px;font-weight:600">'+esc(msg)+'</div>'
+  +'<button class="pri" onclick="go(\'home\')">확인</button></div>';
+  navSync();header();
+}
+
+/* ============ 이유식 탭 ============ */
+function todayFeedCard(){
+  const t=todayStr(), p=feed.plan[t];
+  let h='<div class="card pop"><h3 style="margin-top:0">🍽 오늘</h3>';
+  if(feed.watch){
+    const wd=watchDay();
+    if(wd>=3){
+      h+='<div style="font-size:15px;font-weight:800">🧪 '+esc(feed.watch.name)+' — 3일 지켜봤어요. 어땠나요?</div>'
+      +'<div class="row" style="margin-top:8px"><button class="sec" onclick="watchDone(\'ok\')">😀 괜찮았어요</button><button class="sec" onclick="watchDone(\'warn\')">😟 이상이 있었어요</button></div>';
+    } else {
+      h+='<div><span class="badge watch">🧪 '+esc(feed.watch.name)+' 관찰 '+wd+'/3일</span></div>'
+      +'<div class="small" style="margin-top:5px">두드러기·구토·설사가 없는지만 보면 돼요. 이상하면 아래 버튼.</div>'
+      +'<div style="margin-top:8px"><button class="sec" onclick="watchDone(\'warn\')" style="background:var(--pink);color:#7A3A36">😟 이상이 보여요</button></div>';
+    }
+  } else if(p && p.test && !feed.tried[p.test]){
+    h+='<div style="font-size:15px;font-weight:800">🧪 오늘은 <b>'+esc(p.test)+'</b> 처음 먹여보는 날!</div>'
+    +'<div class="small" style="margin:5px 0">첫 끼에 소량부터. 먹이고 나면 3일 지켜봐요.</div>'
+    +'<div class="row" style="margin-top:8px"><button class="pri" onclick="testFed(\''+p.test.replace(/'/g,"\\'")+'\')">먹였어요</button><button class="sec" onclick="postponeTest()">오늘 말고 내일</button></div>';
+  } else if(p){
+    const bw=feed.style==="bowl";
+    h+='<div style="font-size:14px;font-weight:600">'+(p.meals||[]).map((m,i)=>(i+1)+'끼: '+(bw?'🍲 ':'')+((m.items||[]).join(bw?" + ":" · ")||"—")).join("<br>")+'</div>'
+    +(feed.testPause?'<div class="notice warm" style="font-size:12.5px;margin:8px 0 0">새 재료 테스트는 보류 중 — 소아청소년과와 상의 후 재개하세요. <button class="ghost" onclick="resumeTest()">테스트 재개</button></div>':'');
+  } else {
+    h+='<div class="small">아직 이번 달 식단이 없어요. 아래에서 30초면 만들어져요.</div>';
+  }
+  return h+'</div>';
+}
+function vFood(){
+  const st=curStage(), m=monthAge();
+  let h='<div class="fade"><h2 class="hd">이유식</h2>';
+  if(st.k==="pre"){
+    h+='<div class="hero"><div>'+mascot("normal",74)+'</div><div class="bubble">아직 <b>수유기</b>예요. 이유식은 4~6개월부터(모유수유아는 6개월 권장, WHO). 지금은 준비 기간!</div></div>'
+    +'<div class="card"><h3 style="margin-top:0">미리 알아두면 좋은 것</h3><ul style="font-size:14px;padding-left:18px;font-weight:600;line-height:1.8">'
+    +'<li>첫 이유식은 <b>쌀미음</b>부터 (물:쌀 10:1)</li><li>'+RULE3+'</li><li>6개월 무렵부터 <b>소고기</b>로 철분 채우기</li></ul></div>';
+    h+='<div class="footer-note">'+esc(FOOD_DISCLAIMER)+'</div></div>';
+    return h;
+  }
+  // ① 단계 한 줄
+  h+='<div style="margin-bottom:10px"><span class="chip c2" style="font-size:13.5px;cursor:pointer" onclick="stageOverride()">'+st.nm+' '+st.mo+' ▾</span>'
+  +'<span class="chip c1" style="cursor:pointer" onclick="setMeals()">하루 '+mealsOf(st)+'끼 ▾</span>'
+  +'<span class="chip c1" style="cursor:pointer" onclick="toggleStyle()">'+(feed.style==="bowl"?"🍲 죽이유식":"🍱 토핑이유식")+' ▾</span>'
+  +'<span class="chip">'+st.form+'</span></div>';
+  // ② 오늘
+  h+=todayFeedCard();
+  // ③ 월력 또는 생성 버튼
+  const tried=Object.keys(feed.tried).length;
+  if(!hasPlanAhead()){
+    h+='<div class="card" style="text-align:center">'+mascot("happy",64)
+    +'<div class="big hd">한 달 식단, 30초면 돼요</div>'
+    +'<div class="small" style="margin:6px 0 12px">① 먹어본 음식을 체크하면 → ② 한 달 월력표가 나와요.<br>새 재료 테스트(🧪)는 3~5일 규칙에 맞춰 자동으로 끼워 넣어요.</div>'
+    +'<button class="pri" onclick="go(\'foodSetup\')">'+(tried?('먹어본 음식 고르기 (지금 '+tried+'개)'):'① 먹어본 음식 고르기')+'</button>'
+    +(tried? '<div style="height:8px"></div><button class="sec" onclick="buildMonth(todayStr());render()">② 📅 한 달 식단 만들기</button>':'')
+    +'</div>';
+  } else {
+    if(feed.calView===undefined) feed.calView="list";
+    h+='<div class="card">'
+    +'<div onclick="setGoal()" style="cursor:pointer;font-size:12.5px;font-weight:700;color:var(--sub);margin-bottom:8px">🎯 이달의 목표: '+(feed.goal?'<span style="color:var(--ink)">'+esc(feed.goal)+'</span>':'눌러서 적기 (예: 핑거푸드 만들기)')+'</div>'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+    +'<h3 style="margin:0">📅 이번 달 식단</h3>'
+    +'<div><button class="condbtn '+(feed.calView==="list"?"on":"")+'" style="margin:0 4px 0 0" onclick="feed.calView=\'list\';save();render()">목록</button>'
+    +'<button class="condbtn '+(feed.calView==="cal"?"on":"")+'" style="margin:0" onclick="feed.calView=\'cal\';save();render()">달력</button></div></div>'
+    +(feed.calView==="cal"?monthCal():monthList())+'</div>';
+    if(foodCalSel){ h+=dayDetail(foodCalSel); }
+    h+='<div class="row"><button class="sec" onclick="go(\'foodSetup\')">🍽 먹어본 음식 ('+tried+')</button><button class="sec" onclick="copyPlan()">📋 시트 복사</button></div>'
+    +'<div style="height:8px"></div><button class="sec" onclick="if(confirm(\'오늘부터 한 달 치를 다시 만들까요? 지난 날짜는 그대로 둬요.\')){buildMonth(todayStr());render()}">📅 한 달 다시 만들기</button>';
+    // 장보기
+    const shopItems=weekShopping();
+    if(shopItems.length){
+      h+='<div class="card" style="margin-top:14px"><h3 style="margin-top:0">🛒 이번 주 장보기</h3><div class="small" style="margin-bottom:6px">이번 주 식단에 나오는 재료예요.</div><div>';
+      shopItems.slice(0,10).forEach(it=>{ h+=shopBtn(it.replace(/\(.*\)/,""),it).replace('style="margin-top:10px"','style="display:inline-block;margin:0 6px 8px 0"'); });
+      h+='</div></div>';
+    }
+  }
+  // ⑦⑧ 접힌 사전·금지
+  h+='<details class="card" style="margin-top:14px"><summary style="font-weight:800;cursor:pointer">🧊 큐브 보관 규칙 (한 번 만들어 3일 먹일 때)</summary>';
+  CUBE_RULES.forEach(([a,b2])=>{h+='<div style="font-size:13.5px;margin:7px 0;font-weight:600"><b>'+a+'</b><br><span class="small">'+b2+'</span></div>'});
+  h+='<div class="small" style="margin-top:6px">출처: NHS·FDA·FoodSafety.gov + 국내 통용 관행. 핑거푸드는 보통 8~9개월 무렵(스스로 앉고 집을 수 있을 때, AAP)부터예요.</div></details>';
+  h+='<details class="card"><summary style="font-weight:800;cursor:pointer">📖 재료 사전 자세히 (개별 시작·알레르기 표시)</summary>'+foodDict()+'</details>';
+  h+='<details class="card"><summary style="font-weight:800;cursor:pointer;color:#7A3A36">🚫 이것만은 꼭 (금지 목록)</summary>';
+  NEVER.forEach(([a,b])=>{h+='<div style="font-size:13.5px;margin:7px 0;font-weight:600"><b>'+a+'</b><br><span class="small">'+b+'</span></div>'});
+  h+='</details>';
+  h+='<div class="footer-note">'+esc(FOOD_DISCLAIMER)+'</div></div>';
+  return h;
+}
+let foodCalSel=null;
+function monthList(){
+  const t=todayStr(), AF=allFoods();
+  const catOf=x=>{const f=AF.find(y=>y.n===x);return f?f.cat:"veg"};
+  const icon=x=>{const c=catOf(x);return c==="base"?"🍚":c==="protein"?"🥩":c==="fruit"?"🍎":c==="dairy"?"🧀":"🥦"};
+  const fmtItem=(x,p)=>'<span onclick="event.stopPropagation();go(\'foodDetail\',\''+x.replace(/'/g,"\\'")+'\')" style="text-decoration:underline dotted;text-underline-offset:3px">'+(p.testItem===x?'<b style="color:var(--coral)">🧪'+esc(x)+'</b>':esc(x))+'</span>';
+  let h='<div>', b=-1;
+  for(let d=0; d<28; d++){
+    const ds=addDays(t,d), p=feed.plan[ds];
+    if(!p) continue;
+    if(p.block!==b){
+      b=p.block;
+      let end=d; while(end+1<28 && (feed.plan[addDays(t,end+1)]||{}).block===b) end++;
+      const d1=new Date(ds+"T00:00:00"), d2=new Date(addDays(t,end)+"T00:00:00");
+      const st=p.stock||{b:[],p:[],v:[]};
+      /* 이 블록에서 재료별 등장 끼니 수 = 만들어둘 큐브 개수 (토핑) / 죽 종류별 끼니 수 (죽) */
+      const cnt={}, rc={};
+      for(let dd=d; dd<=end; dd++){ const pp=feed.plan[addDays(t,dd)]; if(!pp)continue;
+        (pp.meals||[]).forEach(mm=>{
+          (mm.items||[]).forEach(x=>{cnt[x]=(cnt[x]||0)+1});
+          const key=JSON.stringify((mm.items||[]).filter(x=>x!==pp.testItem));
+          rc[key]=(rc[key]||0)+1;
+        }); }
+      const withN=x=>esc(x)+(cnt[x]?'<span style="color:var(--sub)">×'+cnt[x]+'</span>':'');
+      const bowlHdr=feed.style==="bowl";
+      h+='<div style="margin:'+(b>0?'14px':'0')+' 0 6px;padding:9px 12px;background:var(--bg);border-radius:14px;border:2px solid '+(p.testItem?'var(--peach)':'var(--line)')+'">';
+      if(bowlHdr){
+        const rlist=Object.entries(rc).filter(([k])=>JSON.parse(k).length).sort((a,b2)=>b2[1]-a[1]);
+        h+='<div style="font-size:11.5px;font-weight:800;color:var(--sub)">🍲 '+(d1.getMonth()+1)+'/'+d1.getDate()+'~'+(d2.getMonth()+1)+'/'+d2.getDate()
+         +' 끓일 죽 (한 번에 끓여 한 끼씩 나눠 담기)'+(p.testItem?' · <span style="color:var(--coral)">🧪 '+esc(p.testItem)+' 새로!</span>':'')+'</div>';
+        rlist.forEach(([k,c],ri)=>{
+          h+='<div style="font-size:13px;font-weight:700;margin-top:2px">죽'+(ri+1)+') '+JSON.parse(k).map(x=>fmtItem(x,p)).join("+")+' <span style="color:var(--sub)">×'+c+'끼</span></div>';
+        });
+        if(p.testItem)h+='<div class="small" style="margin-top:3px">🧪 '+esc(p.testItem)+'는 죽에 섞기 전에 <b>따로 한두 숟갈 먼저</b> 맛보여요 (반응 관찰).</div>';
+      } else {
+        h+='<div style="font-size:11.5px;font-weight:800;color:var(--sub)">🧊 '+(d1.getMonth()+1)+'/'+d1.getDate()+'~'+(d2.getMonth()+1)+'/'+d2.getDate()
+         +' 만들 큐브 (한 번 만들어 소분 · ×숫자=필요한 끼니 수)'+(p.testItem?' · <span style="color:var(--coral)">🧪 '+esc(p.testItem)+' 새로!</span>':'')+'</div>'
+         +'<div style="font-size:13px;font-weight:700;margin-top:2px">'
+         +(st.b.length?'🍚'+st.b.map(withN).join("·"):'')+(st.p.length?'  🥩'+st.p.map(withN).join("·"):'')
+         +(st.v.length?'  🥦'+st.v.map(withN).join("·"):'')+(p.testItem?'  <b style="color:var(--coral)">🧪'+esc(p.testItem)+(cnt[p.testItem]?'×'+cnt[p.testItem]:'')+'</b>':'')+'</div>';
+      }
+      h+=((st.b.length+st.p.length+st.v.length)<5?'<div class="small" style="margin-top:3px">재료를 더 체크할수록 '+(bowlHdr?'죽 종류가 다양해져요':'끼니 조합이 다양해져요')+' → 「먹어본 음식」에서 추가</div>':'')+'</div>';
+    }
+    const dt=new Date(ds+"T00:00:00"), wd=["일","월","화","수","목","금","토"][dt.getDay()];
+    const bowl=feed.style==="bowl";
+    const mealLines=(p.meals||[]).map((m,mi)=>{
+      const line=(m.items||[]).map(x=>icon(x)+fmtItem(x,p)).join(bowl?"+":"·");
+      return '<span style="white-space:nowrap"><b style="color:var(--sub)">'+(mi+1)+'끼</b> '+(bowl?'🍲':'')+line+'</span>';
+    }).join('<span style="color:var(--line)">  │  </span>');
+    h+='<div onclick="foodCalSel=(foodCalSel===\''+ds+'\'?null:\''+ds+'\');render()" '
+     +'style="display:flex;gap:8px;align-items:baseline;padding:5px 8px;cursor:pointer;border-bottom:1.5px solid var(--line);font-size:12.5px'
+     +(d===0?';background:var(--mint);border-radius:10px;border-bottom:none':'')
+     +(ds===foodCalSel?';outline:2px solid var(--peach);border-radius:10px':'')+'">'
+     +'<span style="flex:0 0 56px;font-weight:800;color:'+(dt.getDay()===0?'var(--coral)':'var(--sub)')+'">'
+     +(dt.getMonth()+1)+'/'+dt.getDate()+' '+wd+(d===0?'<br>오늘':'')+'</span>'
+     +'<span style="font-weight:600;line-height:1.8;overflow-x:auto">'+mealLines+'</span></div>';
+  }
+  const bw2=feed.style==="bowl";
+  h+='</div><div class="small" style="margin-top:8px">'
+  +(bw2?'죽은 <b>3일 단위 배치</b> — 1~2가지를 끓여 번갈아 먹여요. 🧪 새 재료는 매일 첫 끼(오전)에 따로 맛보며 3일 지켜봐요.'
+       :'재고(큐브)는 3일 단위(×1=한 끼 분량 큐브 1개), <b>끼니 조합은 매번 달라요.</b> 🧪 새 재료만 매일 첫 끼(오전)에 넣어 3일 연속 지켜봐요.')
+  +' <b>재료 이름을 누르면 조리법·양</b>, 날짜를 누르면 수정.</div>'
+  +(bw2?'<div class="notice" style="font-size:12.5px;margin-top:6px">🍲 <b>죽이유식</b>: 죽을 한 번에 끓여 <b>한 끼 분량씩 나눠 담아요</b>. 냉장은 2~3일 안에, 더 두려면 냉동(해동·재가열 규칙은 아래 보관 규칙과 같아요).<br>📏 <b>'+curStage().nm+' 배합</b> — '+esc(BOWL_FORMULA[curStage().k]||"")+'</div>':'');
+  return h;
+}
+function monthCal(){
+  const t=todayStr();
+  let h='<div class="cal">';
+  ["일","월","화","수","목","금","토"].forEach(d=>h+='<div class="h">'+d+'</div>');
+  const first=new Date(t+"T00:00:00");
+  for(let i=0;i<first.getDay();i++) h+='<div></div>';
+  for(let d=0; d<28; d++){
+    const ds=addDays(t,d), p=feed.plan[ds];
+    const dt=new Date(ds+"T00:00:00");
+    const cls=["d"]; if(ds===t)cls.push("today"); if(ds===foodCalSel)cls.push("sel");
+    const mark = p&&p.test ? '<div style="font-size:9.5px;line-height:1.1;font-weight:800;color:var(--coral)">🧪'+esc(p.test.slice(0,3))+'</div>' : (p?'':'<div style="font-size:9px;color:var(--sub)">—</div>');
+    h+='<div class="'+cls.join(" ")+'" style="padding:4px 0 3px" onclick="foodCalSel=(foodCalSel===\''+ds+'\'?null:\''+ds+'\');render()">'+dt.getDate()+mark+'</div>';
+  }
+  h+='</div><div class="small" style="margin-top:6px">🧪 = 새 재료 처음 먹여보는 날 (그 뒤 3일은 자동으로 새 재료 없음)</div>';
+  return h;
+}
+function dayDetail(ds){
+  const p=feed.plan[ds]; if(!p) return '';
+  const link=x=>'<span onclick="go(\'foodDetail\',\''+x.replace(/'/g,"\\'")+'\')" style="cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px">'+esc(x)+'</span>';
+  const bowl=feed.style==="bowl";
+  let h='<div class="card" style="border-color:var(--peach)"><h3 style="margin-top:0">'+ds+(p.test?' · <span style="color:var(--coral)">🧪 '+esc(p.test)+' 테스트</span>':'')+'</h3>'
+  +'<div style="font-size:14px;font-weight:600;line-height:1.9">'+(p.meals||[]).map((m,i)=>(i+1)+'끼: '+(bowl?'🍲 ':'')+((m.items||[]).map(link).join(bowl?" + ":" · ")||"—")).join("<br>")+'</div>'
+  +'<div class="small" style="margin-top:4px">재료를 누르면 조리법·양이 나와요.'+(bowl?' 🍲는 한 그릇에 섞어 끓인다는 뜻이에요.':'')+'</div>'
+  +'<div class="row" style="margin-top:10px"><button class="sec" onclick="go(\'planDay\',\''+ds+'\')">이 날 수정</button>'
+  +(p.test?'<button class="sec" onclick="removeTest(\''+ds+'\')">테스트 빼기</button>':'')+'</div></div>';
+  return h;
+}
+function removeTest(ds){ const p=feed.plan[ds]; if(!p)return;
+  if(p.meals&&p.meals[0]) p.meals[0].items=(p.meals[0].items||[]).filter(x=>x!==p.test);
+  p.test=null; save(); render(); }
+function foodDict(){
+  const FOODS_VIEW=allFoods();
+  let h='<div class="small" style="margin:8px 0 6px">병원·학회 공개 자료의 <b>예시 목록</b>이에요. 여기 없는 재료도 많아요. '+esc(RULE3)+'</div>';
+  STAGES.filter(x=>x.k!=="pre").forEach(sg=>{
+    const fs=FOODS_VIEW.filter(f=>f.s===sg.k); if(!fs.length)return;
+    h+='<h3>'+sg.nm+' '+sg.mo+'</h3>';
+    fs.forEach(f=>{
+      const t=feed.tried[f.n], watching=feed.watch&&feed.watch.name===f.n;
+      h+='<div class="foodItem" onclick="go(\'foodDetail\',\''+f.n.replace(/'/g,"\\'")+'\')"><span class="nm">'+esc(f.n)+'</span>'
+      +(f.iron?'<span class="badge ok">철분</span>':"")
+      +'<span class="tag">'+(f.al?'<span class="badge al">알레르기 표시 대상</span>':"")
+      +(watching?'<span class="badge watch">관찰 중</span>':t?(t.r==="warn"?'<span class="badge warn">이상 있었음</span>':'<span class="badge ok">먹어봄</span>'):"")+'</span></div>';
+    });
+  });
+  return h;
+}
+/* 먹어본 음식 일괄 선택 */
+function vFoodSetup(){
+  let h='<div class="fade"><button class="ghost" onclick="go(\'food\')">← 이유식으로</button>'
+  +'<h2 class="hd">먹어본 음식을 눌러주세요</h2>'
+  +'<div class="small" style="margin-bottom:10px">이미 먹어서 괜찮았던 것만 켜면 돼요. 식단은 <b>베이스 1 + 단백질 1 + 채소 2</b>로 짜니까, 각 칸에 하나씩은 있으면 좋아요.</div>';
+  const AF=allFoods();
+  Object.keys(FOOD_CATS).forEach(cat=>{
+    const fs=AF.filter(f=>f.cat===cat); if(!fs.length)return;
+    h+='<h3>'+FOOD_CATS[cat]+'</h3><div>';
+    fs.forEach(f=>{
+      const t=feed.tried[f.n]; const warn=t&&t.r==="warn";
+      h+='<button class="condbtn '+(t&&!warn?"on":"")+'" '+(warn?'style="opacity:.5" onclick="toast_(\'이상 반응이 있던 재료예요. 사전 상세에서 관리하세요.\')"':'onclick="setupToggle(\''+f.n.replace(/'/g,"\\'")+'\')"')+'>'+esc(f.n)+(f.custom?" ✎":"")+(warn?" ⚠":"")+'</button>';
+    });
+    h+='</div>';
+  });
+  h+='<div style="margin:10px 0"><button class="ghost" onclick="addCustomFood()">+ 목록에 없는 재료 직접 추가 (브로콜리, 애호박, 비트…)</button></div>';
+  const n=triedOK().length;
+  h+='<div style="margin-top:10px"><button class="pri" onclick="setupDone()">완료 — '+n+'개로 한 달 식단 만들기</button></div>'
+  +'<div class="small" style="margin-top:8px">💡 하나도 안 먹어봤어도 돼요. 그럼 쌀부터 시작하는 표가 나와요.</div></div>';
+  return h;
+}
+function addCustomFood(){
+  const n=prompt("재료 이름 (예: 브로콜리)"); if(!n||!n.trim())return;
+  const nm=n.trim();
+  if(allFoods().some(f=>f.n===nm)){alert("이미 목록에 있어요.");return}
+  const c=prompt("종류를 골라주세요:\n1 베이스(곡물)  2 단백질  3 채소  4 과일  5 유제품","3");
+  const cat=({1:"base",2:"protein",3:"veg",4:"fruit",5:"dairy"})[(c||"3").trim()]||"veg";
+  feed.custom=feed.custom||[]; feed.custom.push({n:nm,cat,s:"mid"});
+  feed.tried[nm]={d:"이전",r:"ok"};   /* 직접 추가 = 이미 먹여본 재료라는 뜻 */
+  save(); render();
+}
+function toast_(m){ alert(m); }
+function setupToggle(n){
+  if(feed.watch&&feed.watch.name===n){ alert("지금 관찰 중인 재료예요."); return; }
+  if(feed.tried[n]){ delete feed.tried[n]; } else { feed.tried[n]={d:"이전",r:"ok"}; }
+  save(); render();
+}
+function setupDone(){ buildMonth(todayStr()); go("food"); }
+/* 테스트 진행 */
+function testFed(n){ feed.watch={name:n,start:todayStr()}; save(); render(); }
+function postponeTest(){ buildMonth(todayStr(),1); render(); }
+function resumeTest(){ feed.testPause=false; buildMonth(addDays(todayStr(),1)); render(); }
+function setMeals(){
+  const v=prompt("하루에 이유식을 몇 끼 먹나요? (1~3)\n비우면 단계 기본값("+stageMeals(curStage())+"끼)으로 돌아가요.",feed.mealsPerDay||"");
+  if(v===null)return;
+  if(v===""){feed.mealsPerDay=null}
+  else{const n=parseInt(v);if(!(n>=1&&n<=3)){alert("1~3 사이로 적어주세요.");return}feed.mealsPerDay=n}
+  buildMonth(todayStr());save();render();
+}
+function setGoal(){
+  const v=prompt("이달의 목표 (달력 맨 위에 붙어요)",feed.goal||"");
+  if(v===null)return; feed.goal=v.trim(); save(); render();
+}
+/* 먹이는 방식: 토핑이유식(큐브 조합) ↔ 죽이유식(죽 1~2가지 배치로 끓이기). 방식이 바뀌면 앞으로의 식단을 그 방식에 맞게 다시 짠다 */
+function toggleStyle(){
+  feed.style = feed.style==="bowl" ? "top" : "bowl";
+  if(hasPlanAhead()) buildMonth(todayStr());
+  save(); render();
+}
+function stageOverride(){
+  const v=prompt("지금 단계: "+curStage().nm+(feed.stageOv?" (직접 설정됨)":" (개월수 자동)")
+    +"\n\n아이마다 진행이 달라서 단계를 직접 정할 수 있어요:\n1 초기 · 2 중기 · 3 후기 · 4 완료기\n\n숫자를 입력하세요. 비우고 확인하면 개월수 자동으로 돌아가요.","");
+  if(v===null)return;
+  const t=v.trim();
+  if(t===""){feed.stageOv=null}
+  else{
+    const map={"1":"early","2":"mid","3":"late","4":"done"};
+    const k=map[t]||(STAGES.some(x=>x.k===t)?t:null);
+    if(!k){alert("1~4 숫자로 적어주세요.");return}
+    feed.stageOv=k;
+  }
+  buildMonth(todayStr()); save(); render();
+}
+function copyPlan(){
+  const rows=[["날짜","테스트","끼니"]];
+  for(let d=0;d<28;d++){ const ds=addDays(todayStr(),d), p=feed.plan[ds]; if(!p)continue;
+    rows.push([ds, p.test?("🧪"+p.test):"", (p.meals||[]).map(m=>(m.items||[]).join("+")||"-").join(" / ")]); }
+  const txt=rows.map(r=>r.join("\t")).join("\n");
+  const done=()=>alert("복사했어요. 시트에 붙여넣으세요.");
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,()=>fallbackCopy(txt,done));
+  else fallbackCopy(txt,done);
+}
+function vPlanDay(){
+  const ds=planDay, st=curStage(), n=mealsOf(st);
+  if(!feed.plan[ds]) feed.plan[ds]={meals:[],test:null};
+  const P=feed.plan[ds];
+  while((P.meals||[]).length<n)P.meals.push({items:[]});
+  const ok=triedOK();
+  let h='<div class="fade"><button class="ghost" onclick="go(\'food\')">← 이유식으로</button>'
+  +'<h2 class="hd">'+ds+' 식단</h2><div class="small" style="margin-bottom:8px">'+st.nm+' · '+st.form
+  +(P.test?' · <b style="color:var(--coral)">🧪 '+esc(P.test)+' 테스트일</b>':'')+'</div>';
+  P.meals.forEach((meal,mi)=>{
+    h+='<div class="card"><h3 style="margin-top:0">'+(mi+1)+'번째 끼니</h3><div>';
+    const opts=[...new Set([...(P.test&&mi===0?[P.test]:[]),...ok])];
+    opts.forEach(f=>{const on=(meal.items||[]).includes(f);
+      h+='<button class="condbtn '+(on?"on":"")+'" onclick="toggleMeal(\''+ds+'\','+mi+',\''+f.replace(/'/g,"\\'")+'\')">'+esc(f)+(f===P.test?" 🧪":"")+'</button>'});
+    if(!opts.length)h+='<div class="small">먹어본 재료가 없어요. 「먹어본 음식 고르기」부터.</div>';
+    h+='</div></div>';
+  });
+  h+='<div class="small">🧪 테스트 재료 말고는 <b>먹어본 재료</b>만 나와요. 새 재료 추가는 월력이 3~5일 규칙으로 잡아줘요.</div></div>';
+  return h;
+}
+function toggleMeal(ds,mi,f){
+  const meal=feed.plan[ds].meals[mi];
+  meal.items=meal.items||[];
+  const i=meal.items.indexOf(f);
+  if(i>=0)meal.items.splice(i,1);else if(meal.items.length<4)meal.items.push(f);
+  save();render();
+}
+function vFoodDetail(){
+  const f=allFoods().find(x=>x.n===foodSel);if(!f)return"<div>없는 재료입니다.</div>";
+  const t=feed.tried[f.n], watching=feed.watch&&feed.watch.name===f.n;
+  const st=STAGES.find(s=>s.k===f.s), cs=curStage();
+  /* 조리 안내는 「지금 아기 단계」 기준. 재료 시작 시기가 더 늦으면 그 단계 기준으로 */
+  const useSt=((STAGE_ORDER[f.s]||0)>(STAGE_ORDER[cs.k]||0))?st:cs;
+  let h='<div class="fade"><button class="ghost" onclick="go(\'food\')">← 이유식으로</button>'
+  +'<div class="card pop"><div class="playline"><span class="hd" style="font-size:22px">'+esc(f.n)+'</span>'
+  +'<span class="chip c2">'+st.nm+' '+st.mo+'~</span>'+(f.iron?'<span class="chip c2">철분 공급원</span>':"")+'</div>';
+  if((STAGE_ORDER[f.s]||0)>(STAGE_ORDER[cs.k]||0))h+='<div class="notice warm" style="font-size:13px">병원 예시 목록 기준으로 <b>'+st.nm+'('+st.mo+')</b>부터 나오는 재료예요. 지금은 '+cs.nm+' — 서두르지 않아도 돼요.</div>';
+  if(f.tip)h+='<div class="notice" style="font-size:13px">'+esc(f.tip)+'</div>';
+  if(f.al)h+='<div class="notice" style="font-size:13px">「'+f.al+'」 — 식품 알레르기 표시 대상이에요. 처음 줄 때 3~5일 관찰을 꼭 지켜주세요.</div>';
+  if(f.early)h+='<div class="notice mint" style="font-size:13px">'+esc(f.early)+'</div>';
+  if(f.chok)h+='<div class="notice warm" style="font-size:13px">질식 주의! 반드시 잘게(1.3cm 이하) 잘라주세요.</div>';
+  if(f.note12)h+='<div class="notice" style="font-size:13px">'+esc(f.note12)+'</div>';
+  /* 🍳 조리·분량 — C-2 */
+  const prep=FOOD_PREP[f.n]||CAT_PREP[f.cat]||"", sp=STAGE_PREP[useSt.k], cubeable=(f.cat==="base"||f.cat==="protein"||f.cat==="veg");
+  h+='<div style="background:var(--bg);border-radius:14px;padding:11px 13px;margin-top:10px">'
+  +'<div style="font-size:13px;font-weight:800;color:var(--sub)">🍳 이렇게 준비해요 · <b>'+useSt.nm+' 기준</b></div>'
+  +(prep?'<div style="font-size:14px;font-weight:700;margin-top:5px;line-height:1.65">'+esc(prep)+'</div>':'')
+  +(sp?'<div style="font-size:13.5px;font-weight:600;margin-top:8px">🔍 <b>굵기·형태</b> — '+esc(sp.grain)+'</div>'
+     +'<div style="font-size:13.5px;font-weight:600;margin-top:4px">🥄 <b>한 끼 양</b> — '+esc(sp.amt)+'</div>':'')
+  +(useSt.meals?'<div style="font-size:13.5px;font-weight:600;margin-top:4px">🍽 <b>횟수</b> — '+esc(useSt.meals)+(useSt.milk?' · 🍼 '+esc(useSt.milk):'')+'</div>':'')
+  +(feed.style==="bowl"
+    ?'<div style="font-size:13.5px;font-weight:600;margin-top:8px">🍲 <b>죽이유식</b> — 큐브 없이 재료를 다져 죽에 바로 넣어 끓여요. '+esc(BOWL_FORMULA[useSt.k]||"")+'</div>'
+    :(cubeable?'<div style="font-size:13.5px;font-weight:600;margin-top:8px">🧊 <b>큐브</b> — 여러 끼 분량을 한 번에 익혀 얼음틀에 소분 냉동하면 그게 3일 재고예요.</div>':''))
+  +'<div class="small" style="margin-top:8px">일반적인 준비 방법 안내예요. 무르기·양은 아이에 맞게 조절하고, 진행이 걱정되면 소아청소년과와 상의하세요.</div></div>';
+  if(cubeable){
+    h+='<details style="margin-top:8px"><summary style="font-size:13px;font-weight:800;cursor:pointer;color:var(--sub)">🧊 보관 규칙 펼치기 (죽·큐브 공통)</summary>';
+    CUBE_RULES.forEach(([a,b2])=>{h+='<div style="font-size:13px;margin:6px 0;font-weight:600"><b>'+a+'</b> <span class="small">'+b2+'</span></div>'});
+    h+='</details>';
+  }
+  if(watching){const wd=watchDay();
+    h+='<div class="notice" style="font-size:14px">지금 관찰 '+Math.min(wd,3)+'/3일째예요.</div>'
+    +(wd>=3?'<div class="row"><button class="sec" onclick="watchDone(\'ok\')">😀 괜찮았어요</button><button class="sec" onclick="watchDone(\'warn\')">😟 이상이 있었어요</button></div>':'<button class="ghost" onclick="watchCancel()">관찰 취소</button>');
+  } else if(t){
+    h+='<div style="font-size:14px;font-weight:700;margin-top:8px">'+(t.r==="warn"?"😟 "+t.d+"에 이상 반응이 있었어요. 다시 시도하기 전에 소아청소년과와 상의하세요.":"😀 "+t.d+"부터 먹어봤어요.")+'</div>';
+    if(t.r==="warn")h+='<button class="ghost" onclick="retryFood(\''+f.n.replace(/'/g,"\\'")+'\')">의사와 상의했어요, 다시 시도</button>';
+  } else {
+    h+='<div class="small" style="margin:8px 0">'+esc(RULE3)+'</div>';
+    if(feed.watch)h+='<div class="notice warm" style="font-size:13px">지금 「'+esc(feed.watch.name)+'」 관찰 중이에요. 새 재료는 한 번에 하나 — 끝나고 시작해요.</div>';
+    else h+='<button class="pri" onclick="watchStart(\''+f.n.replace(/'/g,"\\'")+'\')">오늘부터 시작 (3일 관찰)</button><div class="small" style="margin-top:6px">💡 보통은 월력표가 알아서 잡아줘요. 순서를 직접 정하고 싶을 때만 여기서 시작하세요.</div>';
+  }
+  h+=shopBtn(f.n.replace(/\(.*\)/,""),f.n+" 이유식 재료");
+  h+='</div></div>';
+  return h;
+}
+function watchStart(n){feed.watch={name:n,start:todayStr()};buildMonth(todayStr());save();render()}
+function watchCancel(){feed.watch=null;save();render()}
+function watchDone(r){
+  const n=feed.watch.name;
+  feed.tried[n]={d:feed.watch.start,r:r};feed.watch=null;
+  if(r==="warn"){ feed.testPause=true; }
+  buildMonth(addDays(todayStr(),1));  /* 내일부터 월력 자동 재조정 (통과 재료 편입 / 이상 재료 제외) */
+  save();
+  if(r==="warn"){
+    $("#main").innerHTML='<div class="fade" style="text-align:center;padding-top:30px">'+mascot("oh",96)
+    +'<div class="big hd" style="margin-top:10px">기록해뒀어요</div>'
+    +'<div style="font-size:14.5px;margin:10px 16px;font-weight:600;text-align:left">두드러기·구토·설사·호흡 이상이 있었다면 <b>소아청소년과와 상담</b>하세요. 증상이 지금 심하면 바로 병원으로.<br><br>내일부터의 월력표에서 이 재료를 뺐고, <b>새 재료 테스트도 보류</b>해뒀어요. 의사와 상의 후 이유식 탭에서 재개하면 됩니다.<br><br>이 기록은 진료실용 요약에 들어가요.</div>'
+    +'<button class="pri" onclick="go(\'food\')">확인</button></div>';navSync();header();
+  } else {
+    $("#main").innerHTML='<div class="fade" style="text-align:center;padding-top:30px">'+mascot("happy",96)
+    +'<div class="big hd" style="margin-top:10px">'+esc(n)+' 통과!</div>'
+    +'<div style="font-size:14.5px;margin:10px 16px;font-weight:600">이제 식단에 넣을 수 있어요. 다음 새 재료도 하나씩 가요.</div>'
+    +'<button class="pri" onclick="go(\'food\')">확인</button></div>';navSync();header();
+  }
+}
+function retryFood(n){delete feed.tried[n];save();render()}
+
+/* ============ 기록 탭 ============ */
+function vLog(){
+  let h='<div class="fade"><div class="row" style="margin-bottom:10px">'
+  +'<button class="'+(logMode==="write"?"pri":"sec")+'" onclick="logMode=\'write\';render()">오늘 쓰기</button>'
+  +'<button class="'+(logMode==="cal"?"pri":"sec")+'" onclick="logMode=\'cal\';render()">달력 · 검색</button></div>';
+  if(logMode==="cal")return h+vCalInner()+"</div>";
+  const t=todayStr();
+  h+='<h2 class="hd">'+t+' · '+ageText()+'</h2>'
+  +'<div class="card">'
+  +'<label class="f">오늘 뭘 해줬나요?</label><textarea id="lgIn" placeholder="예: 거실 매트에 공 세 개를 놓아둠"></textarea>'
+  +'<label class="f">아이는 어떻게 했나요?</label><textarea id="lgOut" placeholder="예: 제일 큰 공만 계속 만짐"></textarea>'
+  +'<label class="f">생각나는 것 (안 써도 돼요)</label><textarea id="lgNote" placeholder="예: 크기 선호인가? 내일 순서를 바꿔봐야지"></textarea>'
+  +'<label class="f">영역 (해당되는 것 모두)</label><div id="lgDoms">';
+  DOMS.forEach(d=>{h+='<button class="condbtn" data-d="'+d+'" onclick="this.classList.toggle(\'on\')">'+DOM_ICON[d]+' '+DOM_LABEL[d]+'</button>'});
+  h+='</div><div style="margin-top:12px"><button class="pri" onclick="logSave()">저장</button></div>'
+  +'<div class="small" style="margin-top:10px">💡 자극 → 반응 → 생각. 이 세 칸이 이 앱의 심장이에요. 나눠 적는 순간 부모는 관찰자가 됩니다.</div></div>';
+  const todays=logs.filter(l=>l.date===t);
+  if(todays.length){h+='<h3>오늘 기록 '+todays.length+'건</h3>';todays.forEach(l=>{h+=logItem(l)});
+    h+='<button class="sec" onclick="copyTSV(\''+t+'\')">📋 구글 시트용 복사</button>';}
+  return h+"</div>";
+}
+function logItem(l){
+  return '<div class="card" style="padding:12px 14px"><div class="logitem" style="margin:0">'
+  +'<div class="dt">'+l.date+(l.doms&&l.doms.length?' · '+l.doms.map(d=>DOM_ICON[d]).join(""):"")+'</div>'
+  +'<div style="font-size:14px"><b>자극:</b> '+esc(l.input||"—")+'</div>'
+  +'<div style="font-size:14px"><b>반응:</b> '+esc(l.output||"—")+'</div>'
+  +(l.note?'<div style="font-size:13.5px;color:var(--sub)"><b>노트:</b> '+esc(l.note)+'</div>':"")+'</div></div>';
+}
+function logSave(){
+  const i=$("#lgIn").value.trim(),o=$("#lgOut").value.trim(),nt=$("#lgNote").value.trim();
+  if(!i&&!o&&!nt){alert("한 칸이라도 적어주세요.");return}
+  const doms=[...document.querySelectorAll("#lgDoms .condbtn.on")].map(b=>b.dataset.d);
+  logs.push({date:todayStr(),input:i,output:o,note:nt,doms});save();render();
+}
+function copyTSV(date){
+  const rows=logs.filter(l=>l.date===date).map(l=>
+    [l.date,"D"+dayNum(l.date),(l.doms||[]).join("/"),l.input,l.output,l.note].map(x=>(x||"").replace(/\t/g," ").replace(/\n/g," ")).join("\t")).join("\n");
+  const done=()=>alert("복사했어요. 구글 시트에 붙여넣으세요.");
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(rows).then(done,()=>fallbackCopy(rows,done));
+  else fallbackCopy(rows,done);
+}
+function fallbackCopy(t,cb){const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);
+ ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);cb()}
+
+/* ============ 달력 ============ */
+function vCalInner(){
+  if(!calMonth){const n=new Date();calMonth={y:n.getFullYear(),m:n.getMonth()}}
+  const{y,m}=calMonth;
+  const first=new Date(y,m,1),start=first.getDay(),days=new Date(y,m+1,0).getDate();
+  const logDates=new Set(logs.map(l=>l.date).concat(playLogs.map(l=>l.date)));
+  let h='<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'
+  +'<button class="ghost" onclick="calShift(-1)">◀</button><b class="hd" style="font-size:16px">'+y+'년 '+(m+1)+'월</b><button class="ghost" onclick="calShift(1)">▶</button></div><div class="cal">';
+  ["일","월","화","수","목","금","토"].forEach(d=>h+='<div class="h">'+d+'</div>');
+  for(let i=0;i<start;i++)h+='<div></div>';
+  for(let d=1;d<=days;d++){
+    const ds=y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+    const cls=["d"];if(logDates.has(ds))cls.push("dot");if(ds===todayStr())cls.push("today");if(ds===calSel)cls.push("sel");
+    h+='<div class="'+cls.join(" ")+'" onclick="calSel=\''+ds+'\';render()">'+d+'</div>'}
+  h+='</div><div class="small" style="margin-top:8px">● 기록 있음 — 빈 날엔 아무 표시도 안 해요. 「놓친 날」 같은 건 없어요.</div></div>';
+  h+='<div class="card"><label class="f" style="margin-top:0">🔍 기록 검색</label><input type="text" id="q" placeholder="예: 뒤집기" oninput="renderSearch(this.value)"><div id="qRes"></div></div>';
+  if(calSel){
+    const dl=logs.filter(l=>l.date===calSel),pl=playLogs.filter(l=>l.date===calSel);
+    h+='<h3>'+calSel+'</h3>';
+    if(!dl.length&&!pl.length)h+='<div class="sub">기록이 없어요.</div>';
+    dl.forEach(l=>h+=logItem(l));
+    pl.forEach(l=>{const p=PLAYS.find(x=>x.n===l.n);
+      h+='<div class="card" style="padding:11px 14px;font-size:14px">'+({happy:"😀",meh:"😐",sad:"🙁",skip:"⏭"})[l.res]+' <b>'+esc(p?p.name:l.n)+'</b>'
+      +(l.cond?' <span class="chip">'+CONDS.find(c=>c[0]===l.cond)[1]+'</span>':"")+'</div>'});
+    if(dl.length)h+='<button class="sec" onclick="copyTSV(\''+calSel+'\')">📋 이 날짜 시트용 복사</button>';
+  }
+  return h;
+}
+function calShift(d){calMonth.m+=d;if(calMonth.m<0){calMonth.m=11;calMonth.y--}if(calMonth.m>11){calMonth.m=0;calMonth.y++}calSel=null;render()}
+function renderSearch(q){
+  const box=$("#qRes");if(!q){box.innerHTML="";return}
+  const hits=logs.filter(l=>(l.input+" "+l.output+" "+(l.note||"")).includes(q)).slice(-8).reverse();
+  box.innerHTML=hits.length?hits.map(l=>'<div class="logitem"><div class="dt">'+l.date+'</div><div style="font-size:13.5px">'+esc((l.input+" / "+l.output).slice(0,80))+'…</div></div>').join("")
+   :'<div class="small" style="margin-top:8px">검색 결과가 없어요.</div>';
+}
+
+/* ============ 지도 ============ */
+function vMap(){
+  let h='<div class="fade"><h2 class="hd">우리 아이 지도</h2>'
+  +'<div class="small" style="margin-bottom:10px">📖 기록 '+logs.length+'건 · 놀이 '+playLogs.length+'회 · 이유식 재료 '+Object.keys(feed.tried).length+'개</div>';
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">내가 보고 있는 것</h2>';
+  const tagged=logs.filter(l=>l.doms&&l.doms.length);
+  const cnt={};DOMS.forEach(d=>cnt[d]=0);tagged.forEach(l=>l.doms.forEach(d=>{if(d in cnt)cnt[d]++}));
+  const tot=Object.values(cnt).reduce((a,b)=>a+b,0);
+  if(tot===0){
+    h+='<div class="sub">영역 태그가 붙은 기록이 아직 없어요. 쌓이면 여기에 <b>당신이 무엇을 기록하는지</b>가 나타나요.</div>'
+    +'<div class="divider"></div><div class="small">예시 — 이 앱의 바탕이 된 한 아빠의 218일은 이렇게 쏠려 있었어요:</div>';
+    [["인지",37.2],["신체",23.4],["사회정서",17.3],["언어",13.0]].forEach(([d,v])=>{
+      h+='<div class="bar-row"><div class="lab">'+DOM_ICON[d]+' '+d+'</div><div class="track"><div class="fill" style="width:'+v+'%;opacity:.45"></div></div><div class="val">'+v+'%</div></div>'});
+    h+='<div class="small" style="margin-top:6px">아이가 인지에 쏠린 게 아니라 <b>아빠가 인지를 본 것</b>이었어요.</div>';
+  }else{
+    DOMS.forEach(d=>{const v=Math.round(cnt[d]/tot*100);
+      h+='<div class="bar-row"><div class="lab">'+DOM_ICON[d]+' '+d+'</div><div class="track"><div class="fill" style="width:'+v+'%"></div></div><div class="val">'+v+'%</div></div>'});
+    h+='<div class="notice" style="font-size:13px">아이의 발달이 아니라 <b>당신이 무엇을 보는지</b>예요. 낮은 영역은 아이가 약한 게 아니라 덜 적으신 것일 수 있어요.</div>';
+    const min=DOMS.reduce((a,b)=>cnt[a]<=cnt[b]?a:b);
+    h+='<button class="sec" onclick="go(\'browse\',\''+min+'\')">'+DOM_ICON[min]+' '+DOM_LABEL[min]+' 놀이 보기</button>';
+  }
+  h+='</div>';
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">이 아이가 한 일</h2><div class="small" style="margin-bottom:4px">날짜만 적어요. 판정하지 않아요. 탭하면 참고 범위가 열려요.</div>';
+  MILES.forEach(mi=>{const done=miles[mi.k];
+    h+='<div class="mile" onclick="mileTap(\''+mi.k+'\')"><div><div class="nm">'+esc(mi.nm)+'</div>'
+    +'<div class="st" id="mi_'+mi.k+'" style="display:none">'+esc(mi.line)+'<br><span style="opacity:.7">'+esc(mi.cite)+'</span></div></div>'
+    +'<div class="st">'+(done?"✓ "+done:"아직")+'</div></div>'});
+  h+='<div class="small" style="margin-top:8px">한 아이 안에서도 영역마다 빠르고 늦은 게 갈려요. <b>둘 다 정상이에요.</b></div></div>';
+  // 접종·검진 일정
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">💉 접종·검진 일정</h2><div class="small" style="margin-bottom:6px">시기가 지난 항목은 흐리게만 표시해요 — 「놓쳤다」는 표시는 하지 않아요. 따라잡기 접종은 병원과 상의하면 됩니다.</div>';
+  const mNow=monthAge();
+  SCHED.forEach(r=>{
+    const[a,b,lab,nm,k]=r;
+    const stt = mNow>=b ? "past" : (mNow>=a ? "now" : (a-mNow<=1 ? "soon" : "later"));
+    const badge = stt==="now"?'<span class="badge ok">지금 시기</span>':stt==="soon"?'<span class="badge watch">곧</span>':"";
+    h+='<div style="display:flex;gap:8px;align-items:baseline;padding:7px 0;border-bottom:2px solid var(--line);'+(stt==="past"?"opacity:.45;":"")+'">'
+     +'<span style="flex:0 0 86px;font-size:12px;font-weight:800;color:var(--sub)">'+(k==="c"?"🩺 ":"💉 ")+lab+'</span>'
+     +'<span style="font-size:13.5px;font-weight:600;flex:1">'+nm+'</span>'+badge+'</div>';
+  });
+  h+='<div class="small" style="margin-top:8px">'+esc(SCHED_SRC)+'</div>'
+   +'<button class="ghost" onclick="addAppt()">+ 예약일을 등록하면 홈에 D-day로 떠요</button></div>';
+  // 성장 기록
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">키 · 몸무게 · 머리둘레</h2>';
+  if(growth.length){growth.slice(-5).reverse().forEach(g=>{
+    h+='<div style="font-size:14px;font-weight:600;padding:5px 0;border-bottom:2px solid var(--line)">'+g.date+' — '
+    +(g.h?g.h+"cm ":"")+(g.w?g.w+"kg ":"")+(g.hd?"머리 "+g.hd+"cm":"")+'</div>'})}
+  else h+='<div class="small">검진 다녀올 때마다 적어두면 진료실용 요약에 같이 나가요.</div>';
+  h+='<button class="ghost" onclick="addGrowth()">+ 기록 추가</button></div>';
+  // 병원 일정
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">병원 · 검진 일정</h2>';
+  appts.sort((a,b)=>a.date<b.date?-1:1).forEach(a=>{
+    h+='<div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600;padding:5px 0"><span>'+esc(a.label)+'</span><span>'+a.date+' <button class="ghost" onclick="delAppt(\''+a.date+'\')">지움</button></span></div>'});
+  h+='<button class="ghost" onclick="addAppt()">+ 일정 추가</button>'
+  +'<div class="small">다음 일정이 홈 화면에 D-day로 떠요.</div></div>';
+  h+='<button class="pri" onclick="go(\'summary\')">📄 진료실용 요약 만들기</button>';
+  return h+"</div>";
+}
+function mileTap(k){
+  const el=$("#mi_"+k);
+  if(el&&el.style.display==="none"){el.style.display="block";
+    setTimeout(()=>{const d=prompt("한 날짜를 기록할까요? (예: 2026-08-01)\n비워두면 상세만 봅니다.",miles[k]||"");
+      if(d===null)return;
+      if(d===""){delete miles[k]}else if(/^\d{4}-\d{2}-\d{2}$/.test(d)){miles[k]=d}else{alert("YYYY-MM-DD 형식으로 적어주세요.");return}
+      save();render()},50)}
+  else if(el)el.style.display="none";
+}
+function addGrowth(){
+  const h=prompt("키(cm) — 모르면 비워두세요");if(h===null)return;
+  const w=prompt("몸무게(kg) — 모르면 비워두세요");if(w===null)return;
+  const hd=prompt("머리둘레(cm) — 모르면 비워두세요");if(hd===null)return;
+  if(!h&&!w&&!hd)return;
+  growth.push({date:todayStr(),h:h||"",w:w||"",hd:hd||""});save();render();
+}
+function addAppt(){
+  const label=prompt("무슨 일정인가요? (예: 영유아검진 2차, BCG 접종)");if(!label)return;
+  const d=prompt("날짜 (YYYY-MM-DD)");if(!d||!/^\d{4}-\d{2}-\d{2}$/.test(d)){if(d!==null)alert("YYYY-MM-DD 형식으로 적어주세요.");return}
+  appts.push({label,date:d});save();render();
+}
+
+/* ============ 진료실용 요약 ============ */
+function vSummary(){
+  return '<div class="fade"><button class="ghost" onclick="go(\'map\')">← 지도로</button>'
+  +'<div class="card pop"><h2 class="hd">진료실용 요약</h2>'
+  +'<label class="f">걱정되는 게 있으신가요?</label><textarea id="smWorry" placeholder="예: 옹알이가 3주 전부터 줄어든 것 같아요">'+esc(store.get("worry",""))+'</textarea>'
+  +'<div class="notice" style="font-size:13px">진단이 아니에요. 의사 선생님께 <b>설명할 시간을 줄여주는</b> 용도예요. 최근 8주 기록·이정표 날짜·성장 기록·이유식 이상 반응이 함께 인쇄돼요.</div>'
+  +'<button class="pri" onclick="printSummary()">인쇄 / PDF로 저장</button>'
+  +'<div class="small" style="margin-top:8px">인쇄 화면에서 「PDF로 저장」을 고르면 파일이 됩니다.</div></div></div>';
+}
+function printSummary(){
+  const w=$("#smWorry").value.trim();store.set("worry",w);
+  const cut=new Date();cut.setDate(cut.getDate()-56);
+  const recent=logs.filter(l=>new Date(l.date)>=cut);
+  const pc={happy:0,meh:0,sad:0,skip:0};playLogs.forEach(l=>pc[l.res]++);
+  let h='<h1>발달 관찰 기록 요약</h1>'
+  +'<p>생년월일: '+child.birth+(child.due?' (예정일 '+child.due+', 교정연령 적용)':"")+' · 현재 '+ageText()+'<br>작성일: '+todayStr()+' · 본 요약은 보호자의 가정 관찰 기록이며 진단 자료가 아닙니다.</p>';
+  if(w)h+='<h2>보호자가 걱정하는 것</h2><p>'+esc(w)+'</p>';
+  h+='<h2>이정표 (보호자 기록)</h2><table><tr><th>항목</th><th>날짜</th><th>참고</th></tr>';
+  MILES.forEach(mi=>{h+='<tr><td>'+esc(mi.nm)+'</td><td>'+(miles[mi.k]||"—")+'</td><td>'+esc(mi.line)+'</td></tr>'});
+  h+='</table>';
+  if(growth.length){h+='<h2>성장 기록</h2><table><tr><th>날짜</th><th>키</th><th>몸무게</th><th>머리둘레</th></tr>';
+    growth.forEach(g=>{h+='<tr><td>'+g.date+'</td><td>'+(g.h||"—")+'</td><td>'+(g.w||"—")+'</td><td>'+(g.hd||"—")+'</td></tr>'});h+='</table>'}
+  const warns=Object.keys(feed.tried).filter(n=>feed.tried[n].r==="warn");
+  if(Object.keys(feed.tried).length){h+='<h2>이유식</h2><p>먹어본 재료: '+Object.keys(feed.tried).join(", ")+'</p>';
+    if(warns.length)h+='<p><b>이상 반응이 있었던 재료: '+warns.map(n=>n+"("+feed.tried[n].d+")").join(", ")+'</b></p>'}
+  h+='<h2>최근 8주 관찰 기록 ('+recent.length+'건)</h2><table><tr><th>날짜</th><th>자극(해준 것)</th><th>반응(아이가 한 것)</th><th>비고</th></tr>';
+  recent.slice(-40).forEach(l=>{h+='<tr><td>'+l.date+'</td><td>'+esc(l.input)+'</td><td>'+esc(l.output)+'</td><td>'+esc(l.note||"")+'</td></tr>'});
+  h+='</table><p>놀이 반응 누계: 재밌어함 '+pc.happy+' · 보통 '+pc.meh+' · 관심 없음 '+pc.sad+' · 미수행 '+pc.skip+'</p>'
+  +'<p style="font-size:10px">'+esc(DISCLAIMER)+' '+esc(FOOD_DISCLAIMER)+'</p>';
+  $("#printArea").innerHTML=h;window.print();
+}
+
+/* ============ 설정 ============ */
+function vSettings(){
+  let h='<div class="fade"><button class="ghost" onclick="go(\'home\')">← 돌아가기</button>'
+  +'<div class="card"><h2 class="hd" onclick="adminTap()" style="cursor:default">설정</h2>'
+  +'<label class="f">아이 이름 (표시용)</label><input type="text" id="stName" value="'+esc(child.name||"")+'">'
+  +'<label class="f">생년월일</label><input type="date" id="stBirth" value="'+child.birth+'">'
+  +'<label class="f">예정일 (이르게 태어난 경우만)</label><input type="date" id="stDue" value="'+(child.due||"")+'">'
+  +'<label class="f">지금 보고 있는 영역</label><select id="stDom">';
+  DOMS.forEach(d=>{h+='<option value="'+d+'" '+(child.domain===d?"selected":"")+'>'+DOM_ICON[d]+' '+DOM_LABEL[d]+'</option>'});
+  h+='<option value="none" '+(child.domain==="none"?"selected":"")+'>정하지 않음 (골고루)</option></select>'
+  +'<div style="margin-top:12px"><button class="pri" onclick="stSave()">저장</button></div></div>';
+  /* 🛒 쇼핑 링크 등록은 운영자(개발자) 전용 — 「설정」 제목을 5번 연타하면 열려요. 일반 사용자에게는 안 보임 */
+  if(store.get("admin")){
+    h+='<div class="card" style="border-color:var(--peach)"><h2 class="hd" style="font-size:16px">🛒 쇼핑 링크 <span class="chip" style="font-size:11px">운영자 전용</span></h2>'
+    +'<div class="small" style="margin-bottom:8px">놀이 준비물·이유식 재료 옆의 「찾아보기」 버튼은 기본으로 쿠팡 <b>검색</b>을 열어요(수익 없음). 파트너스에서 만든 링크를 등록하면 그 링크로 열려요. 이 칸은 「설정」 제목을 5번 눌러야 보여요.</div>'
+    +'<label class="f">파트너스 링크 등록 (한 줄에 「키워드=링크」)</label>'
+    +'<textarea id="stPartner" placeholder="흑백 초점책=https://link.coupang.com/a/xxxx&#10;소고기=https://link.coupang.com/a/yyyy" style="min-height:90px">'+esc(Object.entries(shop.partner||{}).map(([k,v])=>k+"="+v).join("\n"))+'</textarea>'
+    +'<div class="small" style="margin:6px 0">파트너스 링크가 열리는 화면에는 「쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다」 문구가 자동으로 붙어요 (공정위 의무 — 이건 모든 사용자에게 보여요).</div>'
+    +'<button class="sec" onclick="savePartner()">쇼핑 링크 저장</button></div>';
+  }
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">데이터</h2>'
+  +'<div class="small" style="margin-bottom:10px">'+(store.ok?"기록은 <b>이 브라우저</b>에 저장돼요. 다른 기기와 자동 동기화되지 않으니 가끔 내보내기로 백업하세요.":"⚠ 지금은 <b>임시 모드</b>예요 — 화면을 닫으면 기록이 사라져요. 파일을 저장해 휴대폰 브라우저(Chrome·Safari)로 직접 열면 저장이 켜져요.")+'</div>'
+  +'<button class="sec" onclick="exportData()">⬇ 기록 내보내기 (백업)</button><div style="height:8px"></div>'
+  +'<button class="sec" onclick="$(\'#impFile\').click()">⬆ 백업 불러오기</button>'
+  +'<input type="file" id="impFile" accept=".json" style="display:none" onchange="importData(this)">'
+  +'<div style="height:8px"></div><button class="sec" style="color:#7A3A36;background:var(--pink);box-shadow:0 4px 0 rgba(190,90,80,.3)" onclick="resetAll()">전체 초기화</button></div>';
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">이 앱에 대해</h2><div style="font-size:13.5px;line-height:1.8;font-weight:600">'
+  +'놀이 66개는 전부 한 아기(2025년 12월생)의 <b>231행 관찰 기록</b>에서 나왔어요. 카드마다 붙은 📍가 출처예요.<br><br>'
+  +'이 앱이 하지 않는 것: 발달 점수, 또래 비교, 연속 기록 배지, 밀린 알림, 아기에게 보여주는 화면.<br><br>'
+  +esc(DISCLAIMER)+'<br><br>'+esc(FOOD_DISCLAIMER)
+  +'<br><br>출처: U.S. CDC "Learn the Signs. Act Early." · WHO Motor Development Study (2006) · 삼성서울병원 임상영양팀 이유식 안내 · 대한소아청소년과학회 육아정보 · WHO Complementary Feeding Guideline (2023) · AAP · 식약처 생선 안전섭취 가이드.</div></div>';
+  return h+"</div>";
+}
+let _admTap=0,_admT=null;
+function adminTap(){
+  _admTap++; clearTimeout(_admT); _admT=setTimeout(()=>{_admTap=0},1600);
+  if(_admTap>=5){ _admTap=0; const on=!store.get("admin"); store.set("admin",on); render();
+    alert(on?"운영자 메뉴가 열렸어요 (쇼핑 링크 등록)":"운영자 메뉴를 숨겼어요"); }
+}
+function stSave(){
+  child.name=$("#stName").value.trim()||"우리 아이";
+  child.birth=$("#stBirth").value||child.birth;
+  child.due=$("#stDue").value||null;
+  const nd=$("#stDom").value;if(nd!==child.domain){child.domain=nd;domSad=0}
+  save();go("home");
+}
+function savePartner(){
+  const lines=$("#stPartner").value.split("\n").map(l=>l.trim()).filter(Boolean);
+  const map={};let bad=0;
+  lines.forEach(l=>{const i=l.indexOf("=");if(i<1){bad++;return}
+    const k=l.slice(0,i).trim(),v=l.slice(i+1).trim();
+    if(!/^https:\/\/(link\.coupang\.com|www\.coupang\.com)/.test(v)){bad++;return}
+    map[k]=v});
+  shop.partner=map;shop.on=Object.keys(map).length>0;save();
+  alert("저장했어요. 등록 "+Object.keys(map).length+"건"+(bad?" (형식이 안 맞아 건너뜀 "+bad+"건)":""));render();
+}
+function exportData(){
+  const data={v:2,exported:todayStr(),child,logs,playLogs,playState,miles,feed,growth,appts,shop};
+  const blob=new Blob([JSON.stringify(data,null,1)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download="시우앱_백업_"+todayStr()+".json";a.click();
+}
+function importData(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(r.result);
+    if(!d.child||!Array.isArray(d.logs))throw 0;
+    child=d.child;logs=d.logs;playLogs=d.playLogs||[];playState=d.playState||{};miles=d.miles||{};
+    feed=d.feed||{tried:{},watch:null,plan:{},stageOv:null};growth=d.growth||[];appts=d.appts||[];shop=d.shop||{partner:{},on:false};
+    save();alert("불러왔어요. 기록 "+logs.length+"건.");go("home")}
+   catch(e){alert("파일을 읽지 못했어요. 이 앱에서 내보낸 백업인지 확인해주세요.")}};
+  r.readAsText(f);
+}
+function resetAll(){
+  if(!confirm("모든 기록을 지우고 처음으로 돌아가요. 내보내기 백업은 하셨나요?"))return;
+  child=null;logs=[];playLogs=[];playState={};miles={};sugCache={};domSad=0;
+  feed={tried:{},watch:null,plan:{},stageOv:null};growth=[];appts=[];shop={partner:{},on:false};
+  if(store.ok)Object.keys(localStorage).filter(k=>k.startsWith("siwoo.")).forEach(k=>localStorage.removeItem(k));
+  store.mem={};ob={step:1,birth:"",due:"",preterm:false,domain:null,reason:null};
+  go("onboard");
+}
+
+/* ============ 렌더 ============ */
+function render(){
+  header();navSync();
+  const m=$("#main");
+  if(!child){view="onboard";m.innerHTML=vOnboard();navSync();return}
+  switch(view){
+    case"onboard":m.innerHTML=vOnboard();break;
+    case"worry":m.innerHTML=vWorry();break;
+    case"home":m.innerHTML=vHome();break;
+    case"plays":m.innerHTML=vPlays();break;
+    case"browse":m.innerHTML=vBrowse();break;
+    case"card":m.innerHTML=vCard();break;
+    case"feedback":m.innerHTML=vFeedback();break;
+    case"food":m.innerHTML=vFood();break;
+    case"foodSetup":m.innerHTML=vFoodSetup();break;
+    case"foodDetail":m.innerHTML=vFoodDetail();break;
+    case"planDay":m.innerHTML=vPlanDay();break;
+    case"log":m.innerHTML=vLog();break;
+    case"cal":logMode="cal";view="log";m.innerHTML=vLog();break;
+    case"map":m.innerHTML=vMap();break;
+    case"summary":m.innerHTML=vSummary();break;
+    case"settings":m.innerHTML=vSettings();break;
+    default:m.innerHTML=vHome();
+  }
+}
+/* 구버전(v3/v4)이 만든 식단 자동 이행 — 끼니 조합 로테이션이 없는 옛 형식이면 오늘부터 다시 생성 */
+(function(){
+  if(!child) return;
+  const p=feed.plan&&feed.plan[todayStr()];
+  if(p && p.stock===undefined && curStage().k!=="pre"){ buildMonth(todayStr()); render(); }
+})();
+render();
+if("serviceWorker" in navigator && location.protocol==="https:"){
+  try{ navigator.serviceWorker.register("sw.js"); }catch(e){}
+}
+</script>
+</body>
+</html>
