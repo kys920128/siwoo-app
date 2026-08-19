@@ -976,8 +976,7 @@ function vFood(){
 let foodCalSel=null;
 function monthList(){
   const t=todayStr(), AF=allFoods();
-  const catOf=x=>{const f=AF.find(y=>y.n===x);return f?f.cat:"veg"};
-  const icon=x=>{const c=catOf(x);return c==="base"?"🍚":c==="protein"?"🥩":c==="fruit"?"🍎":c==="dairy"?"🧀":"🥦"};
+  const icon=x=>foodIcon(x);
   const fmtItem=(x,p)=>'<span onclick="event.stopPropagation();go(\'foodDetail\',\''+x.replace(/'/g,"\\'")+'\')" style="text-decoration:underline dotted;text-underline-offset:3px">'+(p.testItem===x?'<b style="color:var(--coral)">🧪'+esc(x)+'</b>':esc(x))+'</span>';
   let h='<div>', b=-1;
   for(let d=0; d<28; d++){
@@ -1464,6 +1463,20 @@ function quickRow(){
   h+='<button class="ghost" style="width:100%;margin:-2px 0 10px;color:var(--sub);font-size:13px;font-weight:700" onclick="shareDay()">📤 오늘 하루 요약 보내기 (조부모·배우자에게)</button>';
   return h;
 }
+
+/* 재료별 아이콘 — 분류 이모지(🥩 등)를 그대로 쓰면 달걀에 스테이크가 붙는다 */
+const FOOD_EMOJI={
+ "쌀":"🍚","찹쌀":"🍚","현미":"🍚","오트밀":"🥣","퀴노아":"🌾","보리":"🌾",
+ "소고기":"🥩","닭고기":"🍗","두부":"🫘","달걀(완숙)":"🥚","흰살생선":"🐟","고등어":"🐟",
+ "감자":"🥔","단호박":"🎃","당근":"🥕","양배추":"🥬","시금치":"🥬","고구마":"🍠",
+ "양파":"🧅","오이":"🥒","콩나물":"🌱","버섯":"🍄","미역":"🌿","가지":"🍆","파프리카":"🫑",
+ "사과":"🍎","배":"🍐","수박":"🍉","바나나":"🍌","포도(잘게)":"🍇",
+ "아기 치즈":"🧀","플레인 요거트":"🥛","생우유":"🥛"};
+function foodIcon(n){
+  if(FOOD_EMOJI[n]) return FOOD_EMOJI[n];
+  const f=allFoods().find(y=>y.n===n), c=f?f.cat:"veg";
+  return c==="base"?"🍚":c==="protein"?"🍽":c==="fruit"?"🍎":c==="dairy"?"🥛":"🥦";
+}
 /* ============ 🌙 밤중 모드 ============ */
 function nightOn(){
   if(night.mode==="on")return true;
@@ -1513,8 +1526,10 @@ function vSleep(){
   const on=sleeps.find(x=>x.on);
   h+='<div class="card pop">'+(on
     ? '<div style="font-size:15px;font-weight:800">😴 '+(on.n?"낮잠":"밤잠")+' 자는 중 — '+on.s+' 시작</div>'
-      +'<div class="small" style="margin:5px 0">깨면 눌러주세요. 시간은 나중에 고칠 수 있어요.</div>'
-      +'<button class="pri" onclick="sleepEnd()">지금 깼어요</button>'
+      +'<div class="small" style="margin:5px 0">깨면 눌러주세요. 깬 시각도 직접 고칠 수 있어요.</div>'
+      +'<button class="pri" onclick="sleepEnd()">☀️ 깼어요</button>'
+      +'<div class="row" style="margin-top:8px"><button class="ghost" onclick="sleepFixStart()">잠든 시각 고치기</button>'
+      +'<button class="ghost" onclick="sleepCancel()">잘못 눌렀어요 (취소)</button></div>'
     : '<div style="font-size:15px;font-weight:800">지금 재우나요?</div>'
       +'<div class="small" style="margin:5px 0">누르면 시각이 기록돼요. 나중에 몰아서 적어도 괜찮아요.</div>'
       +'<div class="row"><button class="pri" onclick="sleepStart(1)">🌤 낮잠 시작</button>'
@@ -1583,17 +1598,35 @@ function vSleep(){
   h+='<div class="footer-note">수면 정보는 미국수면의학회·미국소아과학회·WHO·대한소아청소년과학회 공개 자료를 옮긴 일반 정보예요. 아이가 유난히 힘들어하면 소아청소년과와 상의하세요.</div>';
   return h+'</div>';
 }
+function nowHM(){ const d=new Date(); return m2hm(d.getHours()*60+d.getMinutes()); }
 function sleepStart(n){
-  if(sleeps.find(x=>x.on)){alert("이미 자는 중으로 기록돼 있어요. 먼저 «지금 깼어요»를 눌러주세요.");return}
-  const now=new Date();
-  sleeps.push({d:todayStr(),s:m2hm(now.getHours()*60+now.getMinutes()),e:"",n:n?1:0,on:1});
+  if(sleeps.find(x=>x.on)){alert("이미 자는 중으로 기록돼 있어요. 먼저 «깼어요»를 눌러주세요.");return}
+  const v=prompt((n?"🌤 낮잠":"🌙 밤잠")+" — 잠든 시각\n\n지금 시각이 적혀 있어요. 그대로 확인을 누르셔도 되고,\n아까 잠들었으면 시각을 고치세요. (취소하면 기록되지 않아요)", nowHM());
+  if(v===null) return;
+  const S=tParse(v); if(!S){alert("시:분 형식으로 적어주세요. 예) 21:30");return}
+  sleeps.push({d:todayStr(),s:S,e:"",n:n?1:0,on:1});
   save();render();
 }
 function sleepEnd(){
   const x=sleeps.find(y=>y.on); if(!x)return;
-  const now=new Date(); x.e=m2hm(now.getHours()*60+now.getMinutes()); delete x.on;
+  const v=prompt("☀️ 깬 시각\n\n"+x.s+"에 잠들었어요. 지금 시각이 적혀 있으니\n다르면 고쳐주세요. (취소하면 계속 «자는 중»으로 둡니다)", nowHM());
+  if(v===null) return;
+  const E=tParse(v); if(!E){alert("시:분 형식으로 적어주세요. 예) 06:10");return}
+  x.e=E; delete x.on;
   if(durMin(x)<5){ const k=confirm("5분도 안 되는 기록이에요. 그래도 남길까요?\n취소를 누르면 지웁니다."); if(!k){sleeps.splice(sleeps.indexOf(x),1);} }
   save();render();
+}
+/* 잘못 눌렀을 때 되돌리기 */
+function sleepCancel(){
+  const x=sleeps.find(y=>y.on); if(!x)return;
+  if(!confirm("«자는 중» 기록을 취소할까요?\n(잘못 누르신 경우예요. 기록은 남지 않습니다)"))return;
+  sleeps.splice(sleeps.indexOf(x),1); save();render();
+}
+function sleepFixStart(){
+  const x=sleeps.find(y=>y.on); if(!x)return;
+  const v=prompt("잠든 시각을 고칩니다.", x.s); if(v===null)return;
+  const S=tParse(v); if(!S){alert("예) 21:30");return}
+  x.s=S; save();render();
 }
 function tParse(v){ v=(v||"").trim().replace(/[.시]/g,":").replace(/분/g,"");
   const mm=v.match(/^(\d{1,2}):?(\d{2})$/); if(!mm)return null;
