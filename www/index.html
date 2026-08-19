@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>시우 — 아이를 보는 법</title>
+<title>고슴이 — 놀이와 이유식 육아기록</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 :root{
-  --bg:#FBF3E7; --card:#FFFFFF; --ink:#4A392E; --sub:#86705F; --line:#F2E3CF;
+  --bg:#FBF3E7; --card:#FFFFFF; --ink:#4A392E; --sub:#836A5F; --line:#F2E3CF;
   --peach:#FFC79E; --peach2:#FFB38A; --coral:#D95632; --mint:#C4E7D2; --mint2:#9BD8B6;
   --sky:#C4DEF2; --butter:#FFE9B3; --pink:#FBD3D0; --lav:#E3D9F2;
   --clay:0 5px 0 rgba(190,148,104,.28), 0 10px 24px rgba(190,148,104,.16);
@@ -27,6 +27,40 @@
     --clay-s:0 3px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25);
   }
 }
+/* 🌙 밤중 모드 — 잠든 아기 옆에서 켤 수 있게 저휘도 적색 계열 (베이비엔젤이 검증한 패턴) */
+body.night{ --bg:#140D09; --card:#1E1410; --ink:#E8C9B0; --sub:#A8836A; --line:#33231A;
+  --peach:#8A5A3C; --peach2:#7A4E33; --coral:#C97A55; --mint:#3E5A48; --mint2:#4A6B55;
+  --sky:#3A4A5A; --butter:#5A4A28; --pink:#5A3630; --lav:#453A55; --ok:#6FA588;
+  --clay:0 4px 0 rgba(0,0,0,.5); --clay-s:0 2px 0 rgba(0,0,0,.45);
+  filter:brightness(.82) sepia(.18); }
+body.night img,body.night svg{filter:brightness(.9)}
+/* 근거 등급 배지 — 이 앱의 성격 */
+.evb{display:inline-block;font-size:10.5px;font-weight:800;padding:1px 6px;border-radius:999px;
+  margin-left:5px;vertical-align:middle;cursor:pointer;letter-spacing:.3px;line-height:1.6}
+.gchart{width:100%;height:auto;display:block;touch-action:pan-y}
+.qbtn{border:none;border-radius:16px;padding:11px 8px;font-family:inherit;font-weight:800;font-size:13px;
+  cursor:pointer;background:var(--card);color:var(--ink);box-shadow:var(--clay-s);
+  display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.25}
+.qbtn .e{font-size:19px}
+.qbtn:active{transform:translateY(2px);box-shadow:none}
+.qgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.sleepbar{height:22px;border-radius:8px;background:var(--line);position:relative;overflow:hidden}
+.sleepbar>i{position:absolute;top:0;bottom:0;background:var(--sky);opacity:.95}
+.sleepbar>i.nap{background:var(--butter)}
+.bandwrap{position:relative;height:30px;border-radius:10px;background:var(--line);overflow:hidden;margin:6px 0}
+.bandwrap>.band{position:absolute;top:0;bottom:0;background:var(--mint);opacity:.55}
+.bandwrap>.mk{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--coral);border-radius:2px}
+
+/* 접근성 — 모션 민감 사용자 존중 (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important}
+  .mascot.b{animation:none !important}
+}
+/* 키보드 포커스 — 없애지 않고 또렷하게 */
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:8px}
+/* 작은 글씨 하한 */
+.small{font-size:12.5px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
   font-family:'Nunito',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
@@ -38,7 +72,7 @@ header.top{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 16
   display:flex;align-items:center;justify-content:space-between}
 header.top .t{font-size:20px}
 header.top .sub{font-size:12px;color:var(--sub);font-weight:700}
-.gear{background:var(--card);border:2px solid var(--line);border-radius:14px;width:40px;height:40px;
+.gear{background:var(--card);border:2px solid var(--line);border-radius:14px;width:44px;height:44px;
   cursor:pointer;color:var(--sub);display:flex;align-items:center;justify-content:center;box-shadow:var(--clay-s)}
 nav.bottom{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);z-index:20;background:var(--card);
   border:2px solid var(--line);display:flex;width:min(452px,calc(100% - 24px));
@@ -69,7 +103,7 @@ button.pri,button.sec{width:100%;border:none;border-radius:18px;padding:14px;fon
 button.pri{background:var(--peach);box-shadow:0 4px 0 rgba(190,120,70,.45)}
 button.sec{background:var(--butter);box-shadow:0 4px 0 rgba(190,150,60,.35)}
 button.pri:active,button.sec:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(190,120,70,.45)}
-button.ghost{background:none;border:none;color:var(--coral);font-size:14px;cursor:pointer;
+button.ghost{background:none;border:none;color:var(--coral);font-size:14px;cursor:pointer;min-height:44px;
   padding:8px 0;font-family:inherit;font-weight:800}
 .row{display:flex;gap:10px}.row>*{flex:1}
 .opt{display:block;width:100%;text-align:left;background:var(--card);border:2.5px solid var(--line);
@@ -141,10 +175,10 @@ label.f{display:block;font-size:13px;color:var(--sub);margin:13px 0 5px;font-wei
   #printArea h1{font-size:18px}#printArea h2{font-size:14px;margin:14px 0 4px}
   #printArea table{width:100%;border-collapse:collapse}
   #printArea td,#printArea th{border:1px solid #999;padding:4px 6px;text-align:left;font-size:11px}}
-.stChip{font-size:11px;border-radius:999px;padding:3px 10px;font-weight:800}
+.stChip{font-size:12px;border-radius:999px;padding:3px 10px;font-weight:800}
 .stChip.ok{background:var(--mint);color:#2A5940}
 .stChip.tmp{background:var(--pink);color:#7A3A36}
-.footer-note{font-size:11.5px;color:var(--sub);text-align:center;margin:18px 4px 6px;line-height:1.7;font-weight:600}
+.footer-note{font-size:12px;color:var(--sub);text-align:center;margin:18px 4px 6px;line-height:1.7;font-weight:600}
 .foodItem{display:flex;align-items:center;gap:9px;padding:10px 4px;border-bottom:2px solid var(--line);cursor:pointer}
 .foodItem:last-child{border-bottom:none}
 .foodItem .nm{font-weight:800;font-size:15px}
@@ -167,7 +201,7 @@ a{color:var(--coral)}
 <body>
 <div id="app">
   <header class="top">
-    <div><div class="t hd" id="hTitle">시우</div><div class="sub" id="hSub"></div></div>
+    <div><div class="t hd" id="hTitle">고슴이</div><div class="sub" id="hSub"></div></div>
     <div style="display:flex;align-items:center;gap:8px">
       <span id="stChip" class="stChip tmp">확인 중</span>
       <button class="gear" onclick="go('settings')" aria-label="설정">
@@ -316,7 +350,102 @@ const NEVER=[
  ["🧂 소금·설탕","간하지 않고 조리 (보건복지부 식생활지침)"],
  ["🧃 주스","12개월 전 금지 (대한소아청소년과학회)"],
  ["🐟 다랑어·새치·상어 등 심해성 어류","수은 축적 — 영유아는 가급적 주지 않아요 (식약처 생선 안전섭취 가이드: 1~2세 주 25g 이하). 흰살생선 등 일반어류는 소량씩 나눠서."]];
+/* 재료별 안전 정보 — Solid Starts의 «모든 재료가 같은 질문에 답한다» 구조를 따름
+   [질식 위험 형태 / 안전한 형태], 알레르기 교차반응은 확인된 것만 */
+const FOOD_SAFE={
+ "포도(잘게)":{chok:"통째로는 기도를 그대로 막는 대표 식품이에요.",safe:"껍질을 벗기고 세로로 4등분. 4세까지 지켜주세요.",src:"AAP"},
+ "방울토마토":{chok:"둥글고 미끄러워 통째로는 위험해요.",safe:"세로 4등분."},
+ "아기 치즈":{chok:"덩어리째는 미끄러워요.",safe:"얇게 저미거나 잘게 잘라서.",cross:"우유"},
+ "생우유":{cross:"우유",note:"12개월 전에는 «마시는 우유»로 주지 않아요. 조리에 소량 쓰는 건 다른 이야기예요."},
+ "플레인 요거트":{cross:"우유"},
+ "달걀(완숙)":{cross:"난류",chok:"흰자 덩어리는 미끄러워요.",safe:"잘게 으깨거나 다져서."},
+ "흰살생선":{chok:"가시가 가장 큰 위험이에요.",safe:"살을 손으로 한 번, 눈으로 한 번 더 확인해요.",cross:"어류"},
+ "고등어":{chok:"잔가시가 많아요.",safe:"살만 발라 으깨서.",cross:"고등어·어류"},
+ "두부":{cross:"대두"},
+ "소고기":{cross:"쇠고기",chok:"덩어리는 씹어 넘기기 어려워요.",safe:"단계에 맞게 곱게 다져서."},
+ "닭고기":{cross:"닭고기",chok:"결이 굵으면 삼키기 어려워요.",safe:"결대로 찢어 다져서."},
+ "보리":{cross:"밀(글루텐)"},
+ "바나나":{chok:"통째로 베어 물면 덩어리가 커요.",safe:"으깨거나 길쭉하게 잘라서."},
+ "감자":{chok:"퍽퍽해서 목에 붙을 수 있어요.",safe:"국물이나 분유로 촉촉하게."},
+ "고구마":{chok:"퍽퍽해서 목에 붙을 수 있어요.",safe:"촉촉하게 농도를 맞춰서."}};
+const CHOKE_RULE="둥글고·단단하고·미끄러운 것이 위험해요. 1.3cm보다 크지 않게, 둥근 건 세로로 잘라 «관 모양»이 되지 않게 하세요. 먹는 동안은 반드시 앉아서, 옆에서 지켜봐 주세요. (AAP)";
 const RULE3="새 재료는 한 번에 하나씩, 3~5일 두고 보세요 (AAP). 그 사이 두드러기·구토·설사가 없는지만 보면 됩니다.";
+
+/* ============================================================
+   근거 등급 — 이 앱의 원칙: 모든 수치에 출처와 근거 수준을 밝힌다.
+   국내외 육아앱 중 이걸 하는 곳이 없어서, 이게 이 앱의 성격이 된다.
+   ============================================================ */
+const EV={
+ off:{t:"공식",bg:"#C4E7D2",fg:"#2A5940",d:"공식 기관(WHO·미국소아과학회·질병관리청 등)의 권고 수치예요."},
+ obs:{t:"관찰",bg:"#FFE9B3",fg:"#6B5518",d:"연구에서 «실제로 이렇더라»고 관찰된 분포예요. 목표치가 아니에요."},
+ com:{t:"통용",bg:"#FBD5CF",fg:"#7A3A36",d:"널리 쓰이지만 공식 근거는 확인되지 않은 관행이에요. 참고만 하세요."}};
+function evb(g,src){
+  const e=EV[g]; if(!e)return"";
+  const tip=(e.d+(src?" 출처: "+src:"")).replace(/"/g,"&quot;");
+  return '<span class="evb" style="background:'+e.bg+';color:'+e.fg+'" onclick="event.stopPropagation();alert(\''+(e.t+"\\n\\n"+e.d+(src?"\\n\\n출처: "+src:"")).replace(/'/g,"\\\\'")+'\')" title="'+tip+'">'+e.t+'</span>';
+}
+
+/* WHO 성장 표준 (0~24개월 LMS) — 출처: WHO Child Growth Standards 2006 */
+const WHO_LMS={
+ wb:[[0.3487,3.3464,0.14602],[0.2297,4.4709,0.13395],[0.197,5.5675,0.12385],[0.1738,6.3762,0.11727],[0.1553,7.0023,0.11316],[0.1395,7.5105,0.1108],[0.1257,7.934,0.10958],[0.1134,8.297,0.10902],[0.1021,8.6151,0.10882],[0.0917,8.9014,0.10881],[0.082,9.1649,0.10891],[0.073,9.4122,0.10906],[0.0644,9.6479,0.10925],[0.0563,9.8749,0.10949],[0.0487,10.0953,0.10976],[0.0413,10.3108,0.11007],[0.0343,10.5228,0.11041],[0.0275,10.7319,0.11079],[0.0211,10.9385,0.11119],[0.0148,11.143,0.11164],[0.0087,11.3462,0.11211],[0.0029,11.5486,0.11261],[-0.0028,11.7504,0.11314],[-0.0083,11.9514,0.11369],[-0.0137,12.1515,0.11426]],
+ wg:[[0.3809,3.2322,0.14171],[0.1714,4.1873,0.13724],[0.0962,5.1282,0.13],[0.0402,5.8458,0.12619],[-0.005,6.4237,0.12402],[-0.043,6.8985,0.12274],[-0.0756,7.297,0.12204],[-0.1039,7.6422,0.12178],[-0.1288,7.9487,0.12181],[-0.1507,8.2254,0.12199],[-0.17,8.48,0.12223],[-0.1872,8.7192,0.12247],[-0.2024,8.9481,0.12268],[-0.2158,9.1699,0.12283],[-0.2278,9.387,0.12294],[-0.2384,9.6008,0.12299],[-0.2478,9.8124,0.12303],[-0.2562,10.0226,0.12306],[-0.2637,10.2315,0.12309],[-0.2703,10.4393,0.12315],[-0.2762,10.6464,0.12323],[-0.2815,10.8534,0.12335],[-0.2862,11.0608,0.1235],[-0.2903,11.2688,0.12369],[-0.2941,11.4775,0.1239]],
+ hb:[[1.0,49.8842,0.03795],[1.0,54.7244,0.03557],[1.0,58.4249,0.03424],[1.0,61.4292,0.03328],[1.0,63.886,0.03257],[1.0,65.9026,0.03204],[1.0,67.6236,0.03165],[1.0,69.1645,0.03139],[1.0,70.5994,0.03124],[1.0,71.9687,0.03117],[1.0,73.2812,0.03118],[1.0,74.5388,0.03125],[1.0,75.7488,0.03137],[1.0,76.9186,0.03154],[1.0,78.0497,0.03174],[1.0,79.1458,0.03197],[1.0,80.2113,0.03222],[1.0,81.2487,0.0325],[1.0,82.2587,0.03279],[1.0,83.2418,0.0331],[1.0,84.1996,0.03342],[1.0,85.1348,0.03376],[1.0,86.0477,0.0341],[1.0,86.941,0.03445],[1.0,87.8161,0.03479]],
+ hg:[[1.0,49.1477,0.0379],[1.0,53.6872,0.0364],[1.0,57.0673,0.03568],[1.0,59.8029,0.0352],[1.0,62.0899,0.03486],[1.0,64.0301,0.03463],[1.0,65.7311,0.03448],[1.0,67.2873,0.03441],[1.0,68.7498,0.0344],[1.0,70.1435,0.03444],[1.0,71.4818,0.03452],[1.0,72.771,0.03464],[1.0,74.015,0.03479],[1.0,75.2176,0.03496],[1.0,76.3817,0.03514],[1.0,77.5099,0.03534],[1.0,78.6055,0.03555],[1.0,79.671,0.03576],[1.0,80.7079,0.03598],[1.0,81.7182,0.0362],[1.0,82.7036,0.03643],[1.0,83.6654,0.03666],[1.0,84.604,0.03688],[1.0,85.5202,0.03711],[1.0,86.4153,0.03734]],
+ cb:[[1.0,34.4618,0.03686],[1.0,37.2759,0.03133],[1.0,39.1285,0.02997],[1.0,40.5135,0.02918],[1.0,41.6317,0.02868],[1.0,42.5576,0.02837],[1.0,43.3306,0.02817],[1.0,43.9803,0.02804],[1.0,44.53,0.02796],[1.0,44.9998,0.02792],[1.0,45.4051,0.0279],[1.0,45.7573,0.02789],[1.0,46.0661,0.02789],[1.0,46.3395,0.02789],[1.0,46.5844,0.02791],[1.0,46.806,0.02792],[1.0,47.0088,0.02795],[1.0,47.1962,0.02797],[1.0,47.3711,0.028],[1.0,47.5357,0.02803],[1.0,47.6919,0.02806],[1.0,47.8408,0.0281],[1.0,47.9833,0.02813],[1.0,48.1201,0.02817],[1.0,48.2515,0.02821]],
+ cg:[[1.0,33.8787,0.03496],[1.0,36.5463,0.0321],[1.0,38.2521,0.03168],[1.0,39.5328,0.0314],[1.0,40.5817,0.03119],[1.0,41.459,0.03102],[1.0,42.1995,0.03087],[1.0,42.829,0.03075],[1.0,43.3671,0.03063],[1.0,43.83,0.03053],[1.0,44.2319,0.03044],[1.0,44.5844,0.03035],[1.0,44.8965,0.03027],[1.0,45.1752,0.03019],[1.0,45.4265,0.03012],[1.0,45.6551,0.03006],[1.0,45.865,0.02999],[1.0,46.0598,0.02993],[1.0,46.2424,0.02987],[1.0,46.4152,0.02982],[1.0,46.5801,0.02977],[1.0,46.7384,0.02972],[1.0,46.8913,0.02967],[1.0,47.0391,0.02962],[1.0,47.1822,0.02957]]};
+function zLMS(L,M,S,x){ return L===0 ? Math.log(x/M)/S : (Math.pow(x/M,L)-1)/(L*S); }
+function pctFromZ(z){
+  if(z<-6)return 0.1; if(z>6)return 99.9;
+  const t=1/(1+0.2316419*Math.abs(z)), d=0.3989423*Math.exp(-z*z/2);
+  let p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));
+  p = z>0 ? 1-p : p;
+  return Math.max(0.1,Math.min(99.9,p*100));
+}
+function lmsAt(key,m){
+  const tb=WHO_LMS[key]; if(!tb)return null;
+  const mm=Math.max(0,Math.min(24,m));
+  const lo=Math.floor(mm), hi=Math.min(24,lo+1), f=mm-lo;
+  const a=tb[lo], b=tb[hi]||tb[lo];
+  return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f, a[2]+(b[2]-a[2])*f];
+}
+function valueAtZ(key,m,z){
+  const p=lmsAt(key,m); if(!p)return null;
+  const [L,M,S]=p;
+  return L===0 ? M*Math.exp(S*z) : M*Math.pow(1+L*S*z, 1/L);
+}
+/* 성장 지표 정의: 키(k) 체중(w) 머리둘레(c) */
+const GKEYS=[{k:"w",nm:"몸무게",unit:"kg",lms:s=>s==="g"?"wg":"wb",f:"w"},
+             {k:"h",nm:"키",unit:"cm",lms:s=>s==="g"?"hg":"hb",f:"h"},
+             {k:"c",nm:"머리둘레",unit:"cm",lms:s=>s==="g"?"cg":"cb",f:"hd"}];
+
+/* ============ 수면 ============
+   [공식] 총 수면시간만 권고가 존재. 낮잠 횟수는 [관찰], 깨어있는 시간은 [통용].
+   근거: AASM 2016(AAP 승인) / WHO 2019 / Galland 2012 메타분석 / Canapari 2019 */
+const SLEEP_TOTAL=[
+ [0,4,14,17,"off","WHO 2019 (0~3개월). 미국수면의학회는 이 시기 권고를 일부러 두지 않았어요 — 아이마다 편차가 너무 커서요."],
+ [4,12,12,16,"off","미국수면의학회(AASM) 2016 · 미국소아과학회(AAP) 승인"],
+ [12,25,11,14,"off","미국수면의학회(AASM) 2016 · 미국소아과학회(AAP) 승인"]];
+const NAP_OBS=[
+ [3,6,3.1,1.2,5.0],[6,9,null,null,null],[9,12,2.2,0.9,3.5],[12,25,1.2,0.4,2.1]];
+const NAP_SRC="Galland 2012 메타분석 (34개 연구·18개국) — 권고가 아니라 관찰된 평균과 95% 범위예요.";
+const WAKE_COM=[[0,4,"60~90분"],[4,7,"1시간 30분~2시간 30분"],[7,10,"2~3시간 30분"],[10,13,"2시간 30분~4시간"],[13,25,"4~6시간"]];
+const WAKE_SRC="시중에서 널리 쓰이는 수치지만, 예일대 소아수면 전문의가 «의학 문헌에서 검색되지 않는 개념»이라고 지적했어요. 우리 아이 실제 기록을 더 믿으세요.";
+const SAFE_SLEEP=[
+ ["등을 대고 재우기","돌까지 «모든» 잠은 등을 대고. 낮잠도 포함, 모든 양육자가 매번.","off","AAP 2022 (근거등급 A)"],
+ ["단단하고 평평한 바닥","기울기 10도를 넘지 않는 단단한 면에. 카시트·바운서에서 재우지 않기.","off","AAP 2022 (근거등급 A)"],
+ ["같은 방, 다른 잠자리","부모 방에 «별도의» 아기 잠자리로 최소 6개월. 국내 학회는 «가능하면 1년까지» 권해요 — 위험 절반으로 줄어요.","off","AAP 2022 · 대한소아청소년과학회"],
+ ["잠자리를 비우기","베개·인형·이불·범퍼·매트리스 토퍼 전부 빼요. 아기 옷을 한 겹 더 입히는 편이 안전해요.","off","AAP 2022 (근거등급 A)"],
+ ["속싸개는 뒤집기 전까지","뒤집으려는 낌새가 보이면 바로 그만둬요 (보통 3~4개월, 더 이를 수도).","off","AAP 2022"],
+ ["담배 연기 없는 집","임신 중·출산 후 흡연은 영아돌연사 위험을 2배 이상 높여요.","off","대한소아청소년과학회"]];
+const SLEEP_MYTH="«4개월 수면 퇴행»은 여러 연구에서 확인되지 않았어요. 첫 1년간 밤잠은 대체로 «꾸준히 길어지는» 것으로 관찰됩니다. 오늘 밤이 힘들었다면 그건 퇴행이 아니라 원래 편차가 큰 것 — 아이가 잘못된 게 아니에요.";
+const SLEEP_MYTH_SRC="2016 대규모 앱 데이터 · 2018 리뷰 · ParentData(Emily Oster) 정리";
+
+/* 활동 — 터미타임·신체활동·화면 */
+const ACTIVITY=[
+ ["🤸 배로 놀기(터미타임)","깨어 있고 지켜볼 때, 하루 통틀어 30분 이상을 여러 번에 나눠서. 갓 태어났을 땐 3~5분씩 하루 2~3회로 시작해요.","off","WHO 2019 · AAP"],
+ ["🏃 몸 쓰는 시간","하루 여러 번, 여러 방식으로. 유모차·아기의자처럼 «묶어두는» 시간은 한 번에 1시간을 넘기지 않아요.","off","WHO 2019"],
+ ["📵 화면","돌 전에는 «권하지 않아요». 영상통화는 예외로 봐요. 두 돌엔 하루 1시간 이하, 적을수록 좋아요.","off","WHO 2019"]];
+
 
 /* 마스코트 — 고슴이 */
 function mascot(mood,size){
@@ -342,13 +471,14 @@ store.init();
 let child=store.get("child",null), logs=store.get("logs",[]), playLogs=store.get("playLogs",[]),
  playState=store.get("playState",{}), miles=store.get("miles",{}), sugCache=store.get("sug",{}),
  domSad=store.get("domSad",0), feed=store.get("feed",{tried:{},watch:null,plan:{},stageOv:null,started:null}),
- growth=store.get("growth",[]), appts=store.get("appts",[]), shop=store.get("shop",{partner:{},on:false});
+ growth=store.get("growth",[]), appts=store.get("appts",[]), shop=store.get("shop",{partner:{},on:false}),
+ sleeps=store.get("sleeps",[]), night=store.get("night",{mode:"auto"});
 /* 구버전 plan(배열) → {meals,test} 마이그레이션 */
 Object.keys(feed.plan||{}).forEach(d=>{ if(Array.isArray(feed.plan[d])) feed.plan[d]={meals:feed.plan[d],test:null}; });
 if(feed.testPause===undefined) feed.testPause=false;
-let view="home", curPlay=null, fb={res:null,cond:null}, calSel=null, calMonth=null, foodSel=null, planDay=null, logMode="write";
-function save(){["child","logs","playLogs","playState","miles","sug","domSad","feed","growth","appts","shop"]
- .forEach((k,i)=>store.set(k,[child,logs,playLogs,playState,miles,sugCache,domSad,feed,growth,appts,shop][i]))}
+let view="home", curPlay=null, fb={res:null,cond:null}, calSel=null, calMonth=null, foodSel=null, planDay=null, logMode="write", growthKey="w";
+function save(){["child","logs","playLogs","playState","miles","sug","domSad","feed","growth","appts","shop","sleeps","night"]
+ .forEach((k,i)=>store.set(k,[child,logs,playLogs,playState,miles,sugCache,domSad,feed,growth,appts,shop,sleeps,night][i]))}
 
 /* ============ 유틸 ============ */
 const $=s=>document.querySelector(s);
@@ -526,7 +656,7 @@ function navSync(){
 }
 function header(){
   if(child){$("#hTitle").textContent=child.name||"우리 아이";$("#hSub").textContent=ageText()}
-  else{$("#hTitle").textContent="시우";$("#hSub").textContent="아이를 보는 법"}
+  else{$("#hTitle").textContent="고슴이";$("#hSub").textContent="아이를 보는 법"}
   const c=$("#stChip");
   if(store.ok){c.className="stChip ok";c.textContent="✓ 저장됨"}
   else{c.className="stChip tmp";c.textContent="⚠ 임시"}
@@ -602,20 +732,31 @@ function vHome(){
   if(child.reason==="worry"){
     h+='<div class="notice warm">걱정으로 시작하셨죠. 놀이보다 <b>기록</b>이 먼저예요 — 걱정되는 장면을 적어두시면 진료실용 요약으로 묶어드려요. <button class="ghost" onclick="go(\'summary\')">요약 만들기 →</button></div>';
   }
+  // ⚡ 한 번에 기록 — 손에 아기를 안고도 되도록 (경쟁앱 리뷰에서 가장 많이 요구된 것)
+  h+=quickRow();
+  h+=whatsNewCard();
+  h+=backupCard();
   // D-day
   const up=appts.filter(a=>daysBetween(todayStr(),a.date)>=0).sort((a,b)=>a.date<b.date?-1:1);
   if(up.length){const a=up[0];const dd=daysBetween(todayStr(),a.date);
     h+='<div class="card"><div class="dday"><div class="n">D-'+dd+'</div><div><b>'+esc(a.label)+'</b><div class="small">'+a.date+'</div></div>'
     +'<button class="ghost" style="margin-left:auto" onclick="delAppt(\''+a.date+'\')">지움</button></div></div>';
   }
-  // 오늘의 시우 (정확한 날이 없으면 매일 다른 과거 기록 순환)
-  let sd=dayNum(), d=DAILY[sd], replay=false;
-  if(!d){ const ks=Object.keys(DAILY).map(Number).sort((a,b)=>a-b);
-    if(ks.length){ sd=ks[hash(todayStr()+"replay")%ks.length]; d=DAILY[sd]; replay=true; } }
-  if(d){h+='<div class="card" style="background:linear-gradient(160deg,var(--card),var(--bg))"><h3 style="margin-top:0">🦔 '+(replay?"그날의 시우 — D"+sd+" <span style=\"font-weight:600\">(기록 다시 보기)</span>":"같은 날의 시우 — D"+sd)+'</h3>'
-   +'<div style="font-size:14px"><b>해준 것:</b> '+esc(d.i)+'</div>'
-   +'<div style="font-size:14px;margin-top:4px"><b>시우는:</b> '+esc(d.o)+'</div>'
-   +'<div class="small" style="margin-top:6px">이 앱의 바탕이 된 실제 관찰 기록이에요. 같은 날 다른 아기는 전혀 다른 걸 해요 — 그게 정상입니다.</div></div>';}
+  // 🌙 오늘의 잠 — 한눈에 (기록이 있을 때만)
+  {
+    const tot=sleepTotal(todayStr()), naps=napCount(todayStr());
+    const lastNight=(()=>{ const y=addDays(todayStr(),-1);
+      const n=sleeps.filter(x=>!x.n && (x.d===y||x.d===todayStr()) && x.e && hm2m(x.s)>=1080).sort((a,b2)=>b2.d<a.d?-1:1)[0];
+      return n?durMin(n):0; })();
+    if(tot>0||lastNight>0){
+      const rec=sleepRange(SLEEP_TOTAL,monthAge());
+      h+='<div class="card" onclick="go(\'sleep\')" style="cursor:pointer"><h3 style="margin-top:0">🌙 오늘의 잠</h3>'
+       +'<div style="font-size:15px;font-weight:800">'+(tot?fmtDur(tot):"—")+(naps?' <span style="color:var(--sub);font-weight:700">· 낮잠 '+naps+'회</span>':'')+'</div>'
+       +(lastNight?'<div class="small" style="margin-top:3px">밤잠 '+fmtDur(lastNight)+'</div>':'')
+       +(rec&&tot?'<div class="small" style="margin-top:3px">'+monthAge()+'개월 권장 '+rec[2]+'~'+rec[3]+'시간 (미국수면의학회)</div>':'')
+       +'<div class="small" style="text-align:right">수면 기록 →</div></div>';
+    }
+  }
   // 이유식 오늘
   const st=curStage();
   if(st.k!=="pre"){
@@ -641,6 +782,15 @@ function vHome(){
   const m=monthAge();
   if(m>7)h+='<div class="notice">놀이는 지금 <b>0~7개월</b> 기록에서 뽑은 66개예요. 8개월 이후 놀이는 기록이 쌓이는 대로 추가됩니다.</div>';
   const sug=suggestToday();
+  // 오늘의 시우 (정확한 날이 없으면 매일 다른 과거 기록 순환)
+  let sd=dayNum(), d=DAILY[sd], replay=false;
+  if(!d){ const ks=Object.keys(DAILY).map(Number).sort((a,b)=>a-b);
+    if(ks.length){ sd=ks[hash(todayStr()+"replay")%ks.length]; d=DAILY[sd]; replay=true; } }
+  if(d && !store.get("hideSiwoo")){h+='<div class="card" style="background:linear-gradient(160deg,var(--card),var(--bg))"><h3 style="margin-top:0">🦔 '+(replay?"그날의 시우 — D"+sd+" <span style=\"font-weight:600\">(기록 다시 보기)</span>":"같은 날의 시우 — D"+sd)+'</h3>'
+   +'<div style="font-size:14px"><b>해준 것:</b> '+esc(d.i)+'</div>'
+   +'<div style="font-size:14px;margin-top:4px"><b>시우는:</b> '+esc(d.o)+'</div>'
+   +'<div class="small" style="margin-top:6px">이 앱을 만든 아빠의 실제 232일 관찰 기록이에요. <b>우리 아이 판정과는 무관한 「읽을거리」</b>입니다 — 같은 날 다른 아기는 전혀 다른 걸 해요, 그게 정상이에요. '
+   +'<span onclick="store.set(\'hideSiwoo\',1);render()" style="text-decoration:underline;cursor:pointer">이 카드 그만 보기</span></div></div>';}
   h+='<h3>오늘 해볼 놀이</h3>';sug.forEach(n=>{h+=playCardMini(n)});
   h+='<div class="sub" style="text-align:center;margin:4px 0;font-weight:700">오늘은 이 '+(sug.length>1?"둘":"하나")+'면 충분해요.</div>';
   if(domSad>=5&&child.domain&&child.domain!=="none"){
@@ -1070,6 +1220,18 @@ function vFoodDetail(){
     ?'<div style="font-size:13.5px;font-weight:600;margin-top:8px">🍲 <b>죽이유식</b> — 큐브 없이 재료를 다져 죽에 바로 넣어 끓여요. '+esc(BOWL_FORMULA[useSt.k]||"")+'</div>'
     :(cubeable?'<div style="font-size:13.5px;font-weight:600;margin-top:8px">🧊 <b>큐브</b> — 여러 끼 분량을 한 번에 익혀 얼음틀에 소분 냉동하면 그게 3일 재고예요.</div>':''))
   +'<div class="small" style="margin-top:8px">일반적인 준비 방법 안내예요. 무르기·양은 아이에 맞게 조절하고, 진행이 걱정되면 소아청소년과와 상의하세요.</div></div>';
+  /* 🛡 안전 — 질식·알레르기 (Solid Starts식 고정 항목) */
+  const sf=FOOD_SAFE[f.n];
+  if(sf||f.al||f.chok){
+    h+='<div style="background:var(--pink);border-radius:14px;padding:11px 13px;margin-top:8px">'
+     +'<div style="font-size:13px;font-weight:800;color:#7A3A36">🛡 안전하게 주려면</div>';
+    if(sf&&sf.chok)h+='<div style="font-size:13.5px;font-weight:700;margin-top:5px">⚠️ <b>질식 주의</b> — '+esc(sf.chok)+(sf.safe?' <b>이렇게:</b> '+esc(sf.safe):'')+'</div>';
+    else if(f.chok)h+='<div style="font-size:13.5px;font-weight:700;margin-top:5px">⚠️ <b>질식 주의</b> — 1.3cm 이하로, 둥근 건 세로로 잘라주세요.</div>';
+    const cr=(sf&&sf.cross)||f.al;
+    if(cr)h+='<div style="font-size:13.5px;font-weight:700;margin-top:5px">🔔 <b>알레르기 표시 대상</b> — «'+esc(cr)+'». 처음 줄 땐 오전에 소량으로, 3~5일 지켜봐요.</div>';
+    if(sf&&sf.note)h+='<div style="font-size:13.5px;font-weight:700;margin-top:5px">📌 '+esc(sf.note)+'</div>';
+    h+='<div class="small" style="margin-top:6px">'+esc(CHOKE_RULE)+'</div></div>';
+  }
   if(cubeable){
     h+='<details style="margin-top:8px"><summary style="font-size:13px;font-weight:800;cursor:pointer;color:var(--sub)">🧊 보관 규칙 펼치기 (죽·큐브 공통)</summary>';
     CUBE_RULES.forEach(([a,b2])=>{h+='<div style="font-size:13px;margin:6px 0;font-weight:600"><b>'+a+'</b> <span class="small">'+b2+'</span></div>'});
@@ -1116,6 +1278,7 @@ function retryFood(n){delete feed.tried[n];save();render()}
 function vLog(){
   let h='<div class="fade"><div class="row" style="margin-bottom:10px">'
   +'<button class="'+(logMode==="write"?"pri":"sec")+'" onclick="logMode=\'write\';render()">오늘 쓰기</button>'
+  +'<button class="sec" onclick="go(\'sleep\')">🌙 수면</button>'
   +'<button class="'+(logMode==="cal"?"pri":"sec")+'" onclick="logMode=\'cal\';render()">달력 · 검색</button></div>';
   if(logMode==="cal")return h+vCalInner()+"</div>";
   const t=todayStr();
@@ -1219,7 +1382,9 @@ function vMap(){
     h+='<div class="mile" onclick="mileTap(\''+mi.k+'\')"><div><div class="nm">'+esc(mi.nm)+'</div>'
     +'<div class="st" id="mi_'+mi.k+'" style="display:none">'+esc(mi.line)+'<br><span style="opacity:.7">'+esc(mi.cite)+'</span></div></div>'
     +'<div class="st">'+(done?"✓ "+done:"아직")+'</div></div>'});
-  h+='<div class="small" style="margin-top:8px">한 아이 안에서도 영역마다 빠르고 늦은 게 갈려요. <b>둘 다 정상이에요.</b></div></div>';
+  h+='<div class="small" style="margin-top:8px">한 아이 안에서도 영역마다 빠르고 늦은 게 갈려요. <b>둘 다 정상이에요.</b></div>'
+   +'<div class="notice" style="font-size:12.5px;margin-top:8px">'+esc(CDC_NOTE)+'</div>'
+   +'<div class="notice warm" style="font-size:13px;margin-top:6px">↩︎ <b>다만 이건 다릅니다</b> — '+esc(REGRESS)+'</div></div>';
   // 접종·검진 일정
   h+='<div class="card"><h2 class="hd" style="font-size:16px">💉 접종·검진 일정</h2><div class="small" style="margin-bottom:6px">시기가 지난 항목은 흐리게만 표시해요 — 「놓쳤다」는 표시는 하지 않아요. 따라잡기 접종은 병원과 상의하면 됩니다.</div>';
   const mNow=monthAge();
@@ -1233,13 +1398,21 @@ function vMap(){
   });
   h+='<div class="small" style="margin-top:8px">'+esc(SCHED_SRC)+'</div>'
    +'<button class="ghost" onclick="addAppt()">+ 예약일을 등록하면 홈에 D-day로 떠요</button></div>';
-  // 성장 기록
-  h+='<div class="card"><h2 class="hd" style="font-size:16px">키 · 몸무게 · 머리둘레</h2>';
-  if(growth.length){growth.slice(-5).reverse().forEach(g=>{
-    h+='<div style="font-size:14px;font-weight:600;padding:5px 0;border-bottom:2px solid var(--line)">'+g.date+' — '
-    +(g.h?g.h+"cm ":"")+(g.w?g.w+"kg ":"")+(g.hd?"머리 "+g.hd+"cm":"")+'</div>'})}
-  else h+='<div class="small">검진 다녀올 때마다 적어두면 진료실용 요약에 같이 나가요.</div>';
-  h+='<button class="ghost" onclick="addGrowth()">+ 기록 추가</button></div>';
+  // 응급 · 상담 신호 진입
+  h+='<button class="sec" style="background:var(--pink);color:#7A3A36;margin-bottom:12px" onclick="go(\'er\')">🚨 이럴 땐 병원에 — 응급 신호와 열 기준</button>';
+  // 활동 — 터미타임·신체활동·화면 [공식]
+  h+='<details class="card"><summary style="font-weight:800;cursor:pointer">🤸 몸 쓰기와 화면 '+evb("off","WHO 2019 · 미국소아과학회")+'</summary>';
+  ACTIVITY.forEach(([a,b2,g,src])=>{h+='<div style="font-size:13.5px;margin:8px 0;font-weight:600"><b>'+a+'</b><br><span class="small">'+b2+'</span></div>'});
+  h+='<div class="small" style="margin-top:6px">숫자를 채우라는 뜻이 아니라, 하루가 어떻게 흘러가는지 가늠하는 눈금으로 봐주세요.</div></details>';
+  // 성장 — WHO 백분위 곡선
+  h+=vGrowthCard();
+  if(growth.length){
+    h+='<details class="card"><summary style="font-weight:800;cursor:pointer">📋 성장 기록 전체</summary>';
+    growth.slice().reverse().forEach(g=>{
+      h+='<div style="font-size:14px;font-weight:600;padding:5px 0;border-bottom:2px solid var(--line)">'+g.date+' — '
+      +(g.h?g.h+"cm ":"")+(g.w?g.w+"kg ":"")+(g.hd?"머리 "+g.hd+"cm":"")+'</div>'});
+    h+='</details>';
+  }
   // 병원 일정
   h+='<div class="card"><h2 class="hd" style="font-size:16px">병원 · 검진 일정</h2>';
   appts.sort((a,b)=>a.date<b.date?-1:1).forEach(a=>{
@@ -1271,12 +1444,429 @@ function addAppt(){
   appts.push({label,date:d});save();render();
 }
 
+
+
+/* ⚡ 원탭 기록 줄 — 잠/놀이/기록/공유 */
+function quickRow(){
+  const on=sleeps.find(x=>x.on);
+  const st=curStage(), pT=feed.plan[todayStr()];
+  let h='<div class="qgrid">';
+  h+= on
+    ? '<button class="qbtn" onclick="sleepEnd()" style="background:var(--sky)"><span class="e">☀️</span>지금 깼어요</button>'
+    : '<button class="qbtn" onclick="sleepStart(nightOn()?0:1)"><span class="e">😴</span>재우는 중</button>';
+  h+='<button class="qbtn" onclick="go(\'log\')"><span class="e">✏️</span>오늘 기록</button>';
+  h+='<button class="qbtn" onclick="go(\'plays\')"><span class="e">🧸</span>놀이 추천</button>';
+  h+= st.k!=="pre"
+    ? '<button class="qbtn" onclick="go(\'food\')"><span class="e">🍚</span>'+(pT?'오늘 식단':'식단 만들기')+'</button>'
+    : '<button class="qbtn" onclick="go(\'map\')"><span class="e">📈</span>성장·접종</button>';
+  h+='</div>';
+  if(on) h+='<div class="small" style="margin:-4px 0 8px;text-align:center">🌙 '+on.s+'부터 자는 중 — 깨면 위 버튼을 눌러주세요</div>';
+  h+='<button class="ghost" style="width:100%;margin:-2px 0 10px;color:var(--sub);font-size:13px;font-weight:700" onclick="shareDay()">📤 오늘 하루 요약 보내기 (조부모·배우자에게)</button>';
+  return h;
+}
+/* ============ 🌙 밤중 모드 ============ */
+function nightOn(){
+  if(night.mode==="on")return true;
+  if(night.mode==="off")return false;
+  const h=new Date().getHours(); return h>=21||h<6;   /* auto */
+}
+function applyNight(){ document.body.classList.toggle("night", nightOn()); }
+function cycleNight(){
+  night.mode = night.mode==="auto" ? "on" : night.mode==="on" ? "off" : "auto";
+  save(); applyNight(); render();
+}
+function nightLabel(){ return night.mode==="auto" ? "자동(밤 9시~아침 6시)" : night.mode==="on" ? "항상 켜기" : "끄기"; }
+
+/* ============ 수면 ============
+   기록 모델: {d:"YYYY-MM-DD"(시작일), s:"HH:MM", e:"HH:MM", n:1(낮잠)|0(밤잠)}
+   자정을 넘는 밤잠은 하나의 기록으로 둔다 (베이비타임의 알려진 버그를 피함) */
+function hm2m(t){ const [a,b]=(t||"0:0").split(":").map(Number); return (a||0)*60+(b||0); }
+function m2hm(m){ m=((m%1440)+1440)%1440; return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0"); }
+function durMin(x){ let d=hm2m(x.e)-hm2m(x.s); if(d<0)d+=1440; return d; }
+function fmtDur(m){ const h=Math.floor(m/60), r=m%60; return (h?h+"시간":"")+(r?(h?" ":"")+r+"분":(h?"":"0분")); }
+function sleepsOn(ds){ return sleeps.filter(x=>x.d===ds); }
+/* 그날의 총 수면: 그날 시작한 잠 + 전날 밤잠이 넘어온 분량 */
+function sleepTotal(ds){
+  let t=0;
+  sleepsOn(ds).forEach(x=>{ t+=durMin(x); });
+  const prev=sleeps.filter(x=>x.d===addDays(ds,-1) && !x.n && hm2m(x.e)<hm2m(x.s));
+  return t;
+}
+function napCount(ds){ return sleepsOn(ds).filter(x=>x.n).length; }
+function sleepRange(arr,m){ for(const r of arr){ if(m>=r[0]&&m<r[1])return r; } return null; }
+function wakeWindows(ds){
+  const day=sleepsOn(ds).slice().sort((a,b)=>hm2m(a.s)-hm2m(b.s));
+  const out=[];
+  for(let i=0;i<day.length-1;i++){
+    let gap=hm2m(day[i+1].s)-hm2m(day[i].e); if(gap<0)gap+=1440;
+    if(gap>0&&gap<720) out.push(gap);
+  }
+  return out;
+}
+let sleepDay=null;
+function vSleep(){
+  const t=todayStr(), ds=sleepDay||t, m=monthAge();
+  const tot=sleepTotal(ds), naps=napCount(ds), list=sleepsOn(ds).slice().sort((a,b)=>hm2m(a.s)-hm2m(b.s));
+  const rec=sleepRange(SLEEP_TOTAL,m), nap=sleepRange(NAP_OBS.map(x=>[x[0],x[1],x[2],x[3],x[4]]),m), ww=sleepRange(WAKE_COM,m);
+  let h='<div class="fade">';
+  /* 진행 중인 잠 */
+  const on=sleeps.find(x=>x.on);
+  h+='<div class="card pop">'+(on
+    ? '<div style="font-size:15px;font-weight:800">😴 '+(on.n?"낮잠":"밤잠")+' 자는 중 — '+on.s+' 시작</div>'
+      +'<div class="small" style="margin:5px 0">깨면 눌러주세요. 시간은 나중에 고칠 수 있어요.</div>'
+      +'<button class="pri" onclick="sleepEnd()">지금 깼어요</button>'
+    : '<div style="font-size:15px;font-weight:800">지금 재우나요?</div>'
+      +'<div class="small" style="margin:5px 0">누르면 시각이 기록돼요. 나중에 몰아서 적어도 괜찮아요.</div>'
+      +'<div class="row"><button class="pri" onclick="sleepStart(1)">🌤 낮잠 시작</button>'
+      +'<button class="sec" onclick="sleepStart(0)">🌙 밤잠 시작</button></div>'
+      +'<div style="height:8px"></div><button class="ghost" onclick="sleepAdd()">+ 지나간 잠 적기</button>')
+    +'</div>';
+  /* 날짜 이동 */
+  const dt=new Date(ds+"T00:00:00");
+  h+='<div class="row" style="align-items:center;justify-content:space-between;margin-bottom:8px">'
+   +'<button class="ghost" onclick="sleepDay=addDays(\''+ds+'\',-1);render()">‹ 어제</button>'
+   +'<b style="font-size:14px">'+(dt.getMonth()+1)+'월 '+dt.getDate()+'일'+(ds===t?" (오늘)":"")+'</b>'
+   +(ds<t?'<button class="ghost" onclick="sleepDay=addDays(\''+ds+'\',1);render()">다음 ›</button>':'<span style="width:56px"></span>')+'</div>';
+  /* 하루 24시간 띠 */
+  h+='<div class="card"><h3 style="margin-top:0">이 날의 잠</h3>';
+  if(list.length){
+    h+='<div class="sleepbar">';
+    list.forEach(x=>{
+      const s=hm2m(x.s), d=Math.min(durMin(x),1440-s);
+      h+='<i class="'+(x.n?"nap":"")+'" style="left:'+(s/14.4)+'%;width:'+(d/14.4)+'%"></i>';
+    });
+    h+='</div><div class="small" style="display:flex;justify-content:space-between;margin-top:2px"><span>0시</span><span>6시</span><span>12시</span><span>18시</span><span>24시</span></div>';
+    list.forEach((x,i)=>{
+      h+='<div style="display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;padding:6px 0;border-bottom:1.5px solid var(--line)">'
+       +'<span>'+(x.n?"🌤":"🌙")+'</span><span>'+x.s+' → '+x.e+'</span>'
+       +'<span style="color:var(--sub)">'+fmtDur(durMin(x))+'</span>'
+       +'<button class="ghost" style="margin-left:auto;padding:2px 8px" onclick="sleepEdit('+sleeps.indexOf(x)+')">고침</button>'
+       +'<button class="ghost" style="padding:2px 8px" onclick="sleepDel('+sleeps.indexOf(x)+')">지움</button></div>';
+    });
+  } else h+='<div class="small">아직 기록이 없어요. 위에서 시작하거나 「지나간 잠 적기」로 채우면 돼요.</div>';
+  h+='</div>';
+  /* 총 수면 — [공식] */
+  h+='<div class="card"><h3 style="margin-top:0">하루 총 수면 '+evb("off",rec?rec[5]:"")+'</h3>';
+  if(rec){
+    const lo=rec[2]*60, hi=rec[3]*60, span=Math.max(hi*1.35, tot*1.1, 1);
+    h+='<div style="font-size:22px;font-weight:800" class="hd">'+(tot?fmtDur(tot):"—")+'</div>'
+     +'<div class="bandwrap"><div class="band" style="left:'+(lo/span*100)+'%;width:'+((hi-lo)/span*100)+'%"></div>'
+     +(tot?'<div class="mk" style="left:'+Math.min(99,(tot/span*100))+'%"></div>':'')+'</div>'
+     +'<div class="small">초록 띠가 '+monthAge()+'개월 권장 범위('+rec[2]+'~'+rec[3]+'시간)예요. '
+     +(tot? (tot<lo? '오늘은 범위보다 짧게 기록됐어요 — 적어두지 못한 잠이 있을 수도 있어요.' : tot>hi? '범위보다 길게 기록됐어요. 잘 자는 날도 있어요.' : '범위 안이에요.') : '기록을 채우면 여기 표시돼요.')+'</div>';
+  }
+  h+='</div>';
+  /* 낮잠 — [관찰]. 6~9개월은 원 연구에 수치가 없다 → 그 공백을 숨기지 않고 그대로 말한다 */
+  h+='<div class="card"><h3 style="margin-top:0">낮잠 횟수 '+evb("obs",NAP_SRC)+'</h3>'
+   +'<div style="font-size:22px;font-weight:800" class="hd">'+naps+'회</div>';
+  if(nap&&nap[2]){
+    h+='<div class="small">같은 월령 아기들의 <b>평균은 '+nap[2]+'회</b>, 실제로 관찰된 범위는 <b>'+nap[3]+'~'+nap[4]+'회</b>로 아주 넓어요. 몇 회여야 «정상»인 건 없어요.</div>';
+  } else {
+    h+='<div class="small"><b>이 월령(6~8개월)은 연구에 낮잠 횟수 수치가 없어요.</b> 없는 걸 지어내지 않고 그대로 말씀드립니다. '
+     +'앞뒤 구간을 보면 3~5개월 평균 3.1회 → 9~11개월 평균 2.2회예요. 즉 <b>지금이 낮잠이 하나씩 줄어드는 전환기</b>라, '
+     +'어떤 날은 3번 어떤 날은 2번인 게 자연스러워요. 낮잠이 줄면서 한 번의 길이가 길어지는 흐름이면 잘 가고 있는 거예요.</div>';
+  }
+  h+='</div>';
+  /* 깨어있는 시간 — [통용] + 우리 아이 실측 우선 */
+  const wws=wakeWindows(ds);
+  h+='<div class="card"><h3 style="margin-top:0">깨어있는 시간 '+evb("com",WAKE_SRC)+'</h3>';
+  if(wws.length){
+    h+='<div style="font-size:15px;font-weight:800;margin-bottom:4px">우리 아이 (이 날): '+wws.map(fmtDur).join(" · ")+'</div>';
+  } else h+='<div class="small" style="margin-bottom:4px">잠을 두 번 이상 기록하면 우리 아이의 실제 간격이 여기 나와요.</div>';
+  if(ww)h+='<div class="small">시중에서 말하는 '+monthAge()+'개월 참고치는 '+ww[2]+'예요. 다만 이 수치는 <b>공식 근거가 확인되지 않았어요</b> — 우리 아이 기록을 더 믿으셔도 됩니다.</div>';
+  h+='</div>';
+  /* 안전한 잠자리 — [공식] */
+  h+='<details class="card"><summary style="font-weight:800;cursor:pointer">🛏 안전한 잠자리 '+evb("off","AAP 2022 · 대한소아청소년과학회")+'</summary>';
+  SAFE_SLEEP.forEach(([a,b2,g,src])=>{h+='<div style="font-size:13.5px;margin:8px 0;font-weight:600"><b>'+a+'</b><br><span class="small">'+b2+'</span></div>'});
+  h+='<div class="small" style="margin-top:6px">이 항목들은 근거가 확실해서 «가능하면»이 아니라 «꼭»이라고 적었어요.</div></details>';
+  h+='<div class="notice mint" style="font-size:13px">💡 '+SLEEP_MYTH+' <span class="small">('+SLEEP_MYTH_SRC+')</span></div>';
+  h+='<div class="footer-note">수면 정보는 미국수면의학회·미국소아과학회·WHO·대한소아청소년과학회 공개 자료를 옮긴 일반 정보예요. 아이가 유난히 힘들어하면 소아청소년과와 상의하세요.</div>';
+  return h+'</div>';
+}
+function sleepStart(n){
+  if(sleeps.find(x=>x.on)){alert("이미 자는 중으로 기록돼 있어요. 먼저 «지금 깼어요»를 눌러주세요.");return}
+  const now=new Date();
+  sleeps.push({d:todayStr(),s:m2hm(now.getHours()*60+now.getMinutes()),e:"",n:n?1:0,on:1});
+  save();render();
+}
+function sleepEnd(){
+  const x=sleeps.find(y=>y.on); if(!x)return;
+  const now=new Date(); x.e=m2hm(now.getHours()*60+now.getMinutes()); delete x.on;
+  if(durMin(x)<5){ const k=confirm("5분도 안 되는 기록이에요. 그래도 남길까요?\n취소를 누르면 지웁니다."); if(!k){sleeps.splice(sleeps.indexOf(x),1);} }
+  save();render();
+}
+function tParse(v){ v=(v||"").trim().replace(/[.시]/g,":").replace(/분/g,"");
+  const mm=v.match(/^(\d{1,2}):?(\d{2})$/); if(!mm)return null;
+  const a=+mm[1], b=+mm[2]; if(a>23||b>59)return null; return m2hm(a*60+b); }
+function sleepAdd(){
+  const ds=sleepDay||todayStr();
+  const s=prompt("잠든 시각 (예: 21:30 또는 2130)\n"+ds+" 기준이에요."); if(s===null)return;
+  const S=tParse(s); if(!S){alert("시:분 형식으로 적어주세요. 예) 21:30");return}
+  const e=prompt("깬 시각 (예: 06:10)\n자정을 넘어도 그대로 적으면 돼요."); if(e===null)return;
+  const E=tParse(e); if(!E){alert("시:분 형식으로 적어주세요. 예) 06:10");return}
+  const n=confirm("낮잠인가요?\n확인=낮잠 / 취소=밤잠");
+  sleeps.push({d:ds,s:S,e:E,n:n?1:0}); save();render();
+}
+function sleepEdit(i){
+  const x=sleeps[i]; if(!x)return;
+  const s=prompt("잠든 시각",x.s); if(s===null)return; const S=tParse(s); if(!S){alert("예) 21:30");return}
+  const e=prompt("깬 시각",x.e); if(e===null)return; const E=tParse(e); if(!E){alert("예) 06:10");return}
+  x.s=S;x.e=E;delete x.on;save();render();
+}
+function sleepDel(i){ if(!confirm("이 기록을 지울까요?"))return; sleeps.splice(i,1);save();render(); }
+
+/* ============ 📈 WHO 성장 백분위 ============ */
+function growthPct(g,gk){
+  if(!child||!child.sex)return null;
+  const def=GKEYS.find(x=>x.k===gk); if(!def)return null;
+  const v=parseFloat(g[def.f]); if(!v||v<=0)return null;
+  const m=monthsBetween(child.birth,g.date);
+  if(m<0||m>24)return null;
+  const p=lmsAt(def.lms(child.sex),m); if(!p)return null;
+  return {m, v, z:zLMS(p[0],p[1],p[2],v), pct:pctFromZ(zLMS(p[0],p[1],p[2],v))};
+}
+function monthsBetween(b,d){ return daysBetween(b,d)/30.4375; }
+function growthChart(gk){
+  const def=GKEYS.find(x=>x.k===gk); if(!def||!child||!child.sex)return "";
+  const key=def.lms(child.sex);
+  const W=320,H=200,PL=34,PR=8,PT=10,PB=22;
+  const maxM=Math.max(6,Math.min(24,Math.ceil(monthAge()+2)));
+  const zs=[-2,-1,0,1,2];
+  let vmin=1e9,vmax=-1e9;
+  const curves=zs.map(z=>{
+    const pts=[];
+    for(let m=0;m<=maxM;m+=0.5){ const v=valueAtZ(key,m,z); if(v==null)continue; pts.push([m,v]); vmin=Math.min(vmin,v); vmax=Math.max(vmax,v); }
+    return {z,pts};
+  });
+  const mine=growth.map(g=>{const r=growthPct(g,gk); return r?[r.m,r.v,g.date,r.pct]:null}).filter(Boolean).filter(p=>p[0]<=maxM);
+  mine.forEach(p=>{vmin=Math.min(vmin,p[1]);vmax=Math.max(vmax,p[1])});
+  const pad=(vmax-vmin)*0.08||1; vmin-=pad; vmax+=pad;
+  const X=m=>PL+(m/maxM)*(W-PL-PR), Y=v=>PT+(1-(v-vmin)/(vmax-vmin))*(H-PT-PB);
+  const path=pts=>pts.map((p,i)=>(i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join(" ");
+  let sv='<svg class="gchart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+def.nm+' 성장 곡선">';
+  /* 3~97 백분위 밴드 */
+  const band=(a,b2,op)=>{
+    const A=curves.find(c=>c.z===a).pts, B=curves.find(c=>c.z===b2).pts.slice().reverse();
+    return '<path d="'+path(A)+" "+B.map(p=>"L"+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join(" ")+' Z" fill="var(--mint)" opacity="'+op+'"/>';
+  };
+  sv+=band(-2,2,.28)+band(-1,1,.34);
+  curves.forEach(c=>{
+    sv+='<path d="'+path(c.pts)+'" fill="none" stroke="var(--sub)" stroke-width="'+(c.z===0?1.6:0.8)+'" opacity="'+(c.z===0?.75:.4)+'"'+(c.z===0?"":' stroke-dasharray="3 3"')+'/>';
+  });
+  /* 축 */
+  for(let m=0;m<=maxM;m+=(maxM>12?6:3)) sv+='<text x="'+X(m)+'" y="'+(H-6)+'" font-size="9" fill="var(--sub)" text-anchor="middle">'+m+'개월</text>';
+  [vmin+(vmax-vmin)*0.1, (vmin+vmax)/2, vmax-(vmax-vmin)*0.1].forEach(v=>{
+    sv+='<text x="4" y="'+(Y(v)+3)+'" font-size="9" fill="var(--sub)">'+v.toFixed(v>20?0:1)+'</text>';
+  });
+  /* 우리 아이 */
+  if(mine.length>1) sv+='<path d="'+path(mine)+'" fill="none" stroke="var(--coral)" stroke-width="2.4" stroke-linecap="round"/>';
+  mine.forEach(p=>{ sv+='<circle cx="'+X(p[0]).toFixed(1)+'" cy="'+Y(p[1]).toFixed(1)+'" r="4" fill="var(--coral)"/>'; });
+  sv+='</svg>';
+  return sv;
+}
+function vGrowthCard(){
+  let h='<div class="card"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">'
+   +'<h2 class="hd" style="font-size:16px;margin:0">📈 성장 곡선 '+evb("off","WHO Child Growth Standards 2006 — 모유수유아 기준 국제 표준")+'</h2></div>';
+  if(!child.sex){
+    h+='<div class="small" style="margin:8px 0">성장 백분위는 <b>남아·여아 표가 달라서</b> 아이 성별이 필요해요. 이 정보는 이 기기 안에만 저장돼요.</div>'
+     +'<div class="row"><button class="sec" onclick="setSex(\'b\')">남자아이</button><button class="sec" onclick="setSex(\'g\')">여자아이</button></div></div>';
+    return h;
+  }
+  h+='<div class="row" style="margin:6px 0">';
+  GKEYS.forEach(k=>{ h+='<button class="condbtn '+(growthKey===k.k?"on":"")+'" onclick="growthKey=\''+k.k+'\';render()">'+k.nm+'</button>'; });
+  h+='</div>';
+  const has=growth.some(g=>growthPct(g,growthKey));
+  if(has){
+    h+=growthChart(growthKey);
+    const last=growth.slice().reverse().map(g=>({g,r:growthPct(g,growthKey)})).find(x=>x.r);
+    if(last){
+      const p=last.r.pct, band=p<3?"아래쪽":p>97?"위쪽":"가운데 범위";
+      h+='<div style="font-size:14.5px;font-weight:700;margin-top:8px">가장 최근 기록 '+last.g.date+' — <b>'+last.r.v+GKEYS.find(x=>x.k===growthKey).unit+'</b>, '
+       +'같은 개월 아기 100명 중 <b>약 '+Math.round(p)+'번째</b></div>'
+       +'<div class="small" style="margin-top:4px">백분위는 «잘 자라는 정도»가 아니라 <b>또래 중 어디쯤인지</b>를 나타내는 위치예요. 3~97 사이면 넓은 정상 범위 안이고, '
+       +'중요한 건 숫자 하나가 아니라 <b>그 아이만의 선이 꾸준히 올라가는지</b>예요. 판단은 검진 때 의사 선생님이 합니다.</div>';
+    }
+  } else {
+    h+='<div class="small" style="margin:8px 0">키·몸무게를 한 번이라도 적으면 WHO 표준 곡선 위에 우리 아이 점이 찍혀요.</div>';
+  }
+  h+='<button class="ghost" onclick="addGrowth()">+ 오늘 기록 추가</button></div>';
+  return h;
+}
+function setSex(s){ child.sex=s; save(); render(); }
+
+
+
+
+
+/* 새로 생긴 것 안내 — 이미 쓰던 분이 새 기능을 놓치지 않게. 한 번 보고 닫으면 끝 */
+const WHATS_NEW={v:"v9",items:[
+ ["🌙 수면 기록","기록 탭 → 수면. 재우기 시작/깼어요 한 번씩만 눌러도 되고, 나중에 몰아서 적어도 돼요.","sleep"],
+ ["📈 성장 곡선","지도 탭. 키·몸무게를 적으면 WHO 표준 곡선 위에 우리 아이 선이 그려져요.","map"],
+ ["🚨 이럴 땐 병원에","지도 탭 맨 위. 119 신호와 «우리 아이 월령의 열 기준»을 바로 볼 수 있어요.","er"],
+ ["🌙 밤중 모드","설정 → 화면. 새벽에 켜도 눈부시지 않게 어두운 화면으로 바뀌어요.","settings"]]};
+function whatsNewCard(){
+  if(store.get("seenNew")===WHATS_NEW.v)return"";
+  if(!store.get("firstUse"))return"";           /* 완전 신규 사용자에겐 띄우지 않음 */
+  let h='<div class="card pop" style="border-color:var(--mint2)">'
+   +'<h3 style="margin-top:0">🎁 새로 생긴 것</h3>'
+   +'<div class="small" style="margin-bottom:8px">근거가 확인된 것만 넣었어요. 숫자 옆의 <b>공식·관찰·통용</b> 배지를 누르면 출처가 나와요.</div>';
+  WHATS_NEW.items.forEach(([a,b2,v])=>{
+    h+='<div onclick="store.set(\'seenNew\',WHATS_NEW.v);go(\''+v+'\')" style="cursor:pointer;padding:7px 0;border-bottom:1.5px solid var(--line)">'
+     +'<div style="font-size:14px;font-weight:800">'+a+' <span style="color:var(--coral)">→</span></div>'
+     +'<div class="small">'+b2+'</div></div>';
+  });
+  h+='<button class="ghost" style="width:100%;margin-top:6px" onclick="store.set(\'seenNew\',WHATS_NEW.v);render()">다 봤어요</button></div>';
+  return h;
+}
+
+/* ============ 🛟 백업 안내 ============
+   서버가 없다는 건 «내 기록이 남에게 안 간다»는 뜻이자 «기기를 잃으면 끝»이라는 뜻이기도 하다.
+   그래서 배지·연속기록 대신, 조용한 안전 안내를 둔다. (경쟁앱들이 이걸 유료화한 지점) */
+function backupDue(){
+  const first=store.get("firstUse"), last=store.get("lastBackup");
+  if(!first){ store.set("firstUse",todayStr()); return false; }
+  const total=logs.length+playLogs.length+Object.keys(feed.plan||{}).length+sleeps.length+growth.length;
+  if(total<5) return false;                                   /* 쌓인 게 없으면 조르지 않는다 */
+  if(store.get("backupSnooze")===todayStr()) return false;
+  if(!last) return daysBetween(first,todayStr())>=3;          /* 시작 3일 뒤 한 번 */
+  return daysBetween(last,todayStr())>=30;                    /* 이후 한 달에 한 번 */
+}
+function backupCard(){
+  if(!backupDue())return"";
+  const last=store.get("lastBackup");
+  return '<div class="card" style="border-color:var(--sky)">'
+   +'<div style="font-size:14.5px;font-weight:800">🛟 기록을 한 번 꺼내두실래요?</div>'
+   +'<div class="small" style="margin:5px 0 9px">이 앱은 서버가 없어서 기록이 <b>이 기기 안에만</b> 있어요. 남에게 새어 나갈 일이 없는 대신, 폰을 바꾸거나 잃으면 같이 사라져요. '
+   +(last?'마지막 백업은 '+last+'였어요.':'파일 하나로 통째로 저장됩니다 — 30초면 돼요.')+'</div>'
+   +'<div class="row"><button class="sec" onclick="exportData()">⬇ 지금 백업</button>'
+   +'<button class="ghost" onclick="store.set(\'backupSnooze\',todayStr());render()">나중에</button></div></div>';
+}
+
+/* ============ 📤 하루 요약 공유 ============
+   서버 없는 앱이 «공동양육»을 푸는 방법: 실시간 동기화 대신 «오늘 하루»를 통째로 보내준다.
+   조부모·시터·배우자에게 카톡으로. 개인정보가 서버를 거치지 않는다는 게 오히려 장점. */
+function dayDigest(ds){
+  ds=ds||todayStr();
+  const L=[], nm=(child&&child.name)||"우리 아이";
+  const dt=new Date(ds+"T00:00:00");
+  L.push("🦔 "+nm+" — "+(dt.getMonth()+1)+"월 "+dt.getDate()+"일 ("+ageText()+")");
+  L.push("");
+  /* 잠 */
+  const sl=sleepsOn(ds).slice().sort((a,b)=>hm2m(a.s)-hm2m(b.s));
+  if(sl.length){
+    L.push("🌙 잠 — 합쳐서 "+fmtDur(sleepTotal(ds))+" (낮잠 "+napCount(ds)+"회)");
+    sl.forEach(x=>L.push("  "+(x.n?"🌤":"🌙")+" "+x.s+"~"+x.e+" ("+fmtDur(durMin(x))+")"));
+  }
+  /* 이유식 */
+  const p=feed.plan[ds];
+  if(p&&p.meals&&p.meals.length){
+    L.push("🍚 이유식"+(feed.style==="bowl"?" (죽)":" (토핑)"));
+    p.meals.forEach((m,i)=>{ const it=(m.items||[]); if(it.length)L.push("  "+(i+1)+"끼: "+it.join(feed.style==="bowl"?" + ":" · ")); });
+    if(p.testItem)L.push("  🧪 새 재료: "+p.testItem+" — 두드러기·구토·설사 있는지 봐주세요");
+  }
+  /* 관찰 기록 */
+  const lg=logs.filter(x=>x.date===ds);
+  if(lg.length){
+    L.push("✏️ 오늘 본 것");
+    lg.forEach(x=>{ const t=(x.output||x.input||"").trim(); if(t)L.push("  · "+t.slice(0,80)); });
+  }
+  /* 놀이 */
+  const pl=playLogs.filter(x=>x.date===ds);
+  if(pl.length){
+    const names=pl.map(x=>{const q=PLAYS.find(y=>y.n===x.n); return q?q.name:null}).filter(Boolean);
+    if(names.length)L.push("🧸 놀이 — "+names.join(", "));
+  }
+  if(L.length<=2)L.push("(아직 오늘 기록이 없어요)");
+  L.push("");
+  L.push("— 고슴이 앱에서 보냄");
+  return L.join("\n");
+}
+function shareDay(ds){
+  const txt=dayDigest(ds);
+  if(navigator.share){
+    navigator.share({title:"오늘 하루",text:txt}).catch(()=>copyDigest(txt));
+  } else copyDigest(txt);
+}
+function copyDigest(txt){
+  const done=()=>alert("복사했어요!\n카톡에 붙여넣으면 됩니다.");
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,()=>fallbackCopy(txt,done));
+  else fallbackCopy(txt,done);
+}
+
+/* ============ 🚨 응급 · 상담 신호 ============
+   원칙: 진단은 절대 하지 않는다. 다만 «병원에 갈 때»는 흐리지 않고 또렷하게 말한다.
+   근거: AAP Infant Fever CPG 2021 / NICE NG143 / AAP 응급 안내 / 서울대병원 */
+const ER119=[
+ "숨을 제대로 못 쉬어요 (입술·얼굴이 파래짐, 그렁거림, 갈비뼈 사이가 쑥 들어감)",
+ "경련이 5분 넘게 계속돼요",
+ "불러도 깨지 않아요 / 축 늘어져 있어요",
+ "눌러도 사라지지 않는 붉은 반점이 퍼져요",
+ "심한 출혈·화상·삼킴 사고가 있었어요",
+ "무엇이 잘못됐는지 모르겠지만 아이가 위험해 보여요"];
+const ER_NOW=[
+ ["생후 3개월 미만 + 38.0℃ 이상","다른 증상이 없어도 바로 진료를 받으세요. 이 시기엔 열 자체가 신호예요. (AAP)"],
+ ["대천문(정수리 말랑한 곳)이 볼록 솟음","(NICE 고위험)"],
+ ["반복되는 구토, 또는 8시간 넘게 소변이 없음","탈수 신호예요. (NICE)"],
+ ["열이 내렸는데도 계속 아파 보임","숫자보다 이게 더 중요한 신호예요. (AAP)"],
+ ["목이 뻣뻣하거나 계속 고음으로 울어요","(NICE 고위험)"]];
+const FEVER=[
+ [0,1,"38.0℃ 이상","바로 응급실. 생후 28일 이내는 가장 조심하는 시기예요."],
+ [1,3,"38.0℃ 이상","다른 증상이 없어도 즉시 진료. (AAP)"],
+ [3,6,"39.0℃ 이상","당일 진료를 받으세요. (NICE 중간위험)"],
+ [6,25,"40℃ 이상이 반복되면","숫자보다 «아이 상태»로 판단해요. 잘 먹고 잘 놀면 지켜봐도 됩니다. 2세 미만은 열이 24시간 넘게 이어지면 진료. (AAP)"]];
+/* K-DST 추가질문 — 국내 영유아건강검진에서 실제로 묻는 항목 */
+const KDST=[
+ [8,12,["한쪽 손만 주로 써요","서거나 걸을 때 발바닥을 잘 딛지 못하고 «항상» 까치발이에요 (가끔은 제외)"]],
+ [12,18,["한쪽 손만 주로 써요","항상 까치발로 서거나 걸어요","눈을 잘 맞추지 않아요","이름을 불러도 대부분 쳐다보지 않아요"]],
+ [18,30,["항상 까치발로 서거나 걸어요","걷지 못해요","눈을 잘 맞추지 않아요","이름을 불러도 대부분 쳐다보지 않아요","어른의 관심을 끄는 행동을 하지 않아요"]],
+ [30,72,["걷지 못해요","의미 있는 낱말을 말하지 못해요","눈을 잘 맞추지 않아요","이름을 불러도 대부분 쳐다보지 않아요","어른의 관심을 끄는 행동을 하지 않아요"]]];
+const KDST_SRC="한국 영유아발달선별검사(K-DST) 추가질문 — 보건복지부·질병관리청 후원, 대한소아과학회 등 개발. 영유아건강검진에서 실제로 묻는 항목이에요.";
+/* CDC 2022 개정: «경고신호» 목록은 폐지되고, 마일스톤 자체가 75%가 하는 일로 바뀌었다 */
+const CDC_NOTE="미국 CDC는 2022년에 «경고신호» 목록을 없앴어요. 대신 이정표 기준을 «절반이 하는 것»에서 «4명 중 3명이 하는 것»으로 바꿨습니다. 그래서 이 앱도 못 한 항목을 «이상»이라고 부르지 않아요 — 다음 진료 때 함께 볼 이야깃거리로 둡니다.";
+const REGRESS="예전에 하던 것을 지금은 하지 않는다면 — 이건 개월수와 상관없이 가장 먼저 봐야 할 신호예요. 다음 검진까지 기다리지 말고 이번 주 안에 소아청소년과에 가보세요. (미국 CDC가 모든 월령에 공통으로 안내하는 항목입니다.)";
+
+function feverNow(){ const m=monthAge(); for(const f of FEVER){ if(m>=f[0]&&m<f[1])return f; } return FEVER[FEVER.length-1]; }
+function kdstNow(){ const m=monthAge(); for(const k of KDST){ if(m>=k[0]&&m<k[1])return k; } return null; }
+function kdstNext(){ const m=monthAge(); for(const k of KDST){ if(m<k[0])return k; } return null; }
+function vER(){
+  const f=feverNow(), k=kdstNow();
+  let h='<div class="fade"><button class="ghost" onclick="go(\'map\')">← 지도로</button>'
+  +'<div class="card" style="border-color:#E08C7A;background:linear-gradient(160deg,var(--pink),var(--card))">'
+  +'<h2 class="hd" style="margin-top:0;color:#8A3A30">🚨 지금 119</h2>'
+  +'<div style="font-size:14.5px;font-weight:700;line-height:1.85">';
+  ER119.forEach(x=>{h+='· '+esc(x)+'<br>'});
+  h+='</div></div>';
+  h+='<div class="card" style="border-color:var(--peach2)"><h2 class="hd" style="margin-top:0">🏥 지금 진료</h2>'
+   +'<div style="font-size:14px;font-weight:700;line-height:1.8">';
+  ER_NOW.forEach(([a,b2])=>{h+='· '+esc(a)+' <span class="small">'+esc(b2)+'</span><br>'});
+  h+='</div></div>';
+  h+='<div class="card"><h2 class="hd" style="font-size:17px;margin-top:0">🌡 지금 우리 아이 열 기준 '+evb("off","AAP 영아 발열 지침 2021 · NICE NG143")+'</h2>'
+   +'<div style="font-size:15px;font-weight:800;margin:4px 0">생후 '+monthAge()+'개월 — <b style="color:var(--coral)">'+f[2]+'</b></div>'
+   +'<div class="small">'+esc(f[3])+'</div>'
+   +'<div class="small" style="margin-top:8px">아기는 <b>항문 체온</b>이 기준이에요. 겨드랑이 체온은 조금 낮게 나옵니다.</div></div>';
+  h+='<div class="card" style="border-color:var(--peach)"><h2 class="hd" style="font-size:17px;margin-top:0">↩︎ 하던 걸 안 하게 됐다면</h2>'
+   +'<div style="font-size:14px;font-weight:700;line-height:1.75">'+esc(REGRESS)+'</div></div>';
+  const kn=k||kdstNext();
+  if(kn){
+    h+='<div class="card"><h2 class="hd" style="font-size:17px;margin-top:0">🩺 검진 때 실제로 묻는 것 '+evb("off",KDST_SRC)+'</h2>'
+     +'<div class="small" style="margin-bottom:6px">'+(k
+        ? '국가 영유아건강검진에서 '+kn[0]+'~'+kn[1]+'개월에 묻는 항목이에요. 하나라도 «예»라면 검진 때 꼭 말씀하세요 — 진단이 아니라 «한 번 더 보자»는 신호입니다.'
+        : '지금 월령엔 해당 문항이 없어요. <b>다음 검진('+kn[0]+'~'+kn[1]+'개월)</b>에서 이런 걸 묻게 돼요 — 미리 알아두면 그날 당황하지 않아요.')+'</div>'
+     +'<div style="font-size:14px;font-weight:700;line-height:1.9'+(k?'':';opacity:.75')+'">';
+    kn[2].forEach(x=>{h+='· '+esc(x)+'<br>'});
+    h+='</div></div>';
+  }
+  h+='<div class="notice mint" style="font-size:13px">'+esc(CDC_NOTE)+'</div>';
+  h+='<div class="footer-note">이 화면은 미국소아과학회·NICE·질병관리청·서울대병원 공개 자료를 옮긴 <b>일반 정보</b>예요. 진단이 아니며, 판단이 서지 않으면 언제든 병원에 연락하는 편이 낫습니다.</div>';
+  return h+'</div>';
+}
+
 /* ============ 진료실용 요약 ============ */
 function vSummary(){
   return '<div class="fade"><button class="ghost" onclick="go(\'map\')">← 지도로</button>'
   +'<div class="card pop"><h2 class="hd">진료실용 요약</h2>'
   +'<label class="f">걱정되는 게 있으신가요?</label><textarea id="smWorry" placeholder="예: 옹알이가 3주 전부터 줄어든 것 같아요">'+esc(store.get("worry",""))+'</textarea>'
-  +'<div class="notice" style="font-size:13px">진단이 아니에요. 의사 선생님께 <b>설명할 시간을 줄여주는</b> 용도예요. 최근 8주 기록·이정표 날짜·성장 기록·이유식 이상 반응이 함께 인쇄돼요.</div>'
+  +'<div class="notice" style="font-size:13px">진단이 아니에요. 의사 선생님께 <b>설명할 시간을 줄여주는</b> 용도예요. 함께 인쇄되는 것: 최근 8주 관찰 기록 · 이정표 날짜 · <b>성장 기록과 WHO 백분위</b> · <b>최근 14일 수면</b> · 이유식 이상 반응 · <b>검진에서 묻는 K-DST 항목</b>.</div>'
   +'<button class="pri" onclick="printSummary()">인쇄 / PDF로 저장</button>'
   +'<div class="small" style="margin-top:8px">인쇄 화면에서 「PDF로 저장」을 고르면 파일이 됩니다.</div></div></div>';
 }
@@ -1291,8 +1881,35 @@ function printSummary(){
   h+='<h2>이정표 (보호자 기록)</h2><table><tr><th>항목</th><th>날짜</th><th>참고</th></tr>';
   MILES.forEach(mi=>{h+='<tr><td>'+esc(mi.nm)+'</td><td>'+(miles[mi.k]||"—")+'</td><td>'+esc(mi.line)+'</td></tr>'});
   h+='</table>';
-  if(growth.length){h+='<h2>성장 기록</h2><table><tr><th>날짜</th><th>키</th><th>몸무게</th><th>머리둘레</th></tr>';
-    growth.forEach(g=>{h+='<tr><td>'+g.date+'</td><td>'+(g.h||"—")+'</td><td>'+(g.w||"—")+'</td><td>'+(g.hd||"—")+'</td></tr>'});h+='</table>'}
+  if(growth.length){
+    const P=child.sex?'<th>몸무게 백분위</th><th>키 백분위</th><th>머리 백분위</th>':'';
+    h+='<h2>성장 기록'+(child.sex?' (WHO 2006 표준 대비 백분위)':'')+'</h2><table><tr><th>날짜</th><th>키</th><th>몸무게</th><th>머리둘레</th>'+P+'</tr>';
+    growth.forEach(g=>{
+      let ex='';
+      if(child.sex){
+        const pw=growthPct(g,'w'), ph=growthPct(g,'h'), pc2=growthPct(g,'c');
+        ex='<td>'+(pw?Math.round(pw.pct)+'%':"—")+'</td><td>'+(ph?Math.round(ph.pct)+'%':"—")+'</td><td>'+(pc2?Math.round(pc2.pct)+'%':"—")+'</td>';
+      }
+      h+='<tr><td>'+g.date+'</td><td>'+(g.h||"—")+'</td><td>'+(g.w||"—")+'</td><td>'+(g.hd||"—")+'</td>'+ex+'</tr>'});
+    h+='</table>'+(child.sex?'<p style="font-size:11px">백분위는 WHO Child Growth Standards(2006) LMS 값으로 앱에서 계산한 참고치입니다.</p>':'')}
+  /* 수면 — 최근 14일 요약 */
+  const sdays=[];
+  for(let d=0; d<14; d++){ const ds=addDays(todayStr(),-d); const t2=sleepTotal(ds); if(t2>0) sdays.push({ds,t:t2,n:napCount(ds)}); }
+  if(sdays.length){
+    const avg=Math.round(sdays.reduce((a,b2)=>a+b2.t,0)/sdays.length);
+    const rec2=sleepRange(SLEEP_TOTAL,monthAge());
+    h+='<h2>수면 (최근 '+sdays.length+'일 기록)</h2>'
+     +'<p>하루 평균 총 수면 <b>'+fmtDur(avg)+'</b>'+(rec2?' · 같은 월령 권장 '+rec2[2]+'~'+rec2[3]+'시간 (미국수면의학회 2016)':'')+'</p>'
+     +'<table><tr><th>날짜</th><th>총 수면</th><th>낮잠 횟수</th><th>잠든/깬 시각</th></tr>';
+    sdays.forEach(x=>{
+      const list=sleepsOn(x.ds).slice().sort((a,b2)=>hm2m(a.s)-hm2m(b2.s)).map(y=>(y.n?"낮 ":"밤 ")+y.s+"~"+y.e).join(", ");
+      h+='<tr><td>'+x.ds+'</td><td>'+fmtDur(x.t)+'</td><td>'+x.n+'</td><td>'+esc(list)+'</td></tr>'});
+    h+='</table>'}
+  /* 검진에서 실제로 묻는 항목 — 부모가 그날 당황하지 않게 */
+  const kk=kdstNow();
+  if(kk){ h+='<h2>영유아건강검진 발달선별(K-DST) 추가질문 — '+kk[0]+'~'+kk[1]+'개월</h2><ul>';
+    kk[2].forEach(x=>{h+='<li>'+esc(x)+'</li>'});
+    h+='</ul><p style="font-size:11px">검진 시 실제로 묻는 항목입니다. 해당된다고 생각하시면 진료 시 말씀해 주세요.</p>'; }
   const warns=Object.keys(feed.tried).filter(n=>feed.tried[n].r==="warn");
   if(Object.keys(feed.tried).length){h+='<h2>이유식</h2><p>먹어본 재료: '+Object.keys(feed.tried).join(", ")+'</p>';
     if(warns.length)h+='<p><b>이상 반응이 있었던 재료: '+warns.map(n=>n+"("+feed.tried[n].d+")").join(", ")+'</b></p>'}
@@ -1329,6 +1946,12 @@ function vSettings(){
   +'<button class="sec" onclick="$(\'#impFile\').click()">⬆ 백업 불러오기</button>'
   +'<input type="file" id="impFile" accept=".json" style="display:none" onchange="importData(this)">'
   +'<div style="height:8px"></div><button class="sec" style="color:#7A3A36;background:var(--pink);box-shadow:0 4px 0 rgba(190,90,80,.3)" onclick="resetAll()">전체 초기화</button></div>';
+  h+='<div class="card"><h2 class="hd" style="font-size:16px">화면</h2>'
+  +'<div style="font-size:13.5px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:10px"><span>🌙 밤중 모드<br><span class="small">잠든 아기 옆에서 켜도 눈이 부시지 않게 어둡고 붉은 화면으로 바꿔요</span></span>'
+  +'<button class="condbtn '+(night.mode!=="off"?'on':'')+'" style="margin:0;white-space:nowrap" onclick="cycleNight()">'+nightLabel()+'</button></div>'
+  +'<div style="height:10px"></div>'
+  +'<div style="font-size:13.5px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:10px"><span>🦔 홈의 「시우 이야기」 카드<br><span class="small">이 앱을 만든 232일 기록을 하루 하나씩 보여줘요</span></span>'
+  +'<button class="condbtn '+(store.get("hideSiwoo")?'':'on')+'" style="margin:0" onclick="store.set(\'hideSiwoo\',store.get(\'hideSiwoo\')?0:1);render()">'+(store.get("hideSiwoo")?'꺼짐':'켜짐')+'</button></div></div>';
   h+='<div class="card"><h2 class="hd" style="font-size:16px">이 앱에 대해</h2><div style="font-size:13.5px;line-height:1.8;font-weight:600">'
   +'놀이 66개는 전부 한 아기(2025년 12월생)의 <b>231행 관찰 기록</b>에서 나왔어요. 카드마다 붙은 📍가 출처예요.<br><br>'
   +'이 앱이 하지 않는 것: 발달 점수, 또래 비교, 연속 기록 배지, 밀린 알림, 아기에게 보여주는 화면.<br><br>'
@@ -1360,10 +1983,11 @@ function savePartner(){
   alert("저장했어요. 등록 "+Object.keys(map).length+"건"+(bad?" (형식이 안 맞아 건너뜀 "+bad+"건)":""));render();
 }
 function exportData(){
+  store.set("lastBackup",todayStr());
   const data={v:2,exported:todayStr(),child,logs,playLogs,playState,miles,feed,growth,appts,shop};
   const blob=new Blob([JSON.stringify(data,null,1)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download="시우앱_백업_"+todayStr()+".json";a.click();
+  a.download="고슴이_백업_"+todayStr()+".json";a.click();
 }
 function importData(inp){
   const f=inp.files[0];if(!f)return;
@@ -1387,6 +2011,7 @@ function resetAll(){
 
 /* ============ 렌더 ============ */
 function render(){
+  applyNight();
   header();navSync();
   const m=$("#main");
   if(!child){view="onboard";m.innerHTML=vOnboard();navSync();return}
@@ -1403,6 +2028,8 @@ function render(){
     case"foodDetail":m.innerHTML=vFoodDetail();break;
     case"planDay":m.innerHTML=vPlanDay();break;
     case"log":m.innerHTML=vLog();break;
+    case"sleep":m.innerHTML=vSleep();break;
+    case"er":m.innerHTML=vER();break;
     case"cal":logMode="cal";view="log";m.innerHTML=vLog();break;
     case"map":m.innerHTML=vMap();break;
     case"summary":m.innerHTML=vSummary();break;

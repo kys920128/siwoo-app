@@ -1,6 +1,8 @@
 {
   "appId": "com.evelog.siwoo",
-  "appName": "시우",
+  "appName": "고슴이",
   "webDir": "www",
-  "server": { "androidScheme": "https" }
+  "server": {
+    "androidScheme": "https"
+  }
 }
