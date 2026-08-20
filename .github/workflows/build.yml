@@ -42,14 +42,13 @@ jobs:
           npx cap add android
           npx cap sync android
 
-      - name: 앱 이름 확인 (진단용)
+      - name: 앱 이름 추출 (결과물 이름에 박아서 눈으로 확인 가능하게)
         run: |
-          echo "=== capacitor.config.json ==="
           cat capacitor.config.json
-          echo "=== 생성된 strings.xml ==="
           cat android/app/src/main/res/values/strings.xml
-          echo "=== 최종 앱 이름 ==="
-          grep -o '<string name="app_name">[^<]*' android/app/src/main/res/values/strings.xml || echo "app_name 없음"
+          LABEL=$(grep -o '<string name="app_name">[^<]*' android/app/src/main/res/values/strings.xml | sed 's/.*>//')
+          echo "생성된 앱 이름: [$LABEL]"
+          echo "APP_LABEL=$LABEL" >> $GITHUB_ENV
 
       - name: 앱 아이콘 적용
         run: |
@@ -73,7 +72,7 @@ jobs:
       - name: APK 업로드
         uses: actions/upload-artifact@v4
         with:
-          name: siwoo-app-테스트용-APK
+          name: 설치파일-APK-앱이름은-${{ env.APP_LABEL }}
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
       - name: 스토어용 AAB 빌드 (서명키 등록된 경우만)
@@ -91,5 +90,5 @@ jobs:
         if: ${{ env.KEYSTORE_B64 != '' }}
         uses: actions/upload-artifact@v4
         with:
-          name: siwoo-app-스토어용-AAB
+          name: 스토어용-AAB-앱이름은-${{ env.APP_LABEL }}
           path: android/app/build/outputs/bundle/release/app-release.aab
