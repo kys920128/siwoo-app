@@ -42,6 +42,15 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      - name: 앱 이름 확인 (진단용)
+        run: |
+          echo "=== capacitor.config.json ==="
+          cat capacitor.config.json
+          echo "=== 생성된 strings.xml ==="
+          cat android/app/src/main/res/values/strings.xml
+          echo "=== 최종 앱 이름 ==="
+          grep -o '<string name="app_name">[^<]*' android/app/src/main/res/values/strings.xml || echo "app_name 없음"
+
       - name: 앱 아이콘 적용
         run: |
           sudo apt-get install -y imagemagick >/dev/null 2>&1 || true
